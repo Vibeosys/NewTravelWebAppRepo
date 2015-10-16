@@ -26,7 +26,7 @@ class ClsImagesDto {
         $this->ImagePath = $imagePath;
         $this->UserId = $userId;
         $this->DestId = $destId;
-        $this->ImageSeen = FALSE;
+        $this->ImageSeen = "false";
     }
 
 }

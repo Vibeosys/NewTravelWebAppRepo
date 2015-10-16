@@ -38,9 +38,9 @@ class Mysql2SqliteTable extends Table {
         return $returnValue;
     }
 
-    public function excutePreparedStatement($destText) {
+    public function excutePreparedStatement($Text) {
         $db = new \SQLite3($this->sqliteFile);
-        $success = $db->exec($destText);
+        $success = $db->exec($Text);
         $db->close();
         return $success;
     }
