@@ -16,40 +16,75 @@ namespace App\Controller;
 use App\Model\Table;
 use Cake\Network;
 
-define('PATH', 'D:\GitPhpWebsites\TravelWebSiteForMobile\MobileTravelWeb\webroot');
+define('PATH',TMP.DS.'SqliteDBFiles'.DS);
 
 class Mysql2SqliteController extends AppController {
 
-    private $tableInstance;
-    
-    public function getTableObj() {
-        if (!isset($tableInstance))
-        {   
-            $tableInstance = new Table\Mysql2SqliteTable();        
-        }
-        
-        return $tableInstance;
-    }
+  
 
     public function createSqlite() {
-        $id = 1;
+        $id = rand(10, 99);
         $tableObject = new Table\Mysql2SqliteTable();
         if ($tableObject->Create($id)) {
 
-
-            $DestObj = new DestinationController;
-            $destinationPreparedStatement = $DestObj->prepareInsertStatement();
+            //Destination Table
+            $destinationController = new DestinationController();
+            $destinationPreparedStatement = $destinationController->prepareInsertStatement();
             if ($tableObject->excutePreparedStatement($destinationPreparedStatement)) {
                 \Cake\Log\Log::info('Record is inserted into Destination SQLite table for id ' . $id);
             } else {
                 \Cake\Log\Log::error('Record is not inserted into Destination SQLite table');
             }
             
-
+            //User Table
+            $userController = new UserController();
+            $userPreparedStatement = $userController->prepareInsertStatement();
+            if($tableObject->excutePreparedStatement($userPreparedStatement)){
+                \Cake\Log\Log::info('Record is inserted into User SQLite table for id ' . $id);
+            } else {
+                \Cake\Log\Log::error('Record is not inserted into User  SQLite table');
+            }
             
+            //Question Table
+            $questionController = new QuestionController();
+            $questionPreparedStatement = $questionController->prepareInsertStatement();
+            if($tableObject->excutePreparedStatement($questionPreparedStatement)){
+                \Cake\Log\Log::debug('Record is inserted into Question sQLite table for id'.$id);
+            }else {
+                \Cake\Log\Log::debug('Record is not inserted into Question sQLite table for id'.$id);
+            }
+            
+             //Options Table
+            $optionController = new OptionsController();
+            $optionPreparedStatement = $optionController->prepareInsertStatement();
+            if($tableObject->excutePreparedStatement($optionPreparedStatement)){
+                \Cake\Log\Log::debug('Record is inserted into Options sQLite table for id'.$id);
+            }else {
+                \Cake\Log\Log::debug('Record is not inserted into Options sQLite table for id'.$id);
+            }
+            
+            //Answer Table
+            $answerController = new AnswerController();
+            $answerPreparedStatement = $answerController->prepareInsertStatement();
+            if($tableObject->excutePreparedStatement($answerPreparedStatement)){
+                \Cake\Log\Log::debug('Record is inserted into Answer sQLite table for id'.$id);
+            }else {
+                \Cake\Log\Log::debug('Record is not inserted into Answer sQLite table for id'.$id);
+            }
+            
+              //Comment And Like  Table
+            $commentAndLikeController = new CommentAndLikeController();
+            $commentAndLikePreparedStatement = $commentAndLikeController->prepareInsertStatement();
+            if($tableObject->excutePreparedStatement($commentAndLikePreparedStatement)){
+                \Cake\Log\Log::debug('Record is inserted into commentAndLike sQLite table for id'.$id);
+            }else {
+                \Cake\Log\Log::debug('Record is not inserted into commentAndLike sQLite table for id'.$id);
+            }
+            
+            //
 
         $this->response->type('class');
-        $this->response->file(PATH.'/TravelDb'.$id.'.sqlite',['download' => true,'name' => 'myfile'.$id.'.sqlite']);
+        $this->response->file(PATH.'TravelDb'.$id.'.sqlite',['download' => true,'name' => 'myfile'.$id.'.sqlite']);
         $this->response->send();
         }
     }

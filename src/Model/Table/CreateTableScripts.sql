@@ -28,7 +28,7 @@ CREATE TABLE [images]
 ('ImageId' INTEGER NOT NULL PRIMARY KEY, 
 'ImagePath' TEXT NOT NULL, 
 'UserId' INTEGER NOT NULL, 
-'DestinationId' INTEGER NOT NULL,
+'DestId' INTEGER NOT NULL,
 'ImageSeen'  BOOLEAN NOT NULL);
 
 CREATE TABLE [options]
@@ -48,25 +48,25 @@ CREATE TABLE [user]
 
 
 CREATE TABLE [MyMap]
-('MapId'    INTEGER PRIMARY KEY ,
+('MapId'    INTEGER PRIMARY KEY AUTOINCREMENT,
 'RouteName'     TEXT NOT NULL,
 'RouteJson'     TEXT NOT NULL,
 'CreatedDate'   DATETIME NOT NULL);
 
 CREATE TABLE [MyImages]
-('ImageId' INTEGER PRIMARY KEY  ,
+('ImageId' INTEGER PRIMARY KEY  AUTOINCREMENT,
 'ImagePath'           TEXT   NOT NULL,
 'CreateDate'          DATETIME   NOT NULL); 
 
 CREATE TABLE [TempData]
-('Id' INTEGER PRIMARY KEY,
- 'DestId'           INT   NOT NULL,
-'DestName'         TEXT   NOT NULL,
-'Lat'              DOUBLE NOT NULL,
-'Long'             DOUBLE NOT NULL );
+('Id' INTEGER PRIMARY KEY AUTOINCREMENT,
+ 'DestId'           INTEGER   NOT NULL,
+ 'DestName'         TEXT   NOT NULL,
+ 'Lat'              DOUBLE NOT NULL,
+ 'Long'             DOUBLE NOT NULL );
 
 CREATE TABLE [MyUser]
-('UserId'    INTEGER PRIMARY KEY NOT NULL,
+('UserId'    INTEGER PRIMARY KEY NOT NULL ,
  'UserName'     TEXT NOT NULL,
  'UserEmail'     TEXT NOT NULL,
  'PhotoURL'      TEXT NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE [MyUser]
 
 
 CREATE TABLE [Sync](
-'SyncAutoNo' INT PRIMARY KEY NOT NULL,
-'UserId'     INT NOT NULL,
-'JsonSync'   TEXT NOT NULL,
-'TableName'  TEXT NOT NULL); 
+ 'SyncAutoNo' INTEGER PRIMARY KEY AUTOINCREMENT,
+ 'UserId'     INTEGER NOT NULL,
+ 'JsonSync'   TEXT NOT NULL,
+ 'TableName'  TEXT NOT NULL); 
 
 
               

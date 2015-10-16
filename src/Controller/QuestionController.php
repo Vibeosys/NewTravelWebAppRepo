@@ -5,22 +5,33 @@ namespace App\Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use App\Model\Table;
 /**
  * Description of QuestionController
  *
  * @author niteen
  */
-use App\Model\Table;
+define('QUES_INS_QRY', "INSERT INTO question (QuestionId,QuestionText) VALUES (@QuestionId,\"@QuestionText\");");
 class QuestionController extends AppController{
    
     public function getTableObj() {
         return new Table\QuestionTable();
     }
-    public function getAllQuestion() {
+    private function getAllQuestion() {
         return $this->getTableObj()->getAll();
     }
     public function getNewQuestion($Id) {
         return $this->getTableObj()->getNew($Id);
+    }
+    public function prepareInsertStatement() {
+        
+        $allQuestion = $this->getAllQuestion();
+        $preparedStatement = '';
+        foreach ($allQuestion as $question){
+            $preparedStatement.= QUES_INS_QRY;
+            $preparedStatement = str_replace('@QuestionId', $question->QuestionId, $preparedStatement);
+            $preparedStatement = str_replace('@QuestionText', $question->QuestionText, $preparedStatement);
+        }
+        return $preparedStatement;
     }
 }

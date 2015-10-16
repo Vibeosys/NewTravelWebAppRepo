@@ -13,7 +13,7 @@ namespace App\Controller;
  */
 use App\Model\Table;
 use Cake\Network;
-class ImageController extends AppController {
+class ImagesController extends AppController {
      
     public function getTableObj() {
         return new Table\ImageTable();
@@ -67,6 +67,7 @@ class ImageController extends AppController {
     public function upload() {
         
     }
+    
         
   
     

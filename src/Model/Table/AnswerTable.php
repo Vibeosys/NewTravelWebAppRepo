@@ -5,29 +5,28 @@ namespace App\Model\Table;
  * To change this template file(, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
+use Cake\Database\Connection;
+use App\DTO;
 /**
  * Description of AnswerTable
  *
  * @author niteen
  */
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
-use Cake\Database\Connection;
 class AnswerTable extends Table{
     
     public function connect() {
         return TableRegistry::get('answer');
     }
     public function getAll() {
-        $rows = $this->connect()->find()->select(['UserId','DestId','OptionId','UpdatedDate']);
+        $rows = $this->connect()->find();
         $i = 0;
         foreach ($rows as $row){
-            $all[$i]['UserId'] = $row->UserId;
-            $all[$i]['DestId'] = $row->DestId;
-            $all[$i]['OptionId'] = $row->OptionId;
-            $all[$i]['UpdatedDate'] = $row->UpdatedDate;
-            $i = $i + 1;
+                $answerDto = new DTO\ClsAnswerDto($row->AnswerId, $row->UserId, 
+                        $row->DestId, $row->OptionId, $row->CreatedDate);
+                     $all[$i] = $answerDto;
+                $i++;
         }        
         return $all;
     }

@@ -5,26 +5,27 @@ namespace App\Model\Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
+use App\DTO;
 /**
  * Description of OptionTable
  *
  * @author niteen
  */
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
+
 class OptionsTable extends Table{
     public function connect() {
         return TableRegistry::get('options');
     }
-    public function getAll($Id) {
-        $rows = $this->connect()->find()->where(['QuestionId =' => $Id]);
+    public function getAll() {
+        $rows = $this->connect()->find();
         $i = 0;
         foreach ($rows as $row){
-            $Option[$i]['OptionId'] = $row->OptionId;
-            $Option[$i]['OptionText'] = $row->OptionText;
-            $i = $i + 1;
+           $optionDto = new DTO\ClsOptionsDto($row->OptionId, $row->OptionText, $row->QuestionId);
+           $allOption[$i] = $optionDto; 
+           $i++;
         }
-        return $Option;
+        return $allOption;
     }
 }

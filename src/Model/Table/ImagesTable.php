@@ -13,7 +13,7 @@ namespace App\Model\Table;
  */
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
-class ImageTable extends Table{
+class ImagesTable extends Table{
     
     public function connect() {
         return TableRegistry::get('images');
@@ -25,5 +25,8 @@ class ImageTable extends Table{
         $query->UserId = $userid;
         $query->DestinationId = $destid;
         $this->save($query);
+    }
+    public function getAllImages() {
+        
     }
 }

@@ -5,15 +5,15 @@ namespace App\Model\Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
+use App\Controller;
+use App\DTO;
 /**
  * Description of QuestionTable
  *
  * @author niteen
  */
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
-use App\Controller;
 class QuestionTable extends Table{
     public function connect() {
         return TableRegistry::get('question');
@@ -21,18 +21,14 @@ class QuestionTable extends Table{
     
     public function getAll() {
         $rows = $this->connect()->find();
-        $option = new Controller\OptionsController;
         $i = 0;
         foreach($rows as $row)
         {
             if($row->Active == 1){
-              $allQuestion[$i]['QuestionId']    =  $row->QuestionId;
-              $allQuestion[$i]['QuestionText']  =  $row->QuestionText;
-              $allQuestion[$i]['Active']        =  $row->Active;
-              $allQuestion[$i]['CreatedDate']   =  $row->CreatedDate;
-              $allQuestion[$i]['UpdatedDate']   =  $row->UpdatedDate;
+            $QuestionDto = new DTO\ClsQuestionDto($row->QuestionId, $row->QuestionText);
+            $allQuestion[$i] = $QuestionDto;
+            $i++;
             }
-            $i = $i + 1;
         }
         return $allQuestion;
     }

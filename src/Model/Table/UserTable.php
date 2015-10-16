@@ -5,7 +5,9 @@ namespace App\Model\Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
+use App\DTO;
 /**
  * Description of ActivateModel
  *
@@ -13,8 +15,7 @@ namespace App\Model\Table;
  */
 
 
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
+
 class UserTable extends Table{
 
     public function initialize(array $config){}
@@ -77,10 +78,10 @@ class UserTable extends Table{
     }
     //to retive all 
     public function getAll($Id) {
-        $rows = $this->getUser()->where(['UserId !=' => $Id]);
+        $rows = $this->connect()->find()->where(['UserId !=' => $Id]);
         $i = 0;   
         foreach ($rows as $row)
-        {
+        {       
             if ($row->Active) {
                 $userDto = new \App\DTO\ClsUserDto($row->UserId, $row->UserName,
                                 $row->Password, $row->EmailId, $row->PhotoUrl, 
@@ -93,7 +94,7 @@ class UserTable extends Table{
         return $allUser;
     }
     public function getNew($Id) {
-         $rows = $this->getUser()->where(['UserId =' => $Id]);
+         $rows = $this->connect()->where(['UserId =' => $Id]);
      
          foreach ($rows as $row)
         {

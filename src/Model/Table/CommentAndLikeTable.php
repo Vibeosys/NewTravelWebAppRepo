@@ -5,14 +5,15 @@ namespace App\Model\Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+Use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
+use App\DTO;
 /**
  * Description of CommentAndLikeTable
  *
  * @author niteen
  */
-Use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
+
 class CommentAndLikeTable extends Table{
     
    
@@ -21,16 +22,16 @@ class CommentAndLikeTable extends Table{
         return TableRegistry::get('comment_and_like');
     }
     // to get all users like count
-    public function getLikeCount() {
+    public function getCommentAndLike() {
         $rows = $this->connect()->find();
         $i = 0;
         foreach ($rows as $row){
-            $likeCount[$i]['UserId'] = $row->UserId;
-            $likeCount[$i]['DestId'] = $row->DestId;
-            $likeCount[$i]['LikeCount'] = $row->LikeCount;
-            $i = $i + 1;
+            $commentAndLikeDto = new DTO\ClsCommentAndLikeDto($row->UserId, 
+                    $row->DestId, $row->LikeCount, $row->CommentText, $row->CommentUpdatedDate);
+            $allCommentAndLike[$i] = $commentAndLikeDto;
+            $i++;
         }
-        return $likeCount;
+        return $allCommentAndLike;
     }
     public function getLike() {
         
