@@ -90,5 +90,14 @@ class UserTable extends Table {
             return $row->DatabaseCheck;
         }
     }
+    public function validate($userid) {
+        $userCount = $this->connect()->find('all', ['condition' => ['UserId = ' => $userid]])->count();
+        if($userCount){
+            return SUCCESS;
+        }else{
+            return FAIL;
+        }
+        
+    }
 
 }

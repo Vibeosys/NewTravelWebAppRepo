@@ -19,12 +19,12 @@ use App\Model\Table;
 
 class SyncController extends AppController {
 
-    public $userTable = "USER";
-    public $destTable = "DESTINATION";
-    public $queTable = "QUESTION";
-    public $answerTable = "ANSWER";
-    public $LikeTable = "LIKECOUNT";
-    public $CommentTable = "COMMENT";
+    public $userTable = "user";
+    public $destTable = "destination";
+    public $queTable = "question";
+    public $answerTable = "answer";
+    public $LikeTable = "like";
+    public $CommentTable = "comment";
 
     public function connect() {
         return TableRegistry::get('sync');
@@ -101,14 +101,13 @@ class SyncController extends AppController {
             }
     }
 
-    public function download() {
-        $queryData = $this->request->input('json_decode');
-        $UserId = $queryData->UserId;
-        $Update = $this->getTableObj()->getUpdate($UserId);
+    public function download($userid) {
+      
+        $Update = $this->getTableObj()->getUpdate($userid);
         $this->response->type('application/json');
-        $this->response->body(json_encode($Update));
+        $this->response->body($Update);
         $this->response->send();
-        $this->getTableObj()->deleteUpdate($UserId);
+        $this->getTableObj()->deleteUpdate($userid);
     }
 
 }

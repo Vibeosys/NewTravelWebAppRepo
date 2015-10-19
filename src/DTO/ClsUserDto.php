@@ -21,7 +21,7 @@ class ClsUserDto {
     public  $PhotoUrl;
     public  $CreatedDate;
     
-    public function __construct($userId,$userName,$password,$emailId,$photoUrl,$active,$createdDate) {
+    public function __construct($userId,$userName = null,$password = null,$emailId = null,$photoUrl = null,$active = null,$createdDate = null) {
         
         $this->UserId = $userId;
         $this->UserName = $userName;
