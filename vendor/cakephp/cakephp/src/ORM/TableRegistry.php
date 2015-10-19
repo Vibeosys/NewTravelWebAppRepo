@@ -106,6 +106,7 @@ class TableRegistry
      */
     public static function get($alias, array $options = [])
     {
+       
         return static::locator()->get($alias, $options);
     }
 

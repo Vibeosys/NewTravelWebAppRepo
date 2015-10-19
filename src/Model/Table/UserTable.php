@@ -41,14 +41,13 @@ class UserTable extends Table {
         }
     }
 
-    public function update($MobileNo, $OTP) {
+    public function update($userId) {
 
-        $user = $this->connect()->get($this->checkUser($MobileNo)->UserId);
-        $user->OTP = $OTP;
-        $user->OTPRetryCount = $this->getTrial($MobileNo) + 1;
-        if ($this->connect()->save($user)) {
-            return $user->OTPRetryCount;
-        }
+        $user = $this->connect()->get($userId);
+        $user->DatabaseCheck = 1;
+        $this->connect()->save($user);
+           
+        
     }
 
     public function activate($UserId) {
@@ -85,19 +84,19 @@ class UserTable extends Table {
         return $newUser;
     }
     public function userCkeck($userid) {
-        $rows = $this->connect()->find('all', ['condition'=>['UserId' => $userid],'contents' => ['DatabaseCheck']]);
+        $rows = $this->connect()->find()->where(['UserId = ' => $userid]);
+        
         foreach ($rows as $row){
             return $row->DatabaseCheck;
         }
+        return FAIL;
     }
-    public function validate($userid) {
-        $userCount = $this->connect()->find('all', ['condition' => ['UserId = ' => $userid]])->count();
-        if($userCount){
+    public function validate($userId) {
+        if($this->connect()->find()->where(['UserId =' => $userId])->count()){
+        \Cake\Log\Log::debug("in user table validate method");
             return SUCCESS;
-        }else{
-            return FAIL;
         }
-        
+        return FAIL;
     }
 
 }

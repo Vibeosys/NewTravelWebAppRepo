@@ -92,7 +92,7 @@ class ImagesController extends AppController {
             $preparedStatements = str_replace('@DestId', $image->DestId, $preparedStatements);
             $preparedStatements  = str_replace('@ImageSeen', $image->ImageSeen, $preparedStatements);
         }
-        \Cake\Log\Log::info('insert statements for image Sqlite table created successfully ');
+   
         return $preparedStatements;
     }
 

@@ -102,12 +102,17 @@ class SyncController extends AppController {
     }
 
     public function download($userid) {
-      
+        \Cake\Log\Log::info("in Sync controller download method");
         $Update = $this->getTableObj()->getUpdate($userid);
+        if($Update){
         $this->response->type('application/json');
         $this->response->body($Update);
         $this->response->send();
         $this->getTableObj()->deleteUpdate($userid);
+        }  else {
+        $this->response->body('{"Error":"false", "Message":"Update not found"}');
+        $this->response->send();
+        }
     }
 
 }

@@ -57,7 +57,7 @@ if ($req->is('get')) {
         $routes->connect('user/creation', ['controller' => 'User', 'action' => 'userCreation']);
         $routes->connect('user/activation', ['controller' => 'User', 'action' => 'userActivation']);
         $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
-        $routes->connect('answer/submit', ['controller' => 'Answer', 'action' => 'submit']);
+        $routes->connect('sqlite/getdb', ['controller' => 'Sqlite', 'action' => 'getDB']);
         $routes->connect('answer/test', ['controller' => 'Answer', 'action' => 'test']);
        
       
@@ -84,12 +84,12 @@ Router::scope('/',
  Router::scope('/api/v1',
                 
         function ($routes){
-            $routes->connect('/download',['controller' => 'Download','action' => 'down']);
+            $routes->connect('/download',['controller' => 'Download','action' => 'index']);
         });
 Router::scope('/api/v1',
                 
         function ($routes){
-            $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
+            $routes->connect('/upload',['controller' => 'Upload','action' => 'index']);
         });
 
 

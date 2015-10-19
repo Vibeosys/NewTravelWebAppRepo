@@ -22,9 +22,9 @@ class SqliteTable extends Table {
 
     public function Create($id) {
         $returnValue = false;
-        $dbDir = new Folder(TMP . DS . 'SqliteDBFiles', true);
+        $dbDir = new Folder(SQLITE_DB_DIR, true);
         \Cake\Log\Log::debug('folder created');
-        $this->sqliteFile = TMP . DS . 'SqliteDBFiles' . DS . 'TravelDb' . $id . '.sqlite';
+        $this->sqliteFile = $dbDir->path. 'TravelDb' . $id . '.SQLITE';
         $db = new \SQLite3($this->sqliteFile);
         if ($db != NULL) {
             $fileContents = file_get_contents(__DIR__ .DS.'CreateTableScripts.sql');

@@ -81,6 +81,7 @@ class UserController extends AppController {
         return $preparedStatement;
     }
     public function isDatabaseTake($userid) {
+          \Cake\Log\Log::debug("in user controller database method");
         if($this->getTableObj()->userCkeck($userid)){
             return SUCCESS;
         }

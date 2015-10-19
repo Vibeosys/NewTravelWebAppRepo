@@ -246,6 +246,7 @@ return [
         /**
          * The test connection is used during the test suite.
          */
+        /*
         'test' => [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\sqlite',
@@ -262,6 +263,8 @@ return [
             'log' => false,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
+         * 
+         */
     ],
 
     /**

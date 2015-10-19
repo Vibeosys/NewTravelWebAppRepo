@@ -18,6 +18,11 @@
  * constants
  */
 require __DIR__ . '/paths.php';
+/**
+ * Added constants for application
+ */
+require __DIR__ . '/app.constants.php';
+
 
 // Use composer to load the autoloader.
 require ROOT . DS . 'vendor' . DS . 'autoload.php';

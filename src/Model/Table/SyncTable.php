@@ -36,10 +36,11 @@ class SyncTable extends Table {
         $this->connect()->save($query);
     }
 
-    public function getUpdate($UserId) {
-        $updateCount = $this->connect()->find('all',['condition' => ['UserId =' => $userId]])->count();
+    public function getUpdate($userId) {
+        $rows = $this->connect()->find()->where(['UserId = ' => $userId]);
+        $updateCount = $rows->count();
         if ($updateCount) {
-            $rows = $this->connect()->find()->where(['UserId = ' => $UserId]);
+            
             $update = '{"data":[';
             foreach ($rows as $row) {
                 $updateCount--;
@@ -51,7 +52,9 @@ class SyncTable extends Table {
             $update .=']}'; 
             return $update;
         } else {
+             \Cake\Log\Log::debug('Update not created');
             return NOT_FOUND;
+           
         }
     }
 
