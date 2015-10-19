@@ -241,12 +241,13 @@ return [
              * which is the recommended value in production environments
              */
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-        ],
+        ]
+        //,
 
         /**
          * The test connection is used during the test suite.
          */
-        'test' => [
+        /*'test' => [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\sqlite',
             'persistent' => false,
@@ -261,7 +262,7 @@ return [
             'quoteIdentifiers' => false,
             'log' => false,
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-        ],
+        ],*/
     ],
 
     /**
