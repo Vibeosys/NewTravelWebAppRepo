@@ -29,19 +29,18 @@ class DestinationTable extends Table {
 
     //to retrive all destination and return in array
     public function getDest() {
+        if (!$this->connect()->find()->count()) {
+            return NOT_FOUND;
+        }
         $rows = $this->connect()->find();
         $allDest[] = null;
         $i = 0;
-
         foreach ($rows as $row) {
             if ($row->Active) {
-                $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, 
-                        $row->Lat, $row->Long, $row->Active, $row->CraetedDate, 
-                        $row->UpdatedDate);
+                $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Lat, $row->Long, $row->Active, $row->CraetedDate, $row->UpdatedDate);
                 $allDest[$i] = $destDto;
                 $i++;
             }
-            
         }
         return $allDest;
     }

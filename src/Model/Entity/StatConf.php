@@ -12,6 +12,6 @@ namespace App\Model\Entity;
  * @author niteen
  */
 use Cake\ORM\Entity;
-class Stat_Conf extends Entity{
+class StatConf extends Entity{
    
 }

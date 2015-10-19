@@ -80,8 +80,10 @@ class ImagesController extends AppController {
 
     public function prepareInsertStatement() {
         $allImages = $this->getAll();
+         if(!$allImages){
+                return NOT_FOUND;
+            }
         $preparedStatements = '';
-
         foreach ($allImages as $image) {
             $preparedStatements .= IMG_INS_QRY;
             $preparedStatements = str_replace('@ImageId', $image->ImageId, $preparedStatements);
@@ -91,7 +93,6 @@ class ImagesController extends AppController {
             $preparedStatements  = str_replace('@ImageSeen', $image->ImageSeen, $preparedStatements);
         }
         \Cake\Log\Log::info('insert statements for image Sqlite table created successfully ');
- 
         return $preparedStatements;
     }
 

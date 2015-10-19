@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Model\Table;
 
+
 /**
  * Description of CommentAndLikeController
  *
@@ -28,36 +29,41 @@ class CommentAndLikeController extends AppController {
         return $this->getTableObj()->getCommentAndLike();
     }
 
-    public function addLike() {
-        $querydata = $this->request->input('json_decode');
-        if ($this->getTableObj()->putLikeCount($querydata->UserId, $querydata->DestId)) {
-            $syn = new SyncController;
-            $json = '{"UserId":"' . $querydata->UserId . '", "DestId":"' . $querydata->DestId . '"}';
-            $syn->likeEntry($querydata->UserId, $json);
-            $this->response->body('{"ERROR":"FALSE","MESSAGE":"Your Like For UserId : ' . $querydata->UserId . ' Saved Successfully"}');
-            $this->response->send();
-        } else {
-            $this->response->body('{"ERROR":"TRUE","MESSAGE":"Your Like Not Recieved"}');
-            $this->response->send();
+    public function submitComment(\App\DTO\ClsCommentAndLikeDto $comment) {
+
+        $this->autoRender = false;
+        if ($comment) {
+            
+            if ($this->getTableObj()->insertComment($comment->UserId,$comment->DestId,$comment->CommentText)) {
+                \Cake\Log\Log::info('Comment succefully stored');
+                $this->response->body('{"ERROR":"false", "message":"Saved"}');
+                $this->response->send();
+            } else {
+                \Cake\Log\Log::error('Comment not  stored');
+                $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
+            }
         }
     }
 
-    public function addComment() {
-        $querydata = $this->request->input('json_decode');
-        if ($this->getTableObj()->putComment($querydata->UserId, $querydata->DestId, $querydata->CommentText)) {
-            $syn = new SyncController;
-            $json = '{"UserId":"' . $querydata->UserId . '", "DestId":"' . $querydata->DestId . '","CommentText":"' . $querydata->CommentText . '"}';
-            $syn->likeEntry($querydata->UserId, $json);
-            $this->response->body('{"ERROR":"FALSE","MESSAGE":"Your Comment For DestId : ' . $querydata->DestId . ' Saved Successfully"}');
-            $this->response->send();
-        } else {
-            $this->response->body('{"ERROR":"TRUE","MESSAGE":"Your Comment Not Recieved"}');
-            $this->response->send();
+    public function submitLike(\App\DTO\ClsCommentAndLikeDto $like) {
+        $this->autoRender = false;
+        if ($like) {
+            
+            if ($this->getTableObj()->insertLike($like->UserId, $like->DestId)) {
+                \Cake\Log\Log::info('Like succefully stored');
+                $this->response->body('{"ERROR":"false", "message":"Saved"}');
+            } else {
+                \Cake\Log\Log::error('Like not  stored');
+                $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
+            }
         }
     }
 
     public function prepareInsertStatement() {
         $allCommentAndLike = $this->getAll();
+        if (!$allCommentAndLike) {
+            return NOT_FOUND;
+        }
         $preparedStatements = '';
         foreach ($allCommentAndLike as $commentAndLike) {
 

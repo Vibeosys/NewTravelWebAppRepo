@@ -13,14 +13,18 @@ use App\DTO;
  *
  * @author niteen
  */
-class Stat_ConfTable extends Table {
+class StatConfTable extends Table {
     
     public function connect() {
         return TableRegistry::get('stat_conf');
     }
     public function getConfig() {
+       if(!$this->connect()->find()->count()){
+           return NOT_FOUND;
+       }
         $rows = $this->connect()->find();
        $i = 0;
+       
         foreach ($rows as $row){
             $statconfDto = new DTO\ClsStatConfigDto($row->Key, $row->Value);
             $config[$i] = $statconfDto;

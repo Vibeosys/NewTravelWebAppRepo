@@ -38,6 +38,9 @@ class DestinationController extends AppController{
     }
     public function prepareInsertStatement() {
         $allDestinations = $this->getAllDest();
+         if(!$allDestinations){
+                return NOT_FOUND;
+            }
         $preparedStatement = '';
         foreach ($allDestinations as $destination)
         {

@@ -18,13 +18,14 @@ use Cake\Network;
 
 define('PATH',TMP.DS.'SqliteDBFiles'.DS);
 
-class Mysql2SqliteController extends AppController {
+class SqliteController extends AppController {
 
   
 
-    public function createSqlite() {
+    public function getDB() {
+        $this->autoRender = false;
         $id = rand(10, 99);
-        $tableObject = new Table\Mysql2SqliteTable();
+        $tableObject = new Table\SqliteTable();
         if ($tableObject->Create($id)) {
 
             //Destination Table
@@ -91,12 +92,12 @@ class Mysql2SqliteController extends AppController {
             }
             
              //Stat_Config Table
-            $stat_confController = new Stat_ConfController();
-            $statconfPreparedStatement = $stat_confController->prepareInsertStatement();
+            $statconfController = new StatConfController();
+            $statconfPreparedStatement = $statconfController->prepareInsertStatement();
             if($tableObject->excutePreparedStatement($statconfPreparedStatement)){
                 \Cake\Log\Log::debug('Record is inserted into stat_conf sQLite table for id' . $id);
             }else {
-                \Cake\Log\Log::debug('Record is not inserted into stat_confsQLite table for id');
+                \Cake\Log\Log::debug('Record is not inserted into stat_conf SQLite table for id');
             }
 
         $this->response->type('class');

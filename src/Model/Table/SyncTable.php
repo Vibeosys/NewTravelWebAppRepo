@@ -38,9 +38,7 @@ class SyncTable extends Table{
         $rows = $this->connect()->find()->where(['UserId = ' => $UserId]);
         $i = 0;
         $this->AutoNo = array();
-        foreach ($rows as $row)
-        {
-           
+        foreach ($rows as $row){
             $Update[$i]['Table'] = $row->TableName;
             $Update[$i]['Json'] =$row->JsonSync;
             $Update[$i]['UpdatedDate'] = $row->UpdatedDate;

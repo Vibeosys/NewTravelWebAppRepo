@@ -22,6 +22,9 @@ class OptionsController extends AppController{
     }
     public function prepareInsertStatement() {
         $allOptions = $this->getOptions();
+        if(!$allOptions){
+                return NOT_FOUND;
+            }
         $preparedStatements = '';
         foreach ($allOptions as $options){
             $preparedStatements .= OPTION_INS_QRY;

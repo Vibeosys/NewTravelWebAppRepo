@@ -24,8 +24,10 @@ class QuestionController extends AppController{
         return $this->getTableObj()->getNew($Id);
     }
     public function prepareInsertStatement() {
-        
         $allQuestion = $this->getAllQuestion();
+        if(!$allQuestion){
+                return NOT_FOUND;
+            }
         $preparedStatement = '';
         foreach ($allQuestion as $question){
             $preparedStatement.= QUES_INS_QRY;

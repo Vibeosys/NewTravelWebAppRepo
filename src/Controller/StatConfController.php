@@ -17,10 +17,10 @@ use App\Model\Table;
  */
 define('STATCONF_INS_QRY', "INSERT INTO stat_conf (Key,Value) VALUES (\"@key\",\"@Values\");");
 
-class Stat_ConfController extends AppController {
+class StatConfController extends AppController {
 
     public function getTableObj() {
-        return new Table\Stat_ConfTable();
+        return new Table\StatConfTable();
     }
 
     private function getstatConfig() {
@@ -29,6 +29,9 @@ class Stat_ConfController extends AppController {
 
     public function prepareInsertStatement() {
         $allConfig = $this->getstatConfig();
+        if(!$allConfig){
+                return NOT_FOUND;
+            }
         $preparedstatements = '';
         foreach ($allConfig as $config) {
             $preparedstatements.=STATCONF_INS_QRY;
@@ -39,3 +42,4 @@ class Stat_ConfController extends AppController {
     }
 
 }
+

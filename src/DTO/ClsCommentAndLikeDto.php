@@ -21,7 +21,7 @@ class ClsCommentAndLikeDto {
     public $CommentText;
     public $CreatedDate;
 
-    public function __construct($userId, $destId, $likeCount, $commentText, $createdDate) {
+    public function __construct($userId, $destId, $likeCount = null, $commentText = null, $createdDate = null) {
 
         $this->UserId = $userId;
         $this->DestId = $destId;

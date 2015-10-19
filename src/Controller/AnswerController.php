@@ -8,6 +8,7 @@ namespace App\Controller;
 
 use Cake\Network;
 use App\Model\Table;
+use App\DTO;
 
 /**
  * Description of AnswerController
@@ -24,8 +25,15 @@ class AnswerController extends AppController{
     private function allAnswer() {
         return $this->getTablObj()->getAll();
     }
-    public function newAnswer($Id) {
-        return $this->getTablObj()->getNew($Id);
+    public function submit(DTO\ClsAnswerDto $answer) {
+        if($answer){
+            if($this->getTablObj()->Insert($answer->UserId,$answer->DestId,$answer->OptionId)){
+                \Cake\Log\Log::info('answer submited');
+                $this->response->body('{"ERROR":"False","Message":"Saved"}');
+            }else{\Cake\Log\Log::info('answer not submited');$this->response->body('{"ERROR":"true","Message":"Not Saved Try again "}');}
+        }
+        $this->autoRender = false;
+        
     }
     public function putNewAnswer() {
         $querydata = $this->request->input('json_decode');
@@ -40,7 +48,11 @@ class AnswerController extends AppController{
     }
     public function prepareInsertStatement() {
             $allAnswer = $this->allAnswer();
+            if(!$allAnswer){
+                return NOT_FOUND;
+            }
             $preparedStatements = '';
+         
             foreach ($allAnswer as $answer){
                 $preparedStatements .= ANS_INS_QRY;
                 $preparedStatements = str_replace('@AnswerId', $answer->AnswerId, $preparedStatements);
@@ -50,5 +62,6 @@ class AnswerController extends AppController{
                 $preparedStatements = str_replace('@CreatedDate', $answer->CreatedDate, $preparedStatements);
             }
             return $preparedStatements;
+         
     }
 }

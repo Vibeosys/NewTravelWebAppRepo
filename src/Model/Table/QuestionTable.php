@@ -20,6 +20,9 @@ class QuestionTable extends Table{
     }
     
     public function getAll() {
+        if(!$this->connect()->find()->count()){
+            return NOT_FOUND;
+        }
         $rows = $this->connect()->find();
         $i = 0;
         foreach($rows as $row)

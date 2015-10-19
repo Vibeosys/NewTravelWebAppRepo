@@ -43,7 +43,8 @@ use Cake\Network;
 $req = new Network\Request();
 if ($req->is('get')) {
     Router::defaultRouteClass('DashedRoute');
-    Router::scope('/', function ($routes) {
+    
+    Router::scope('/api/v1', function ($routes) {
         $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
         $routes->connect('user/activation', ['controller' => 'User', 'action' => 'activation']);
          $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
@@ -51,15 +52,15 @@ if ($req->is('get')) {
     });
 } elseif ($req->is('Post')) {
     Router::defaultRouteClass('DashedRoute');
-    Router::scope('/', function ($routes) {
+    Router::scope('/api/v1', function ($routes) {
         $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
         $routes->connect('user/creation', ['controller' => 'User', 'action' => 'userCreation']);
         $routes->connect('user/activation', ['controller' => 'User', 'action' => 'userActivation']);
         $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
-        $routes->connect('answer/putnewanswer', ['controller' => 'Answer', 'action' => 'putNewAnswer']);
-          $routes->connect('answer/test', ['controller' => 'Answer', 'action' => 'test']);
-        $routes->connect('commentandcomment/addlike', ['controller' => 'CommentAndLike', 'action' => 'addLike']);
-        $routes->connect('mysql2sqlite/createsqlite', ['controller' => 'Mysql2Sqlite', 'action' => 'createSqlite']);
+        $routes->connect('answer/submit', ['controller' => 'Answer', 'action' => 'submit']);
+        $routes->connect('answer/test', ['controller' => 'Answer', 'action' => 'test']);
+       
+      
         $routes->connect('app/backupmysqldump', ['controller' => 'App', 'action' => 'backupMysqldump']);
         $routes->fallbacks('DashedRoute');
     });
@@ -78,6 +79,17 @@ Router::scope('/',
         $routes->connect('upload1',[
             'action' => 'upload1'
         ]);
+        });
+   //fixed url     
+ Router::scope('/api/v1',
+                
+        function ($routes){
+            $routes->connect('/download',['controller' => 'Download','action' => 'down']);
+        });
+Router::scope('/api/v1',
+                
+        function ($routes){
+            $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
         });
 
 

@@ -19,7 +19,7 @@ class ClsAnswerDto {
     public $OptionId;
     public $CreatedDate;
 
-    public function __construct($answerId, $userId, $destId, $optionId, $createdDate) {
+    public function __construct($userId, $destId, $optionId,$answerId = null, $createdDate = null) {
         $this->AnswerId = $answerId;
         $this->UserId = $userId;
         $this->DestId = $destId;

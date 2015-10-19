@@ -12,7 +12,6 @@ use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\DTO;
 
-
 /**
  * Description of ImageTable
  *
@@ -34,6 +33,9 @@ class ImagesTable extends Table {
     }
 
     public function getAllImages() {
+        if (!$this->connect()->find()->count()) {
+            return NOT_FOUND;
+        }
         $rows = $this->connect()->find();
         $i = 0;
         $allImages = NULL;
@@ -44,11 +46,7 @@ class ImagesTable extends Table {
                 $i++;
             }
         }
-        if (!$allImages) {
-            echo ('Images Does Not Exists ');
-        } else {
-            return $allImages;
-        }
+        return $allImages;
     }
 
 }
