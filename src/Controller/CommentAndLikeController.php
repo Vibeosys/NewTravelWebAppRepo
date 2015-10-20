@@ -38,6 +38,7 @@ class CommentAndLikeController extends AppController {
                 \Cake\Log\Log::info('Comment succefully stored');
                 $this->response->body('{"ERROR":"false", "message":"Saved"}');
                 $this->response->send();
+                return SUCCESS;
             } else {
                 \Cake\Log\Log::error('Comment not  stored');
                 $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
@@ -50,6 +51,7 @@ class CommentAndLikeController extends AppController {
         if ($like) {
             
             if ($this->getTableObj()->insertLike($like->UserId, $like->DestId)) {
+                
                 \Cake\Log\Log::info('Like succefully stored');
                 $this->response->body('{"ERROR":"false", "message":"Saved"}');
             } else {

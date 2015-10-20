@@ -8,7 +8,7 @@ namespace App\Controller;
  * and open the template in the editor.
  */
 
-use Cake\Network;
+
 use App\DTO;
 
 /**
@@ -22,24 +22,28 @@ class UploadController extends AppController {
 
     public function up() {
         $this->autoRender = false;
+        
         $queryData = $this->request->input('json_decode');
+        $senderId = $queryData->SenderId;
+        $senderEmail = $queryData->SenserEmail;
+        if(1)
         foreach ($queryData->data as $index => $record) {
             foreach ($record as $key => $value) {
                 switch ($key) {
                     case $this->table['TC']:
-                        $this->comment($value);
+                        $this->comment($value,$senderId,$senderEmail);
                         break;
                     case $this->table['TL']:
-                        $this->like($value);
+                        $this->like($value,$senderId,$senderEmail);
                         break;
                     case $this->table['TA']:
-                        $this->answer($value);
+                        $this->answer($value,$senderId,$senderEmail);
                         break;
                     case $this->table['TU']:
-                        $this->user($value);
+                        $this->user($value,$senderId,$senderEmail);
                         break;
                     case $this->table['TI']:
-                        $this->image($value);
+                        $this->image($value,$senderId,$senderEmail);
                 }
             }
         }
@@ -49,7 +53,11 @@ class UploadController extends AppController {
      $commentDto = new DTO\ClsCommentAndLikeDto($comment->UserId, $comment->DestId, $likeCount = null, $comment->CommentText);
      $commentAndLikeController = new CommentAndLikeController();
       \Cake\Log\Log::info('Comment DTO object send to submit');
-     $commentAndLikeController->submitComment($commentDto);
+     if($commentAndLikeController->submitComment($commentDto)){
+         $syncController = new SyncController();
+         $json = '{"UserId":"'.$commentDto->UserId.'","DestID":"'.$commentDto->DestId.'","CommentText":"'.$commentDto->CommentText.'"}';
+         $syncController->commentEntry($commentDto->UserId, $json);
+     }
     
     }
 
@@ -64,13 +72,20 @@ class UploadController extends AppController {
         $answerDto = new DTO\ClsAnswerDto($answer->UserId, $answer->DestId, $answer->OptionId);
         $answercontroller = new AnswerController();
          \Cake\Log\Log::info('Answer DTO object send to submit');
-        $answercontroller->submit($answerDto);
+        if($answercontroller->submit($answerDto)){
+            $syncController = new SyncController();
+            $json = '{"UserId":"'.$answerDto->UserId.'","DestId":"'.$answerDto->DestId.'","OptionId":"'.$answerDto->OptionId.'"}';
+            $syncController->answerEntry($AnswerId, $UserId);
+        }
     }
 
     private function user($user) {
         
     }
     private function image($image) {
+        
+    }
+    private function userValidation($userID,$userEmail) {
         
     }
 

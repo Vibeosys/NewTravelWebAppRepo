@@ -1559,6 +1559,7 @@ class Response
                 $this->_flushBuffer();
             }
         }
+        \Cake\Log\Log::debug("Real path of file : ".$file->path);
         $file->close();
         return true;
     }

@@ -89,7 +89,7 @@ Router::scope('/',
 Router::scope('/api/v1',
                 
         function ($routes){
-            $routes->connect('/upload',['controller' => 'Upload','action' => 'index']);
+            $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
         });
 
 

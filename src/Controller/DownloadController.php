@@ -48,8 +48,7 @@ class DownloadController extends AppController {
         }
          * 
          */
-        echo SQLITE_DB_DIR;
-        
+ 
         $sqliteController = new SqliteController();
                 $sqliteController->getDB(2);
     }

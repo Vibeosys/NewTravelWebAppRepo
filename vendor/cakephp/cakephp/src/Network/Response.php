@@ -1424,9 +1424,9 @@ class Response
             throw new NotFoundException('The requested file contains `..` and will not be read.');
         }
 
-        if (!is_file($path)) {
+        /*if (!is_file($path)) {
             $path = APP . $path;
-        }
+        }*/
 
         $file = new File($path);
         if (!$file->exists() || !$file->readable()) {

@@ -27,9 +27,11 @@ class AnswerController extends AppController{
     }
     public function submit(DTO\ClsAnswerDto $answer) {
         if($answer){
-            if($this->getTablObj()->Insert($answer->UserId,$answer->DestId,$answer->OptionId)){
+            $temp = $this->getTablObj()->Insert($answer->UserId,$answer->DestId,$answer->OptionId);
+            if($temp){
                 \Cake\Log\Log::info('answer submited');
                 $this->response->body('{"ERROR":"False","Message":"Saved"}');
+                return SUCCESS;
             }else{\Cake\Log\Log::info('answer not submited');$this->response->body('{"ERROR":"true","Message":"Not Saved Try again "}');}
         }
         $this->autoRender = false;

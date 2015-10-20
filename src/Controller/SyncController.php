@@ -84,10 +84,10 @@ class SyncController extends AppController {
     }
     public function likeEntry($UserId,$json) {
          $UserObj = new UserController;
-          $allUser = $UserObj->getAllUser();
+          $allUser = $UserObj->getAllUser($UserId);
            foreach ($allUser as $user) {
-                if ($user['Active'] == 1 and $user['UserId'] != $UserId) {
-                    $this->getTableObj()->Insert($user['UserId'], $json, $this->LikeCommentTable);
+                if ($user->Active) {
+                    $this->getTableObj()->Insert($user->UserId, $json, $this->LikeTable);
                 }
             }
     }
