@@ -1,6 +1,6 @@
 CREATE TABLE [answer]
- ('AnswerId' INTEGER NOT NULL PRIMARY KEY, 
-'UserId' INTEGER, 
+ ('AnswerId' TEXT NOT NULL PRIMARY KEY, 
+'UserId' TEXT, 
 'DestId' INTEGER, 
 'OptionId' INTEGER, 
 'CreatedDate' DATETIME);
@@ -16,7 +16,7 @@ CREATE TABLE [question]
              'QuestionText' TEXT NOT NULL);
 
 CREATE TABLE [comment_and_like] 
-('UserId' INTEGER NOT NULL, 
+('UserId' TEXT NOT NULL, 
 'DestId' INTEGER NOT NULL, 
 'LikeCount' INTEGER NOT NULL, 
 'CommentText' TEXT, 
@@ -25,9 +25,9 @@ CREATE TABLE [comment_and_like]
 
 
 CREATE TABLE [images] 
-('ImageId' INTEGER NOT NULL PRIMARY KEY, 
+('ImageId' TEXT NOT NULL PRIMARY KEY, 
 'ImagePath' TEXT NOT NULL, 
-'UserId' INTEGER NOT NULL, 
+'UserId' TEXT NOT NULL, 
 'DestId' INTEGER NOT NULL,
 'ImageSeen'  BOOLEAN NOT NULL);
 
@@ -41,7 +41,7 @@ CREATE TABLE [stat_conf]
  'Value' TEXT NOT NULL);
 
 CREATE TABLE [user] 
-('UserId' INTEGER NOT NULL PRIMARY KEY, 
+('UserId' TEXT NOT NULL PRIMARY KEY, 
 'UserName' TEXT NOT NULL,
 'PhotoURL'  TEXT NOT NULL);
 
@@ -54,7 +54,7 @@ CREATE TABLE [MyMap]
 'CreatedDate'   DATETIME NOT NULL);
 
 CREATE TABLE [MyImages]
-('ImageId' INTEGER PRIMARY KEY  AUTOINCREMENT,
+('ImageId' TEXT PRIMARY KEY,
 'ImagePath'           TEXT   NOT NULL,
 'CreateDate'          DATETIME   NOT NULL); 
 
@@ -66,7 +66,7 @@ CREATE TABLE [TempData]
  'Long'             DOUBLE NOT NULL );
 
 CREATE TABLE [MyUser]
-('UserId'    INTEGER PRIMARY KEY NOT NULL ,
+('UserId'    TEXT PRIMARY KEY NOT NULL ,
  'UserName'     TEXT NOT NULL,
  'UserEmail'     TEXT NOT NULL,
  'PhotoURL'      TEXT NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE [MyUser]
 
 CREATE TABLE [Sync](
  'SyncAutoNo' INTEGER PRIMARY KEY AUTOINCREMENT,
- 'UserId'     INTEGER NOT NULL,
+ 'UserId'     TEXT NOT NULL,
  'JsonSync'   TEXT NOT NULL,
  'TableName'  TEXT NOT NULL); 
 

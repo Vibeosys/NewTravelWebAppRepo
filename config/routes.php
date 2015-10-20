@@ -86,12 +86,17 @@ Router::scope('/',
         function ($routes){
             $routes->connect('/download',['controller' => 'Download','action' => 'index']);
         });
-Router::scope('/api/v1',
+ Router::scope('/api/v1',
                 
         function ($routes){
             $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
         });
 
+ Router::scope('/api/v1',
+                
+        function ($routes){
+            $routes->connect('/downloadDb',['controller' => 'DownloadDb','action' => 'index']);
+        });
 
 
 

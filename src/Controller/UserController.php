@@ -48,13 +48,13 @@ class UserController extends AppController {
     }
 
     //to activate user
-    public function userSignUp() {
+    public function userSignUp($userId) {
+        if($this->getTableObj()->insertUser($userId)){
+            return SUCCESS;
+        }     
+        return FAIL;
     }
-    public function userActivation() {
-        
-    }
-
-
+  
     public function makeEntry($Id) {
         $syn = new SyncController;
         $sqliteController = new SqliteController;

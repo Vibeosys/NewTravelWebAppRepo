@@ -22,16 +22,13 @@ class DownloadController extends AppController {
 
     public function index() {
         $this->autoRender = false;
-        /*
-        $this->autoRender = false;
-        \Cake\Log\Log::debug("In download controller first step");
-       $query = $this->request->param('pass');
-        if(!count($query)){
-            $this->response->body('{"Error":"True", "Message":"UserId missing"}');
-            return ;
+        
+        $userId = $this->request->param("userid");
+        if(!$userId){
+            $this->response->body(DTO\ClsErrorDto::prepareError(101));
         }
+        \Cake\Log\Log::debug("In download controller first step");
         \Cake\Log\Log::debug("Decoded json");
-        $userDto = new DTO\ClsUserDto($query[0]);
         if ($this->isValied($userDto->UserId)) {
             \Cake\Log\Log::debug("User validate");
             if ($this->databaseCheck($userDto->UserId)) {
@@ -46,12 +43,7 @@ class DownloadController extends AppController {
         } else {
             $this->response->body('{"Error":"True","Message":"Invalide user"}');
         }
-         * 
-         */
- 
-        $sqliteController = new SqliteController();
-                $sqliteController->getDB(2);
-    }
+     }
 
     private function isValied($userid) {
         $userTable = new Table\UserTable();
@@ -74,5 +66,6 @@ class DownloadController extends AppController {
     private function functionName($param) {
         
     }
+   
 
 }

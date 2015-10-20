@@ -28,17 +28,14 @@ class UserTable extends Table {
         return TableRegistry::get('user');
     }
 
-    public function insertUser($Name, $MobileNo, $OTP) {
+    public function insertUser($userId) {
 
         $user = $this->connect()->newEntity();
-        $user->UserName = $Name;
-        $user->MobileNo = $MobileNo;
-        $user->OTP = $OTP;
-        $user->OTPRetryCount = 1;
-        $user->CreatedDate = date("Y-m-d H:i:sa");
+           $user->UserId =    $userId; 
         if ($this->connect()->save($user)) {
-            return $this->checkUser($MobileNo)->UserId;
+            return SUCCESS;
         }
+        return FAIL;
     }
 
     public function update($userId) {
