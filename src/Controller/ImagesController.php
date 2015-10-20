@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Model\Table;
 use Cake\Network;
+use App\DTO;
 
 /**
  * Description of ImageController
@@ -94,6 +95,12 @@ class ImagesController extends AppController {
         }
    
         return $preparedStatements;
+    }
+    public function saveImages(DTO\ClsImagesDto $imageDto) {
+        if($this->getTableObj()->insertImage($imageDto->UserId,$imageDto->DestId,$imageDto->ImagePath)){
+            return SUCCESS;
+        }
+        return FAIL;
     }
 
 }

@@ -80,14 +80,13 @@ Router::scope('/',
             'action' => 'upload1'
         ]);
         });
-   //fixed url     
+
+        //Travel Web App Endpoints     
  Router::scope('/api/v1',
-                
         function ($routes){
             $routes->connect('/download',['controller' => 'Download','action' => 'index']);
         });
  Router::scope('/api/v1',
-                
         function ($routes){
             $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
         });

@@ -16,11 +16,7 @@ class ClsErrorDto {
     
     public $errorCode;
     public $message;
-    public $errorDictionary = array(
-        100 => 'User is not authenticated',
-        101 => 'UserId is blank',
-        102 => 'Unknown error occured'
-    );
+    
     
     
     //format {"errorCode":"100", "message":"User is not authenticated"}
@@ -31,6 +27,12 @@ class ClsErrorDto {
         $errorDto->message = $errorDto->errorDictionary[$errorcode];
         return json_encode($errorDto);
     }
+    protected $errorDictionary = array(
+        100 => 'User is not authenticated',
+        101 => 'UserId is blank',
+        102 => 'Unknown error occured',
+        103 => 'Update not found'
+    );
     
     
 }

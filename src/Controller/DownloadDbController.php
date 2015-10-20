@@ -19,6 +19,7 @@ class DownloadDbController extends AppController {
     
      public function index() {
         $this->autoRender = false;
+        \Cake\Log\Log::info('first step in DownloadDb');
         $tempUserId = $this->request->query("tempid");
         if(!$tempUserId){
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
@@ -29,11 +30,16 @@ class DownloadDbController extends AppController {
             \Cake\Log\Log::debug("User validate");
                 $sqliteController = new SqliteController();
                 $sqliteController->getDB($userDto->UserId);
-                \Cake\Log\Log::debug("sqlite file sended to to user");
+                \Cake\Log\Log::debug("sqlite file sended to user");
         } else {
             $userController = new UserController();
-            $userController->userSignUp($userDto->UserId);
-            
+            \Cake\Log\Log::debug('UserId send to save in database');
+            if($userController->userSignUp($userDto->UserId)){
+                $sqliteController = new SqliteController();
+                $sqliteController->getDB($userDto->UserId);
+                \Cake\Log\Log::debug("sqlite file sended  to user after userid saving");
+    
+            }
         }
      }
      private function isValied($userid) {

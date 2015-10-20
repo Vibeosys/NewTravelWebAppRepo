@@ -99,7 +99,7 @@ class SqliteController extends AppController {
             }else {
                 \Cake\Log\Log::debug('Record is not inserted into stat_conf SQLite table for id');
             }
-            \Cake\Log\Log::info("SqliteDB dir : ".SQLITE_DB_DIR." TEMP dir : ".TMP);
+            
         $this->response->type('class');
         $this->response->file(SQLITE_DB_DIR.'TravelDb'.$userId.'.sqlite',['download' => true]);
         $this->response->send();

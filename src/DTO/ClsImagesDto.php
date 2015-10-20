@@ -21,7 +21,7 @@ class ClsImagesDto {
     public $DestId;
     public $ImageSeen;
 
-    public function __construct($imageId, $imagePath, $userId, $destId) {
+    public function __construct($imagePath, $userId, $destId, $imageId = null) {
         $this->ImageId = $imageId;
         $this->ImagePath = $imagePath;
         $this->UserId = $userId;

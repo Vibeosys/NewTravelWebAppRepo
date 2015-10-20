@@ -44,7 +44,7 @@ class SyncTable extends Table {
             $update = '{"data":[';
             foreach ($rows as $row) {
                 $updateCount--;
-                $update .= '{"' . $row->TableName . '":"' . $row->JsonSync . '"}';
+                $update .= '{"' . $row->TableName . '":' . $row->JsonSync . '}';
                 if($updateCount){
                     $update .= ',';
                 }

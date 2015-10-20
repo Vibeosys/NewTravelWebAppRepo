@@ -12,7 +12,6 @@ use App\DTO;
 use App\Model\Table;
 use Cake\Network;
 
-
 /**
  * Description of DownloadController
  *
@@ -22,28 +21,23 @@ class DownloadController extends AppController {
 
     public function index() {
         $this->autoRender = false;
-        
-        $userId = $this->request->param("userid");
-        if(!$userId){
+
+        $userId = $this->request->query("tempid");
+        if (!$userId) {
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
+            return ;
         }
-        \Cake\Log\Log::debug("In download controller first step");
-        \Cake\Log\Log::debug("Decoded json");
+        
+        $userDto = new DTO\ClsUserDto($userId);
         if ($this->isValied($userDto->UserId)) {
             \Cake\Log\Log::debug("User validate");
-            if ($this->databaseCheck($userDto->UserId)) {
-                $syncController = new SyncController();
-                $syncController->download($userDto->UserId);
-                \Cake\Log\Log::debug("User Having sqlite file so call to download method");
-            } else {
-                $sqliteController = new SqliteController();
-                $sqliteController->getDB($userDto->UserId);
-                \Cake\Log\Log::debug("sqlite file sended to to user");
-            }
+            $syncController = new SyncController();
+            $syncController->download($userDto->UserId);
+            \Cake\Log\Log::debug("User Having sqlite file so call to download method");
         } else {
-            $this->response->body('{"Error":"True","Message":"Invalide user"}');
+            $this->response->body(DTO\ClsErrorDto::prepareError(102));
         }
-     }
+    }
 
     private function isValied($userid) {
         $userTable = new Table\UserTable();
@@ -66,6 +60,5 @@ class DownloadController extends AppController {
     private function functionName($param) {
         
     }
-   
 
 }

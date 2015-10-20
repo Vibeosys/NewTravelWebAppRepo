@@ -40,7 +40,7 @@ class SqliteTable extends Table {
         if ($Text) {
             $success = $db->exec($Text);
             $db->close();
-            return $success;
+            return SUCCESS;
         }
         return NOT_FOUND;
     }

@@ -29,7 +29,10 @@ class ImagesTable extends Table {
         $query->CreatedDate = date('Y-M-d H:i:sa');
         $query->UserId = $userid;
         $query->DestinationId = $destid;
-        $this->save($query);
+        if($this->save($query)){
+            return SUCCESS;
+        }
+        return FAIL;
     }
 
     public function getAllImages() {
@@ -41,7 +44,7 @@ class ImagesTable extends Table {
         $allImages = NULL;
         foreach ($rows as $row) {
             if ($row->Visibility) {
-                $imageDto = new DTO\ClsImagesDto($row->ImageId, $row->ImagePath, $row->UserId, $row->DestId);
+                $imageDto = new DTO\ClsImagesDto($row->ImagePath, $row->UserId, $row->DestId, $row->ImageId);
                 $allImages[$i] = $imageDto;
                 $i++;
             }

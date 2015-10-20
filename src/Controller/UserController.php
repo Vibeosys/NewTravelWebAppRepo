@@ -50,7 +50,9 @@ class UserController extends AppController {
     //to activate user
     public function userSignUp($userId) {
         if($this->getTableObj()->insertUser($userId)){
+            \Cake\Log\Log::debug('temp Userid inserted');
             return SUCCESS;
+            
         }     
         return FAIL;
     }
@@ -80,9 +82,9 @@ class UserController extends AppController {
         }
         return $preparedStatement;
     }
-    public function isDatabaseTake($userid) {
-          \Cake\Log\Log::debug("in user controller database method");
-        if($this->getTableObj()->userCkeck($userid)){
+    public function validate($userid,$usermail) {
+          \Cake\Log\Log::debug("in user controller method");
+        if($this->getTableObj()->userCkeck($userid,$usermail)){
             return SUCCESS;
         }
         return FAIL;
