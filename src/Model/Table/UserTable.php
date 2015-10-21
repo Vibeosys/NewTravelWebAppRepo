@@ -55,19 +55,16 @@ class UserTable extends Table {
     }
 
     //to retive all 
-    public function getAll($Id) {
-        $rows = $this->connect()->find()->where(['UserId !=' => $Id]);
+    public function getAll() {
+        $rows = $this->connect()->find()->where();
         $i = 0;
         $allUser = null;
         if ($this->connect()->find()->count()) {
             foreach ($rows as $row) {
-
-                if ($row->Active) {
                     \Cake\Log\Log::info("Valied User : " . $row->UserId . "Active : " . $row->Active);
                     $userDto = new \App\DTO\ClsUserDto($row->UserId, $row->UserName, $row->Password, $row->EmailId, $row->PhotoUrl, $row->Active, $row->CreatedDate);
                     $allUser[$i] = $userDto;
                     $i++;
-                }
             }return $allUser;
         } else {
             return NOT_FOUND;
@@ -87,11 +84,12 @@ class UserTable extends Table {
 
     public function userCkeck($userid, $usermail) {
         $rows = $this->connect()->find()->where(['UserId =' => $userid]);
-        \Cake\Log\Log::info("EmailId of ".$userid);
         foreach ($rows as $row) {
-            if ($row->EmailId === $usermail) {
+            if($row->EmailId == $usermail){
+                \Cake\Log\Log::debug("User Authenticate for Email");
                 return SUCCESS;
             }
+             \Cake\Log\Log::debug("User Authentication failed");
         }
         return FAIL;
     }

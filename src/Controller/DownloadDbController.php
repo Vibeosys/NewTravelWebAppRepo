@@ -14,19 +14,22 @@ use Cake\Network;
  *
  * @author niteen
  */
-class DownloadDbController extends AppController {
+class DownloadDbController extends ApiController {
    
     
      public function index() {
         $this->autoRender = false;
         \Cake\Log\Log::info('first step in DownloadDb');
+        //$tempUserId = null;
         $tempUserId = $this->request->query("tempid");
         if(!$tempUserId){
+            //$this->response->type('json');
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
+            return ;
         }
         $userDto = new DTO\ClsUserDto($tempUserId);
         \Cake\Log\Log::debug('TempUserID is send to Validate'.$tempUserId);
-        if($this->isValied($userDto->UserId)) {
+        if($this->isValid($userDto->UserId)) {
             \Cake\Log\Log::debug("User validate");
                 $sqliteController = new SqliteController();
                 $sqliteController->getDB($userDto->UserId);
@@ -42,7 +45,7 @@ class DownloadDbController extends AppController {
             }
         }
      }
-     private function isValied($userid) {
+     private function isValid($userid) {
         $userTable = new Table\UserTable();
         if ($userTable->validate($userid)) {
             return SUCCESS;

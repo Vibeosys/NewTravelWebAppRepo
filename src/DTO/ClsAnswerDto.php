@@ -11,7 +11,7 @@ namespace App\DTO;
  *
  * @author niteen
  */
-class ClsAnswerDto {
+class ClsAnswerDto extends JsonDeserializer{
 
     public $AnswerId;
     public $UserId;

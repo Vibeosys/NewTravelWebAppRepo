@@ -35,12 +35,12 @@ class CommentAndLikeController extends AppController {
         if ($comment) {
             
             if ($this->getTableObj()->insertComment($comment->UserId,$comment->DestId,$comment->CommentText)) {
-                \Cake\Log\Log::info('Comment succefully stored');
+               
                 $this->response->body('{"ERROR":"false", "message":"Saved"}');
                 $this->response->send();
                 return SUCCESS;
             } else {
-                \Cake\Log\Log::error('Comment not  stored');
+                
                 $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
             }
         }

@@ -18,9 +18,9 @@ CREATE TABLE [question]
 CREATE TABLE [comment_and_like] 
 ('UserId' TEXT NOT NULL, 
 'DestId' INTEGER NOT NULL, 
-'LikeCount' INTEGER NOT NULL, 
+'LikeCount' INTEGER NOT NULL DEFAULT 0, 
 'CommentText' TEXT, 
-'CreatedDate' DATETIME NOT NULL);
+'CreatedDate' DATETIME);
 
 
 

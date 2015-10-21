@@ -40,17 +40,6 @@ class AnswerTable extends Table {
             return $all;
     }
 
-    public function getNew($Id) {
-        $rows = $this->connect()->find()->where(['AnswerId = ' => $Id]);
-        foreach ($rows as $row) {
-            $all['UserId'] = $row->UserId;
-            $all['DestId'] = $row->DestId;
-            $all['OptionId'] = $row->OptionId;
-            $all['UpdatedDate'] = $row->UpdatedDate;
-        }
-        return $all;
-    }
-
     public function Insert($userid, $destid, $optionid) {
         $query = $this->connect()->newEntity();
 
@@ -60,6 +49,10 @@ class AnswerTable extends Table {
         $query->CreatedDate = date('Y-m-d H-i-sa');
         $query->UpdatedDate = date('Y-m-d H-i-sa');
         if ($this->connect()->save($query)) {
+             $json = '{"AnswerId":"'.$query->AnswerId.'","UserId":"'.$userid.'","DestId":"'.$destid.'","OptionId":"'.$optionid.'"}';
+                $syncController = new \App\Controller\SyncController();
+                $syncController->answerEntry($userid, $json, INSERT);
+                \Cake\Log\Log::debug("Sync Entry for Answer");
             return $query->AnswerId;
         }
     }

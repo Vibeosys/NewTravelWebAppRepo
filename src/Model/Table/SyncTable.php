@@ -26,12 +26,13 @@ class SyncTable extends Table {
         return TableRegistry::get('sync');
     }
 
-    public function Insert($UserId, $Update, $Table) {
+    public function Insert($userId, $update, $table,$opration) {
 
         $query = $this->connect()->newEntity();
-        $query->UserId = $UserId;
-        $query->JsonSync = $Update;
-        $query->TableName = $Table;
+        $query->UserId = $userId;
+        $query->JsonSync = $update;
+        $query->TableName = $table;
+        $query->Opration = $opration;
         $query->UpdatedDate = date("Y-m-d H:i:sa");
         $this->connect()->save($query);
     }
@@ -44,7 +45,7 @@ class SyncTable extends Table {
             $update = '{"data":[';
             foreach ($rows as $row) {
                 $updateCount--;
-                $update .= '{"' . $row->TableName . '":' . $row->JsonSync . '}';
+                $update .= '{"tableName":"' . $row->TableName . '","tableData":' . json_encode($row->JsonSync) . '}';
                 if($updateCount){
                     $update .= ',';
                 }

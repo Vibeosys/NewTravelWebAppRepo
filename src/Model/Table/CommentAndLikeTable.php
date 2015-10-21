@@ -65,6 +65,9 @@ class CommentAndLikeTable extends Table {
             $query->set(['LikeCount' => $count, 'LikeUpdatedDate' => date('Y-m-d H:i:sa')]);
             $query->where(['UserId =' => $userid, 'DestId =' => $destid]);
             if ($query->execute()) {
+                 $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'"}';
+                $syncController = new \App\Controller\SyncController();
+                $syncController->likeEntry($userid, $json, UPDATE);
                 return SUCCESS;
             } else {
                 return FAIL;
@@ -76,6 +79,9 @@ class CommentAndLikeTable extends Table {
             $query->LikeCount = LIKE;
             $query->LikeUpdatedDate = date('Y-m-d H:i:sa');
             if ($this->connect()->save($query)) {
+                 $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'"}';
+                $syncController = new \App\Controller\SyncController();
+                $syncController->likeEntry($userid, $json, INSERT);
                 return SUCCESS;
             } else {
                 return FAIL;
@@ -88,9 +94,12 @@ class CommentAndLikeTable extends Table {
         if ($check) {
             $query = $this->connect()->query();
             $query->update();
-            $query->set(['CommentText' => $comment, 'CommentUpdatedDate' => date('Y-m-d H:i:sa')]);
+            $query->set(['CommentText' => $comment, 'CommentUpdatedDate' => $current = date('Y-m-d H:i:sa')]);
             $query->where(['UserId ='=> $userid ,'DestId =' => $destid]);
             if ($query->execute()) {
+                $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'","CommentText":"'.$comment.'","CreatedDate":"'.$current.'"}';
+                $syncController = new \App\Controller\SyncController();
+                $syncController->commentEntry($userid, $json, UPDATE);
                 return SUCCESS;
             } else {
                 return FAIL;
@@ -100,8 +109,11 @@ class CommentAndLikeTable extends Table {
             $query->UserId = $userid;
             $query->DestId = $destid;
             $query->CommentText = $comment;
-            $query->CommentUpdatedDate = date('Y-m-d H:i:sa');
+            $query->CommentUpdatedDate = $current = date('Y-m-d H:i:sa');
             if ($this->connect()->save($query)) {
+                 $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'","CommentText":"'.$comment.'","CreatedDate":"'.$current.'"}';
+                $syncController = new \App\Controller\SyncController();
+                $syncController->commentEntry($userid, $json, INSERT);
                 return SUCCESS;
             } else {
                 return FAIL;

@@ -11,7 +11,7 @@ namespace App\DTO;
  *
  * @author niteen
  */
-class ClsUserDto {
+class ClsUserDto extends JsonDeserializer{
    
     public  $UserId;
     public  $UserName;
@@ -21,7 +21,7 @@ class ClsUserDto {
     public  $PhotoUrl;
     public  $CreatedDate;
     
-    public function __construct($userId,$userName = null,$password = null,$emailId = null,$photoUrl = null,$active = null,$createdDate = null) {
+    public function __construct($userId = null,$userName = null,$password = null,$emailId = null,$photoUrl = null,$active = null,$createdDate = null) {
         
         $this->UserId = $userId;
         $this->UserName = $userName;

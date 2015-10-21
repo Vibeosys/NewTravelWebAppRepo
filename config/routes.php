@@ -92,7 +92,7 @@ Router::scope('/',
         });
 
  Router::scope('/api/v1',
-                
+ 
         function ($routes){
             $routes->connect('/downloadDb',['controller' => 'DownloadDb','action' => 'index']);
         });

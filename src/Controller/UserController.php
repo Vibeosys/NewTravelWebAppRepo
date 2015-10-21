@@ -64,8 +64,8 @@ class UserController extends AppController {
         $syn->userEntry($this->getTableObj()->getAll($Id), $this->getTableObj()->getNew($Id));
     }
 
-    private function getAllUser() {
-        return $this->getTableObj()->getAll(1);
+    public function getAllUser() {
+        return $this->getTableObj()->getAll();
     }
 
     public function prepareInsertStatement() {

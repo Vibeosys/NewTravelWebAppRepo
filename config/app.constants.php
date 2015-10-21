@@ -16,6 +16,10 @@ define('SUCCESS', 1);
 
 define('FAIL', 0);
 
+define('UPDATE', 'update');
+
+define('INSERT', 'insert');
+
 
 
 

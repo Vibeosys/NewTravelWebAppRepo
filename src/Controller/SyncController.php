@@ -8,7 +8,7 @@ namespace App\Controller;
  * and open the template in the editor.
  */
 
-use Cake\Network;
+
 use Cake\ORM\TableRegistry;
 use App\Model\Table;
 use App\DTO;
@@ -18,7 +18,7 @@ use App\DTO;
  *
  * @author niteen
  */
-class SyncController extends AppController {
+class SyncController extends ApiController {
 
     public $userTable = "user";
     public $destTable = "destination";
@@ -35,78 +35,79 @@ class SyncController extends AppController {
         return new Table\SyncTable();
     }
 
-    public function userEntry($allUser, $newUser) {
+    public function userEntry($newUser) {
+        $userController = new UserController();
+        $allUser = $userController->getAllUser();
         foreach ($allUser as $user) {
-            if ($user['Active'] == 1) {
+            if ($user->UserId) {
                 $this->getTableObj()->Insert($user['UserId'], json_encode($newUser), $this->userTable);
             }
         }
     }
 
-    public function destEntry($Id) {
-        $DestObj = new DestinationController;
+    public function destEntry($json,$opration) {
+       
         $UserObj = new UserController;
-        $destList = $DestObj->getNewDest($Id);
+       
+        $allUser = $UserObj->getAllUser();
+       
+        foreach ($allUser as $user) {
+       
+                $this->getTableObj()->Insert($user->UserId, $json, $this->destTable,$opration);
+            
+        }
+    }
+
+    public function questionEntry($json,$opration) {
+        $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
         $i = 0;
         foreach ($allUser as $user) {
-            if ($user['Active'] == 1) {
-                $this->getTableObj()->Insert($user['UserId'], json_encode($destList), $this->destTable);
-            }
+          
+                $this->getTableObj()->Insert($user->UserId, $json, $this->queTable,$opration);
+          
         }
     }
 
-    public function questionEntry($Id) {
-        $QuestionObj = new QuestionController;
+    public function answerEntry($userId,$json, $opration) {
         $UserObj = new UserController;
-        $Que = $QuestionObj->getNewQuestion($Id);
-        $allUser = $UserObj->getAllUser();
-        $i = 0;
-        foreach ($allUser as $user) {
-            if ($user['Active'] == 1) {
-                $this->getTableObj()->Insert($user['UserId'], json_encode($Que), $this->queTable);
-            }
-        }
-    }
-
-    public function answerEntry($AnswerId, $UserId) {
-        $AnswerObj = new AnswerController;
-        $UserObj = new UserController;
-        $Review = $AnswerObj->newAnswer($AnswerId);
         $allUser = $UserObj->getAllUser();
         foreach ($allUser as $user) {
-            if ($user['Active'] == 1 and $user['UserId'] != $UserId) {
-                $this->getTableObj()->Insert($user['UserId'], json_encode($Review), $this->answerTable);
-            }
-        }
+            if($user->UserId != $userId){
+                $this->getTableObj()->Insert($user->UserId,$json, $this->answerTable,$opration);
+            
+        }}
     }
 
-    public function likeEntry($UserId, $json) {
+    public function likeEntry($userId, $json, $opration) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser($UserId);
         foreach ($allUser as $user) {
-            if ($user->Active) {
-                $this->getTableObj()->Insert($user->UserId, $json, $this->LikeTable);
+            if($user->UserId != $userId){
+                $this->getTableObj()->Insert($user->UserId, $json, $this->LikeTable, $opration);
             }
         }
     }
 
-    public function commentEntry($UserId, $json) {
+    public function commentEntry($userId, $json, $opration) {
         $UserObj = new UserController;
-        $allUser = $UserObj->getAllUser();
+        $allUser = $UserObj->getAllUser($userId);
         foreach ($allUser as $user) {
-            if ($user['Active'] == 1 and $user['UserId'] != $UserId) {
-                $this->getTableObj()->Insert($user['UserId'], $json, $this->CommentTable);
+            if($user->UserId != $userId){
+            try{
+                $this->getTableObj()->Insert($user->UserId, $json, $this->CommentTable, $opration);
+            }  catch (Excption $ex){
+                throw  new Exception($ex);
             }
-        }
+        }}
     }
 
     public function download($userid) {
         \Cake\Log\Log::info("in Sync controller download method");
         $Update = $this->getTableObj()->getUpdate($userid);
         if ($Update) {
-            $this->response->type('application/json');
-            $this->response->body($Update);
+           
+            $this->response->body(json_encode($Update));
             $this->response->send();
             $this->getTableObj()->deleteUpdate($userid);
         } else {

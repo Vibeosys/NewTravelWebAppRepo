@@ -13,7 +13,7 @@ namespace App\DTO;
  *
  * @author niteen
  */
-class ClsImagesDto {
+class ClsImagesDto extends JsonDeserializer{
 
     public $ImageId;
     public $ImagePath;

@@ -17,13 +17,14 @@ use Cake\Network;
  *
  * @author niteen
  */
-class DownloadController extends AppController {
+class DownloadController extends ApiController {
 
     public function index() {
         $this->autoRender = false;
 
         $userId = $this->request->query("tempid");
         if (!$userId) {
+            $this->response->type('json');
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
             return ;
         }

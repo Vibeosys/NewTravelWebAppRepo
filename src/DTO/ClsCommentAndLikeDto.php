@@ -13,7 +13,7 @@ namespace App\DTO;
  *
  * @author niteen
  */
-class ClsCommentAndLikeDto {
+class ClsCommentAndLikeDto extends JsonDeserializer{
 
     public $UserId;
     public $DestId;
@@ -21,7 +21,7 @@ class ClsCommentAndLikeDto {
     public $CommentText;
     public $CreatedDate;
 
-    public function __construct($userId, $destId, $likeCount = null, $commentText = null, $createdDate = null) {
+    public function __construct($userId = null, $destId = null, $likeCount = null, $commentText = null, $createdDate = null) {
 
         $this->UserId = $userId;
         $this->DestId = $destId;
