@@ -54,12 +54,12 @@ if ($req->is('get')) {
     Router::defaultRouteClass('DashedRoute');
     Router::scope('/api/v1', function ($routes) {
         $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
-        $routes->connect('user/creation', ['controller' => 'User', 'action' => 'userCreation']);
+      
         $routes->connect('user/activation', ['controller' => 'User', 'action' => 'userActivation']);
         $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
         $routes->connect('sqlite/getdb', ['controller' => 'Sqlite', 'action' => 'getDB']);
-        $routes->connect('answer/test', ['controller' => 'Answer', 'action' => 'test']);
-       
+        $routes->connect('images/upload', ['controller' => 'Images', 'action' => 'upload']);
+        $routes->connect('images/upload1', ['controller' => 'Images', 'action' => 'upload1']);
       
         $routes->connect('app/backupmysqldump', ['controller' => 'App', 'action' => 'backupMysqldump']);
         $routes->fallbacks('DashedRoute');
@@ -96,7 +96,12 @@ Router::scope('/',
         function ($routes){
             $routes->connect('/downloadDb',['controller' => 'DownloadDb','action' => 'index']);
         });
-
+ 
+ //website route
+  Router::scope('/',
+           function ($routes){
+          $routes->connect('form/login', ['controller' => 'Form', 'action' => 'login', 'login']);
+   });
 
 
 

@@ -11,7 +11,6 @@ namespace App\Controller;
 use App\Model\Table;
 use App\DTO;
 
-
 /**
  * Description of UploadController
  *
@@ -20,54 +19,61 @@ use App\DTO;
 class UploadController extends ApiController {
 
     private $table = array("TC" => "Comment", "TL" => "Like", "TA" => "Answer", "TU" => "User", "TI" => "Image");
+
     public function up() {
         $this->autoRender = false;
-        
-    
+
+        $json = null;
         $json = $this->request->input();
-       
+        echo $json;
+        \Cake\Log\Log::debug("Checking is request empty or not");
+        if(is_null($json)){
+            $this->response->body(DTO\ClsErrorDto::prepareError(104));
+            return;
+        }
+
         $arr = DTO\ClsJsonDeserializerDto::Deserialize($json);
         $user = DTO\ClsUserDto::Deserialize($arr->User);
         $data = DTO\ClsJsonDeserializerDto::Deserialize($arr->data);
-   
+
         /*
-        foreach ($queryData->User as $key => $value){
-             //   if($key == 'SenderId'){$this->senderId = $value;}else{$this->sendermail = $value;}
-        }
+          foreach ($queryData->User as $key => $value){
+          //   if($key == 'SenderId'){$this->senderId = $value;}else{$this->sendermail = $value;}
+          }
          * 
          */
-        if ($this->userValidation($user->UserId,$user->EmailId)) {
+        if ($this->userValidation($user->UserId, $user->EmailId)) {
             foreach ($arr->data as $index => $record) {
-                    switch ($record->tableName) {
-                        case $this->table['TC']:
-                            $commentDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                            $this->comment($commentDto);
-                            break;
-                        case $this->table['TL']:
-                           $likeDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                            $this->like($likeDto);
-                            break;
-                        case $this->table['TA']:
-                            $answerDto = DTO\ClsAnswerDto::Deserialize($record->tableData);
-                            $this->answer($answerDto);
-                            break;
-                        case $this->table['TU']:
-                             $userDto = DTO\ClsUserDto::Deserialize($record->tableData);
-                            $this->user($userDto);
-                            break;
-                        case $this->table['TI']:
-                             $imageDto = DTO\ClsImagesDto::Deserialize($record->tableData);
-                            $this->image($imageDto);
-                            break;
-                    }
+                switch ($record->tableName) {
+                    case $this->table['TC']:
+                        $commentDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
+                        $this->comment($commentDto);
+                        break;
+                    case $this->table['TL']:
+                        $likeDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
+                        $this->like($likeDto);
+                        break;
+                    case $this->table['TA']:
+                        $answerDto = DTO\ClsAnswerDto::Deserialize($record->tableData);
+                        $this->answer($answerDto);
+                        break;
+                    case $this->table['TU']:
+                        $userDto = DTO\ClsUserDto::Deserialize($record->tableData);
+                        $this->user($userDto);
+                        break;
+                    case $this->table['TI']:
+                        $imageDto = DTO\ClsImagesDto::Deserialize($record->tableData);
+                        $this->image($imageDto);
+                        break;
+                }
             }
-        }  else {
-            $this->response->body(DTO\ClsErrorDto::prepareError(100));    
+        } else {
+            $this->response->body(DTO\ClsErrorDto::prepareError(100));
         }
     }
 
     private function comment($commentDto) {
-      
+
         $commentAndLikeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Comment DTO object send to submit');
         if ($commentAndLikeController->submitComment($commentDto)) {
@@ -76,14 +82,14 @@ class UploadController extends ApiController {
     }
 
     private function like($likeDto) {
-      
+
         $likeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Like DTO object send to submit');
         $likeController->submitLike($likeDto);
     }
 
     private function answer($answerDto) {
-      
+
         $answercontroller = new AnswerController();
         \Cake\Log\Log::info('Answer DTO object send to submit');
         if ($answercontroller->submit($answerDto)) {

@@ -1,0 +1,499 @@
+2015-10-22 11:26:39 Debug: in user table validate method
+2015-10-22 11:26:39 Debug: User validate
+2015-10-22 11:26:39 Info: in Sync controller download method
+2015-10-22 11:26:39 Debug: Update not created
+2015-10-22 11:26:39 Debug: User Having sqlite file so call to download method
+2015-10-22 11:27:01 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 32
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:27:01 Debug: reading uploaded file
+2015-10-22 11:27:01 Debug: Check file is image or not?
+2015-10-22 11:27:01 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 39]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 39
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:27:01 Debug: Sorry, file already exists.
+2015-10-22 11:27:01 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 56]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 56
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:37:11 Debug: in user table validate method
+2015-10-22 11:37:11 Debug: User validate
+2015-10-22 11:37:11 Info: in Sync controller download method
+2015-10-22 11:37:11 Debug: Update not created
+2015-10-22 11:37:11 Debug: User Having sqlite file so call to download method
+2015-10-22 11:37:30 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 32
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:37:31 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:37:31 Debug: reading uploaded file
+2015-10-22 11:37:31 Debug: Check file is image or not?
+2015-10-22 11:37:31 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 41]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 41
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:37:32 Debug: Sorry, file already exists.
+2015-10-22 11:37:32 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 58]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 58
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:37:33 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 84]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 84
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:07 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 32
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:07 Debug: reading uploaded file
+2015-10-22 11:40:07 Debug: Check file is image or not?
+2015-10-22 11:40:07 Debug: Sorry, file already exists.
+2015-10-22 11:40:07 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 84]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 84
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:42 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 32
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:42 Debug: reading uploaded file
+2015-10-22 11:40:42 Debug: Check file is image or not?
+2015-10-22 11:40:42 Debug: Sorry, file already exists.
+2015-10-22 11:40:42 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 84]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 84
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:45 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 32
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:45 Debug: reading uploaded file
+2015-10-22 11:40:45 Debug: Check file is image or not?
+2015-10-22 11:40:45 Debug: Sorry, file already exists.
+2015-10-22 11:40:45 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 84]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 84
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:56 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 32]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 32
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:40:56 Debug: reading uploaded file
+2015-10-22 11:40:56 Debug: Check file is image or not?
+2015-10-22 11:40:56 Debug: Sorry, file already exists.
+2015-10-22 11:40:56 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 84]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 84
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 11:44:01 Debug: in user table validate method
+2015-10-22 11:44:01 Debug: User validate
+2015-10-22 11:44:01 Info: in Sync controller download method
+2015-10-22 11:44:01 Debug: Update not created
+2015-10-22 11:44:01 Debug: User Having sqlite file so call to download method
+2015-10-22 12:08:08 Debug: in user table validate method
+2015-10-22 12:08:08 Debug: User validate
+2015-10-22 12:08:08 Info: in Sync controller download method
+2015-10-22 12:08:08 Debug: Update not created
+2015-10-22 12:08:08 Debug: User Having sqlite file so call to download method
+2015-10-22 12:08:50 Notice: Notice (8): Undefined index: imageName in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:20:28 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:20:28 Notice: Notice (8): Undefined index: imageName in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:25:27 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:25:27 Notice: Notice (8): Undefined index: imageName in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:26:20 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:26:20 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 12:27:44 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:07 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:07 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:07 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 44]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 44
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:07 Debug: file upload successful filename :  file_extension :Array
+2015-10-22 13:43:08 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:08 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:08 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 44]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 44
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:08 Debug: file upload successful filename :  file_extension :Array
+2015-10-22 13:43:39 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:39 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:39 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 44]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 44
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:43:39 Debug: file upload successful filename :  file_extension :Array
+2015-10-22 13:46:27 Debug: in user table validate method
+2015-10-22 13:46:27 Debug: User validate
+2015-10-22 13:46:27 Info: in Sync controller download method
+2015-10-22 13:46:27 Debug: Update not created
+2015-10-22 13:46:27 Debug: User Having sqlite file so call to download method
+2015-10-22 13:47:06 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:47:06 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:47:06 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 44]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 44
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:47:06 Debug: file upload successful filename :  file_extension :Array
+2015-10-22 13:49:20 Debug: in user table validate method
+2015-10-22 13:49:20 Debug: User validate
+2015-10-22 13:49:20 Info: in Sync controller download method
+2015-10-22 13:49:20 Debug: Update not created
+2015-10-22 13:49:20 Debug: User Having sqlite file so call to download method
+2015-10-22 13:49:34 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 44]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 44
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:49:34 Debug: file upload successful filename : IMG-20150830-WA0000.jpg file_extension :Array
+2015-10-22 13:51:09 Notice: Notice (8): Undefined index: upload in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 33]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 33
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:51:09 Notice: Notice (8): Undefined index: imagename in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 34]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 34
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:51:09 Notice: Notice (8): Array to string conversion in [/var/www/travelwebapp/src/Controller/ImagesController.php, line 44]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 138
+App\Controller\ImagesController::upload1() - APP/Controller/ImagesController.php, line 44
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 416
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 114
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 87
+[main] - ROOT/webroot/index.php, line 37
+
+
+
+2015-10-22 13:51:09 Debug: file upload successful filename :  file_extension :Array
+2015-10-22 13:51:53 Debug: in user table validate method
+2015-10-22 13:51:53 Debug: User validate
+2015-10-22 13:51:53 Info: in Sync controller download method
+2015-10-22 13:51:53 Debug: Update not created
+2015-10-22 13:51:53 Debug: User Having sqlite file so call to download method

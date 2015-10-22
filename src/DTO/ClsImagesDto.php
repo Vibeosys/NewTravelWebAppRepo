@@ -21,7 +21,7 @@ class ClsImagesDto extends JsonDeserializer{
     public $DestId;
     public $ImageSeen;
 
-    public function __construct($imagePath, $userId, $destId, $imageId = null) {
+    public function __construct($imageId = null,$imagePath = null, $userId = null, $destId = null) {
         $this->ImageId = $imageId;
         $this->ImagePath = $imagePath;
         $this->UserId = $userId;

@@ -28,7 +28,7 @@ class ImagesTable extends Table {
         $query->ImagePath = $path;
         $query->CreatedDate = date('Y-M-d H:i:sa');
         $query->UserId = $userid;
-        $query->DestinationId = $destid;
+        $query->DestId = $destid;
         if($this->save($query)){
             return SUCCESS;
         }
@@ -44,7 +44,7 @@ class ImagesTable extends Table {
         $allImages = NULL;
         foreach ($rows as $row) {
             if ($row->Visibility) {
-                $imageDto = new DTO\ClsImagesDto($row->ImagePath, $row->UserId, $row->DestId, $row->ImageId);
+                $imageDto = new DTO\ClsImagesDto($row->ImageId,$row->ImagePath, $row->UserId, $row->DestId);
                 $allImages[$i] = $imageDto;
                 $i++;
             }

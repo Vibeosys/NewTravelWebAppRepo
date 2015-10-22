@@ -11,7 +11,12 @@ return array(
     $vendorDir . '/cakephp/cakephp/src/Collection/functions.php',
     $vendorDir . '/cakephp/cakephp/src/I18n/functions.php',
     $vendorDir . '/cakephp/cakephp/src/Utility/bootstrap.php',
+    $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
+    $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
     $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
     $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
+    $vendorDir . '/mtdowling/jmespath.php/src/JmesPath.php',
+    $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
     $vendorDir . '/psy/psysh/src/Psy/functions.php',
+    $vendorDir . '/aws/aws-sdk-php/src/functions.php',
 );

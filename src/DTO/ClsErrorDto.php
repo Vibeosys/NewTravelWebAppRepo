@@ -31,7 +31,8 @@ class ClsErrorDto {
         100 => 'User is not authenticated',
         101 => 'UserId is blank',
         102 => 'Unknown error occured',
-        103 => 'Update not found'
+        103 => 'Update not found',
+        104 => 'Invalid request'
     );
     
     
