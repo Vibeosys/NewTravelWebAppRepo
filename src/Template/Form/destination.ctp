@@ -51,7 +51,7 @@ $this->layout = false;
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/login" class="logo">
+            <a href="login" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
@@ -70,7 +70,7 @@ $this->layout = false;
                     <ul class="nav navbar-nav">                      
                         <!-- User Account -->
                         <li class="dropdown user user-menu">
-                            <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/login">                              
+                            <a href="login">                              
                                
                                 <img src="../../../img/user.png" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Sign Off</span>                             
@@ -96,19 +96,19 @@ $this->layout = false;
                         </a>
                     </li>
                     <li class="active">
-                        <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/destination">
+                        <a href="destination">
                             <i class="icon regions"></i> <span>Destinations</span>
                             <em></em>
                         </a>
                     </li>
                     <li>
-                        <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/questions">
+                        <a href="questions">
                             <i class="icon channels"></i>  <span>Questions</span>
                             <em></em>
                         </a>
                     </li>
                     <li>
-                        <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/configuration">
+                        <a href="configuration">
                             <i class="icon products"></i>  <span>Configurations</span> 
                             <em></em>
                         </a>
@@ -126,7 +126,7 @@ $this->layout = false;
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="http://localhost/NewTravelWebAppRepo/api/v1/form/login"><i class="fa fa-dashboard"></i> Home</a></li>                  
+                    <li><a href="login"><i class="fa fa-dashboard"></i> Home</a></li>                  
                     <li class="active">Destinations</li>
                 </ol>
             </section>

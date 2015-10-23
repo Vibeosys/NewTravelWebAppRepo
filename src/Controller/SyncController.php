@@ -81,7 +81,7 @@ class SyncController extends ApiController {
 
     public function likeEntry($userId, $json, $opration) {
         $UserObj = new UserController;
-        $allUser = $UserObj->getAllUser($UserId);
+        $allUser = $UserObj->getAllUser($userId);
         foreach ($allUser as $user) {
             if($user->UserId != $userId){
                 $this->getTableObj()->Insert($user->UserId, $json, $this->LikeTable, $opration);
@@ -109,6 +109,7 @@ class SyncController extends ApiController {
            
             $this->response->body(json_encode($Update));
             $this->response->send();
+            \Cake\Log\Log::debug("Update send to User");
             $this->getTableObj()->deleteUpdate($userid);
         } else {
             $this->response->body(DTO\ClsErrorDto::prepareError(103));

@@ -15,7 +15,7 @@ use App\DTO;
  *
  * @author niteen
  */
-define('ANS_INS_QRY', "INSERT INTO answer (AnswerId,UserId,DestId,OptionId,CreatedDate) VALUES (@AnswerId,@UserId,@DestId,@OptionId,\"@CreatedDate\");");
+define('ANS_INS_QRY', "INSERT INTO answer (AnswerId,UserId,DestId,OptionId,CreatedDate) VALUES (\"@AnswerId\",\"@UserId\",@DestId,@OptionId,\"@CreatedDate\");");
 
 class AnswerController extends ApiController{
    

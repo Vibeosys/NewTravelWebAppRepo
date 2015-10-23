@@ -58,7 +58,7 @@ if ($req->is('get')) {
         $routes->connect('user/activation', ['controller' => 'User', 'action' => 'userActivation']);
         $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
         $routes->connect('sqlite/getdb', ['controller' => 'Sqlite', 'action' => 'getDB']);
-        $routes->connect('images/upload', ['controller' => 'Images', 'action' => 'upload']);
+        $routes->connect('images/amazonupload', ['controller' => 'Images', 'action' => 'amazonUpload']);
         $routes->connect('images/upload1', ['controller' => 'Images', 'action' => 'upload1']);
       
         $routes->connect('app/backupmysqldump', ['controller' => 'App', 'action' => 'backupMysqldump']);

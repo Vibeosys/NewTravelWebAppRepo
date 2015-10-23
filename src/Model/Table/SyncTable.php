@@ -7,15 +7,15 @@ namespace App\Model\Table;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+use App\DTO;
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 
 /**
  * Description of SyncTable
  *
  * @author niteen
  */
-use Cake\ORM\Table;
-use Cake\ORM\TableRegistry;
-
 class SyncTable extends Table {
 
     public function initialize(array $config) {
@@ -26,7 +26,7 @@ class SyncTable extends Table {
         return TableRegistry::get('sync');
     }
 
-    public function Insert($userId, $update, $table,$opration) {
+    public function Insert($userId, $update, $table, $opration) {
 
         $query = $this->connect()->newEntity();
         $query->UserId = $userId;
@@ -41,21 +41,18 @@ class SyncTable extends Table {
         $rows = $this->connect()->find()->where(['UserId = ' => $userId]);
         $updateCount = $rows->count();
         if ($updateCount) {
-            
-            $update = '{"data":[';
+            $i = 0;
             foreach ($rows as $row) {
-                $updateCount--;
-                $update .= '{"tableName":"' . $row->TableName . '","tableData":' . json_encode($row->JsonSync) . '}';
-                if($updateCount){
-                    $update .= ',';
-                }
+                $downloadSerielizer = new DTO\ClsDownloadSerializerDto($row->TableName, $row->JsonSync);
+                $update[$i] = $downloadSerielizer;
+                $i++;
             }
-            $update .=']}'; 
-            return $update;
+            \Cake\Log\Log::debug("Sending update to sync controller");
+            $data['data'] = $update;
+            return $data;
         } else {
-             \Cake\Log\Log::debug('Update not created');
+            \Cake\Log\Log::debug('Update not created');
             return NOT_FOUND;
-           
         }
     }
 

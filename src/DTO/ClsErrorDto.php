@@ -32,7 +32,8 @@ class ClsErrorDto {
         101 => 'UserId is blank',
         102 => 'Unknown error occured',
         103 => 'Update not found',
-        104 => 'Invalid request'
+        104 => 'Invalid request',
+        105 => 'Invalid image'
     );
     
     

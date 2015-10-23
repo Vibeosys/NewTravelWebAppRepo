@@ -6,25 +6,19 @@ namespace App\DTO;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use App\Deserializer;
+
 /**
  * Description of ClsJsonDeserializeDto
  *
  * @author niteen
  */
-class ClsJsonDeserializerDto extends JsonDeserializer{
+class ClsDownloadSerializerDto{
   
-    public  $User;
-    public  $data;
     public  $tableName;
     public  $tableData;
-
-
-
-
-    public function __construct() {
-        //$this->TableName = $tableName;
-        //$this->TableData = $tableData;
+    public function __construct($tableName, $tableData) {
+       $this->tableName = $tableName;
+       $this->tableData = $tableData;
         
     }
     

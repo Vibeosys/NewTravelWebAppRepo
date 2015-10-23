@@ -23,19 +23,19 @@ class UploadController extends ApiController {
     public function up() {
         $this->autoRender = false;
 
-        $json = null;
+       // $json = null;
         $json = $this->request->input();
-        echo $json;
+      
         \Cake\Log\Log::debug("Checking is request empty or not");
-        if (is_null($json)) {
+        if (empty($json)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(104));
             return;
         }
 
-        $arr = DTO\ClsJsonDeserializerDto::Deserialize($json);
-        $user = DTO\ClsUserDto::Deserialize($arr->User);
-        $data = DTO\ClsJsonDeserializerDto::Deserialize($arr->data);
-
+        $arr = DTO\ClsUploadDeserializerDto::Deserialize($json);
+        $user = DTO\ClsUserDto::Deserialize($arr->user);
+      // $data = DTO\ClsUploadDeserializerDto::Deserialize($arr->data);
+      // print_r($arr->data);
         /*
           foreach ($queryData->User as $key => $value){
           //   if($key == 'SenderId'){$this->senderId = $value;}else{$this->sendermail = $value;}
@@ -44,8 +44,10 @@ class UploadController extends ApiController {
          */
         if ($this->userValidation($user->UserId, $user->EmailId)) {
             foreach ($arr->data as $index => $record) {
+                \Cake\Log\Log::info('Index : '.$index.'REcord :'.$record->tableName);
                 switch ($record->tableName) {
                     case $this->table['TC']:
+                        \Cake\Log\Log::info("Comment section");
                         $commentDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
                         $this->comment($commentDto);
                         break;
@@ -96,7 +98,7 @@ class UploadController extends ApiController {
     }
 
     private function images($image) {
-        $imageDto = new DTO\ClsImagesDto($image->ImagePath, $image->UserId, $image->DestId);
+      
         $imagecontroller = new ImagesController();
         if ($imagecontroller->saveImages($imageDto)) {
             \Cake\Log\Log::debug("Images saved in local Database");

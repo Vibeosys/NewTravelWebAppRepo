@@ -16,9 +16,9 @@ use App\Model\Table;
  *
  * @author niteen
  */
-define('CAL_INS_QRY', "INSERT INTO comment_and_like (UserId,DestId,LikeCount,CommentText,CreatedDate) VALUES (@UserId,@DestId,@LikeCount,\"@CommentText\",\"@CreatedDate\");");
+define('CAL_INS_QRY', "INSERT INTO comment_and_like (UserId,DestId,LikeCount,CommentText,CreatedDate) VALUES (\"@UserId\",@DestId,@LikeCount,\"@CommentText\",\"@CreatedDate\");");
 
-class CommentAndLikeController extends AppController {
+class CommentAndLikeController extends ApiController {
 
     //to get its own table object
     public function getTableObj() {
@@ -37,11 +37,14 @@ class CommentAndLikeController extends AppController {
             if ($this->getTableObj()->insertComment($comment->UserId,$comment->DestId,$comment->CommentText)) {
                
                 $this->response->body('{"ERROR":"false", "message":"Saved"}');
+                \Cake\Log\Log::info("comment insert in db");
                 $this->response->send();
                 return SUCCESS;
             } else {
                 
                 $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
+                \Cake\Log\Log::info("not comment insert in db");
+                
             }
         }
     }

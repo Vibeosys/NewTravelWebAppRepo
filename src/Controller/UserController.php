@@ -12,12 +12,13 @@ use Cake\Network;
 use Cake\ORM\TableRegistry;
 use App\Model\Table;
 
+
 /**
  * Description of DemoController
  *
  * @author niteen
  */
-define('USER_INS_QRY', "INSERT INTO user (UserId,UserName,PhotoUrl)VALUES (@UserId,\"@UserName\",\"@PhotoUrl\");");
+define('USER_INS_QRY', "INSERT INTO user (UserId,UserName,PhotoUrl)VALUES (\"@UserId\",\"@UserName\",\"@PhotoUrl\");");
 
 class UserController extends AppController {
 
