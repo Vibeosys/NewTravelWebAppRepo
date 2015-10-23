@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
     <meta charset="UTF-8">
     <title>Login</title>
     <?= $this->Html->css('Login.css') ?> 
-    <link href=<?php $this->Html->css('Login.css') ?> rel="stylesheet" />
+    
 </head>
     <body class="align">
         <div class="site__container">

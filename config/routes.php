@@ -84,23 +84,19 @@ Router::scope('/',
         //Travel Web App Endpoints     
  Router::scope('/api/v1',
         function ($routes){
-            $routes->connect('/download',['controller' => 'Download','action' => 'index']);
-        });
- Router::scope('/api/v1',
-        function ($routes){
-            $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
-        });
-
- Router::scope('/api/v1',
- 
-        function ($routes){
-            $routes->connect('/downloadDb',['controller' => 'DownloadDb','action' => 'index']);
+                $routes->connect('/downloadDb',['controller' => 'DownloadDb','action' => 'index']);
+                $routes->connect('/download',['controller' => 'Download','action' => 'index']);
+                $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
         });
  
- //website route
-  Router::scope('/',
+ //Travel website Endpoints
+  Router::scope('/form',
            function ($routes){
-          $routes->connect('form/login', ['controller' => 'Form', 'action' => 'login', 'login']);
+          $routes->connect('login', ['controller' => 'Form', 'action' => 'login', 'login']);
+          $routes->connect('login', ['controller' => 'Form', 'action' => 'destination', 'login']);
+          $routes->connect('login', ['controller' => 'Form', 'action' => 'questions', 'login']);
+          $routes->connect('login', ['controller' => 'Form', 'action' => 'configuration', 'login']);
+          
    });
 
 

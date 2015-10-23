@@ -22,5 +22,15 @@ class FormController extends AppController{
         
       
     }
+    public function destination() {
+        
+    }
+    public function questions() {
+        
+    }
+    
+    public function configuration() {
+        
+    }
     
 }

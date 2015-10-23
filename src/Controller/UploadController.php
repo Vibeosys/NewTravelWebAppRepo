@@ -27,7 +27,7 @@ class UploadController extends ApiController {
         $json = $this->request->input();
         echo $json;
         \Cake\Log\Log::debug("Checking is request empty or not");
-        if(is_null($json)){
+        if (is_null($json)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(104));
             return;
         }
@@ -73,7 +73,6 @@ class UploadController extends ApiController {
     }
 
     private function comment($commentDto) {
-
         $commentAndLikeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Comment DTO object send to submit');
         if ($commentAndLikeController->submitComment($commentDto)) {
@@ -82,7 +81,6 @@ class UploadController extends ApiController {
     }
 
     private function like($likeDto) {
-
         $likeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Like DTO object send to submit');
         $likeController->submitLike($likeDto);

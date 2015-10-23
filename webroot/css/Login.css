@@ -1,5 +1,5 @@
-﻿//@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-//@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+﻿@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 [class*="fontawesome-"]:before {
   font-family: 'FontAwesome', sans-serif;
 }
@@ -13,7 +13,7 @@ html {
 }
 
 body {
-    background: #13080e url("../Images/light-blue-background.jpg") no-repeat scroll left top;
+    background: #13080e url("../img/light-blue-background.jpg") no-repeat scroll left top;
     background-size: cover;
     color: #13080e;
     font: 400 0.875rem/1.5 "Open Sans", sans-serif;

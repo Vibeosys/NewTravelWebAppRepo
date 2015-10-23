@@ -28,22 +28,26 @@ class ImagesController extends ApiController {
     }
 
     public function upload1() {
+
         $this->autoRender = false;
         $data = $this->request->data();
+        if (empty($data)) {
+            $this->response->body('{"message":"Image data empty ::"}');
+            \Cake\Log\Log::debug("image not uploaded.");
+            return;
+        }
         $binary = base64_decode($data['upload']);
         $filename = $data['imagename'];
-        $ext = end(explode('.', $filename));
-        $file = fopen(TMP .'/' . $filename, 'wb');
+        $ext = explode('.', strtolower($filename));
+        $file = fopen(TMP . '/' . $filename, 'wb');
         fwrite($file, $binary);
         fclose($file);
-       // if (file_exists($file)) {
-         //   $imageDto = new DTO\ClsImagesDto($imageId = null, $file, $data['UserId'], $data['DestId']);
-          // $this->saveImage($imageDto);
-                $this->response->body('{"message":"' . $filename . 'Uploaded Successfully"}');
-                
-                \Cake\Log\Log::debug('file upload successful filename : ' . $filename . ' file_extension :' . $ext);
-           
-        //}
+        if (file_exists($file)) {
+            $imageDto = new DTO\ClsImagesDto($imageId = null, $file, $data['UserId'], $data['DestId']);
+            $this->saveImage($imageDto);
+            $this->response->body('{"message":"' . $filename . 'Uploaded Successfully"}');
+            \Cake\Log\Log::debug('file upload successful filename : ' . $filename);
+        }
         //  move_uploaded_file($file, $target_file)
         //print_r($image);
 
