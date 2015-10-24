@@ -27,7 +27,7 @@ class SyncTable extends Table {
     }
 
     public function Insert($userId, $update, $table, $opration) {
-
+       try{
         $query = $this->connect()->newEntity();
         $query->UserId = $userId;
         $query->JsonSync = $update;
@@ -35,6 +35,9 @@ class SyncTable extends Table {
         $query->Opration = $opration;
         $query->UpdatedDate = date("Y-m-d H:i:sa");
         $this->connect()->save($query);
+       }  catch (Excetion $e){
+           \Cake\Log\Log::error("Database exception : ".$ex);
+       }
     }
 
     public function getUpdate($userId) {

@@ -13,13 +13,13 @@ namespace App\DTO;
  */
 class ClsQuestionDto {
     
-    public $QuestionId;
-    public $QuestionText;
+    public $questionId;
+    public $questionText;
     
     public function __construct($questionId,$questionText) {
         
-        $this->QuestionId = $questionId;
-        $this->QuestionText = $questionText;
+        $this->questionId = $questionId;
+        $this->questionText = $questionText;
     }
     
 }

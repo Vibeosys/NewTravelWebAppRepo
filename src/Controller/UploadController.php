@@ -18,7 +18,7 @@ use App\DTO;
  */
 class UploadController extends ApiController {
 
-    private $table = array("TC" => "Comment", "TL" => "Like", "TA" => "Answer", "TU" => "User", "TI" => "Image");
+    private $table = array("TC" => "comment", "TL" => "like", "TA" => "answer", "TU" => "user", "TI" => "image");
 
     public function up() {
         $this->autoRender = false;
@@ -29,20 +29,13 @@ class UploadController extends ApiController {
         \Cake\Log\Log::debug("Checking is request empty or not");
         if (empty($json)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(104));
+            \Cake\Log\Log::error("User requested with invalid data");
             return;
         }
 
         $arr = DTO\ClsUploadDeserializerDto::Deserialize($json);
         $user = DTO\ClsUserDto::Deserialize($arr->user);
-      // $data = DTO\ClsUploadDeserializerDto::Deserialize($arr->data);
-      // print_r($arr->data);
-        /*
-          foreach ($queryData->User as $key => $value){
-          //   if($key == 'SenderId'){$this->senderId = $value;}else{$this->sendermail = $value;}
-          }
-         * 
-         */
-        if ($this->userValidation($user->UserId, $user->EmailId)) {
+        if ($this->userValidation($user->userId, $user->emailId)) {
             foreach ($arr->data as $index => $record) {
                 \Cake\Log\Log::info('Index : '.$index.'REcord :'.$record->tableName);
                 switch ($record->tableName) {
@@ -57,6 +50,7 @@ class UploadController extends ApiController {
                         break;
                     case $this->table['TA']:
                         $answerDto = DTO\ClsAnswerDto::Deserialize($record->tableData);
+                        \Cake\Log\Log::debug("Accepted Answer data");
                         $this->answer($answerDto);
                         break;
                     case $this->table['TU']:
@@ -93,6 +87,7 @@ class UploadController extends ApiController {
         $answercontroller = new AnswerController();
         \Cake\Log\Log::info('Answer DTO object send to submit');
         if ($answercontroller->submit($answerDto)) {
+            $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Answer Saved"));
             \Cake\Log\Log::debug("Answer stored in database");
         }
     }
@@ -106,8 +101,8 @@ class UploadController extends ApiController {
     }
 
     public function userValidation($userid, $usermail) {
-        $userController = new UserController;
-        if ($userController->validate($userid, $usermail)) {
+        $userTable = new Table\UserTable();
+        if ($userTable->userCkeck($userid, $usermail)) {
             return SUCCESS;
         }
         return FAIL;

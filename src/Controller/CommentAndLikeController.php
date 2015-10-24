@@ -9,6 +9,7 @@ namespace App\Controller;
  */
 
 use App\Model\Table;
+use App\DTO;
 
 
 /**
@@ -34,17 +35,17 @@ class CommentAndLikeController extends ApiController {
         $this->autoRender = false;
         if ($comment) {
             
-            if ($this->getTableObj()->insertComment($comment->UserId,$comment->DestId,$comment->CommentText)) {
+            if ($this->getTableObj()->insertComment($comment->userId,$comment->destId,$comment->commentText)) {
                
-                $this->response->body('{"ERROR":"false", "message":"Saved"}');
-                \Cake\Log\Log::info("comment insert in db");
+                $this->response->body(\App\DTO\ClsErrorDto::prepareSuccessMessage("Comment Saved"));
+                \Cake\Log\Log::debug("comment insert in db for user : ".$comment->userId);
                 $this->response->send();
                 return SUCCESS;
             } else {
-                
-                $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
-                \Cake\Log\Log::info("not comment insert in db");
-                
+                $this->response->body(\App\DTO\ClsErrorDto::prepareError(109));
+                   $this->response->send();
+                \Cake\Log\Log::error("error in comment insertion");
+                return FAIL;
             }
         }
     }
@@ -53,13 +54,15 @@ class CommentAndLikeController extends ApiController {
         $this->autoRender = false;
         if ($like) {
             
-            if ($this->getTableObj()->insertLike($like->UserId, $like->DestId)) {
+            if ($this->getTableObj()->insertLike($like->userId, $like->destId)) {
                 
-                \Cake\Log\Log::info('Like succefully stored');
-                $this->response->body('{"ERROR":"false", "message":"Saved"}');
+                \Cake\Log\Log::debug('Like succefully stored');
+                $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Like Saved"));
+                $this->response->send();
             } else {
-                \Cake\Log\Log::error('Like not  stored');
-                $this->response->body('{"ERROR":"true", "message":"Not Saved. Try again"}');
+                \Cake\Log\Log::error('Like not saved');
+                $this->response->body(\App\DTO\ClsErrorDto::prepareError(109));
+                   $this->response->send();
             }
         }
     }
@@ -73,11 +76,11 @@ class CommentAndLikeController extends ApiController {
         foreach ($allCommentAndLike as $commentAndLike) {
 
             $preparedStatements.= CAL_INS_QRY;
-            $preparedStatements = str_replace('@UserId', $commentAndLike->UserId, $preparedStatements);
-            $preparedStatements = str_replace('@DestId', $commentAndLike->DestId, $preparedStatements);
-            $preparedStatements = str_replace('@LikeCount', $commentAndLike->LikeCount, $preparedStatements);
-            $preparedStatements = str_replace('@CommentText', $commentAndLike->CommentText, $preparedStatements);
-            $preparedStatements = str_replace('@CreatedDate', $commentAndLike->CreatedDate, $preparedStatements);
+            $preparedStatements = str_replace('@UserId', $commentAndLike->userId, $preparedStatements);
+            $preparedStatements = str_replace('@DestId', $commentAndLike->destId, $preparedStatements);
+            $preparedStatements = str_replace('@LikeCount', $commentAndLike->likeCount, $preparedStatements);
+            $preparedStatements = str_replace('@CommentText', $commentAndLike->commentText, $preparedStatements);
+            $preparedStatements = str_replace('@CreatedDate', $commentAndLike->createdDate, $preparedStatements);
         }
         return $preparedStatements;
     }

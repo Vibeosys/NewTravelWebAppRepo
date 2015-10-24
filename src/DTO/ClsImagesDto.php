@@ -15,18 +15,18 @@ namespace App\DTO;
  */
 class ClsImagesDto extends JsonDeserializer{
 
-    public $ImageId;
-    public $ImagePath;
-    public $UserId;
-    public $DestId;
-    public $ImageSeen;
+    public $imageId;
+    public $imagePath;
+    public $userId;
+    public $destId;
+    public $imageSeen;
 
     public function __construct($imageId = null,$imagePath = null, $userId = null, $destId = null) {
-        $this->ImageId = $imageId;
-        $this->ImagePath = $imagePath;
-        $this->UserId = $userId;
-        $this->DestId = $destId;
-        $this->ImageSeen = "false";
+        $this->imageId = $imageId;
+        $this->imagePath = $imagePath;
+        $this->userId = $userId;
+        $this->destId = $destId;
+        $this->imageSeen = "false";
     }
 
 }

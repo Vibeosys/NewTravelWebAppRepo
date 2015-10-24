@@ -13,23 +13,23 @@ namespace App\DTO;
  */
 class ClsUserDto extends JsonDeserializer{
    
-    public  $UserId;
-    public  $UserName;
-    public  $Password;
-    public  $EmailId;
-    public  $Active;
-    public  $PhotoUrl;
-    public  $CreatedDate;
+    public  $userId;
+    public  $userName;
+    public  $password;
+    public  $emailId;
+    public  $active;
+    public  $photoUrl;
+    public  $createdDate;
     
     public function __construct($userId = null,$userName = null,$password = null,$emailId = null,$photoUrl = null,$active = null,$createdDate = null) {
         
-        $this->UserId = $userId;
-        $this->UserName = $userName;
-        $this->Password =$password;
-        $this->EmailId = $emailId;
-        $this->PhotoUrl = $photoUrl;
-        $this->Active = $active;
-        $this->CreatedDate = $createdDate;
+        $this->userId = $userId;
+        $this->userName = $userName;
+        $this->password =$password;
+        $this->emailId = $emailId;
+        $this->photoUrl = $photoUrl;
+        $this->active = $active;
+        $this->createdDate = $createdDate;
         
     }
     

@@ -31,8 +31,8 @@ class QuestionController extends AppController{
         $preparedStatement = '';
         foreach ($allQuestion as $question){
             $preparedStatement.= QUES_INS_QRY;
-            $preparedStatement = str_replace('@QuestionId', $question->QuestionId, $preparedStatement);
-            $preparedStatement = str_replace('@QuestionText', $question->QuestionText, $preparedStatement);
+            $preparedStatement = str_replace('@QuestionId', $question->questionId, $preparedStatement);
+            $preparedStatement = str_replace('@QuestionText', $question->questionText, $preparedStatement);
         }
         return $preparedStatement;
     }

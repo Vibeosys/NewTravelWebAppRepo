@@ -13,15 +13,15 @@ namespace App\DTO;
  */
 class ClsOptionsDto {
     
-    public  $OptionId;
-    public  $OptionText;
-    public  $QuestionId;
+    public  $optionId;
+    public  $optionText;
+    public  $questionId;
     
     public function __construct($optionId,$optiontext,$questionId) {
         
-        $this->OptionId = $optionId;
-        $this->OptionText = $optiontext;
-        $this->QuestionId = $questionId;
+        $this->optionId = $optionId;
+        $this->optionText = $optiontext;
+        $this->questionId = $questionId;
     }
     
 }

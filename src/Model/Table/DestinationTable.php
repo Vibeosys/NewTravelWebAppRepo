@@ -37,7 +37,8 @@ class DestinationTable extends Table {
         $i = 0;
         foreach ($rows as $row) {
             if ($row->Active) {
-                $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Lat, $row->Long, $row->Active, $row->CraetedDate, $row->UpdatedDate);
+                $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, 
+                        $row->Lat, $row->Long, $row->Active, $row->CraetedDate, $row->UpdatedDate);
                 $allDest[$i] = $destDto;
                 $i++;
             }

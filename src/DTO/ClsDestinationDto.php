@@ -12,22 +12,22 @@ namespace App\DTO;
  * @author niteen
  */
 class ClsDestinationDto {
-    public $Destid;
-    public $DestName;
-    public $Lat;
-    public $Long;
-    public $Active;
-    public $CreatedDate;
-    public $UpdatedDate;
+    public $destid;
+    public $destName;
+    public $lat;
+    public $long;
+    public $active;
+    public $createdDate;
+    public $updatedDate;
 
     public function __construct($destId,$destName,$lat,$long,$active,$createdDate,$updatedDate) {
-        $this->Destid = $destId;
-        $this->DestName = $destName;
-        $this->Lat = $lat;
-        $this->Long = $long;
-        $this->Active = $active;
-        $this->CreatedDate = $createdDate;
-        $this->UpdatedDate = $updatedDate;
+        $this->destid = $destId;
+        $this->destName = $destName;
+        $this->lat = $lat;
+        $this->long = $long;
+        $this->active = $active;
+        $this->createdDate = $createdDate;
+        $this->updatedDate = $updatedDate;
         
     }
     

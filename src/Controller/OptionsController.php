@@ -28,9 +28,9 @@ class OptionsController extends AppController{
         $preparedStatements = '';
         foreach ($allOptions as $options){
             $preparedStatements .= OPTION_INS_QRY;
-            $preparedStatements = str_replace('@OptionId', $options->OptionId, $preparedStatements);
-            $preparedStatements = str_replace('@OptionText', $options->OptionText, $preparedStatements);
-            $preparedStatements = str_replace('@QuestionId', $options->QuestionId, $preparedStatements);
+            $preparedStatements = str_replace('@OptionId', $options->optionId, $preparedStatements);
+            $preparedStatements = str_replace('@OptionText', $options->optionText, $preparedStatements);
+            $preparedStatements = str_replace('@QuestionId', $options->questionId, $preparedStatements);
             
         }
         return $preparedStatements;

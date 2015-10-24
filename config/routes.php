@@ -41,63 +41,42 @@ use Cake\Network;
  *
  */
 $req = new Network\Request();
-if ($req->is('get')) {
-    Router::defaultRouteClass('DashedRoute');
-    
-    Router::scope('/api/v1', function ($routes) {
-        $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
-        $routes->connect('user/activation', ['controller' => 'User', 'action' => 'activation']);
-         $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
-        $routes->fallbacks('DashedRoute');
-    });
-} elseif ($req->is('Post')) {
-    Router::defaultRouteClass('DashedRoute');
-    Router::scope('/api/v1', function ($routes) {
-        $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
-      
-        $routes->connect('user/activation', ['controller' => 'User', 'action' => 'userActivation']);
-        $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
-        $routes->connect('sqlite/getdb', ['controller' => 'Sqlite', 'action' => 'getDB']);
-        $routes->connect('images/amazonupload', ['controller' => 'Images', 'action' => 'amazonUpload']);
-        $routes->connect('images/upload1', ['controller' => 'Images', 'action' => 'upload1']);
-      
-        $routes->connect('app/backupmysqldump', ['controller' => 'App', 'action' => 'backupMysqldump']);
-        $routes->fallbacks('DashedRoute');
-    });
-    
-}
-Router::scope('/',
-        ['Controller' => 'Image'],
-        function ($routes){
-        $routes->connect('upload',[
-            'action' => 'upload'
-        ]);
-        });
-Router::scope('/',
-        ['Controller' => 'Image'],
-        function ($routes){
-        $routes->connect('upload1',[
-            'action' => 'upload1'
-        ]);
-        });
 
-        //Travel Web App Endpoints     
- Router::scope('/api/v1',
-        function ($routes){
-                $routes->connect('/downloadDb',['controller' => 'DownloadDb','action' => 'index']);
-                $routes->connect('/download',['controller' => 'Download','action' => 'index']);
-                $routes->connect('/upload',['controller' => 'Upload','action' => 'up']);
-        });
- 
- //Travel website Endpoints
-  Router::scope('/form',
-           function ($routes){
-          $routes->connect('login', ['controller' => 'Form', 'action' => 'login', 'login']);
-          $routes->connect('login', ['controller' => 'Form', 'action' => 'destination', 'login']);
-          $routes->connect('login', ['controller' => 'Form', 'action' => 'questions', 'login']);
-          $routes->connect('login', ['controller' => 'Form', 'action' => 'configuration', 'login']);
-          
-   });
+Router::defaultRouteClass('DashedRoute');
+Router::scope('/api/v1', function ($routes) {
+    $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
+    $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
+    $routes->connect('sqlite/getdb', ['controller' => 'Sqlite', 'action' => 'getDB']);
+    $routes->connect('images/amazonupload', ['controller' => 'Images', 'action' => 'amazonUpload']);
+    $routes->connect('images/upload1', ['controller' => 'Images', 'action' => 'upload1']);
+    $routes->connect('app/backupmysqldump', ['controller' => 'App', 'action' => 'backupMysqldump']);
+    $routes->fallbacks('DashedRoute');
+});
+
+
+
+Router::scope('/', ['Controller' => 'Images'], function ($routes) {
+    $routes->connect('upload1', [
+        'action' => 'upload1'
+    ]);
+});
+
+//Travel Web App Endpoints     
+Router::scope('/api/v1', function ($routes) {
+    $routes->connect('/downloadDb', ['controller' => 'DownloadDb', 'action' => 'index']);
+    $routes->connect('/download', ['controller' => 'Download', 'action' => 'index']);
+    $routes->connect('/upload', ['controller' => 'Upload', 'action' => 'up']);
+    $routes->connect('/imagesupload', ['controller' => 'imagesUpload', 'action' => 'index']);
+    $routes->connect('/updateuser', ['controller' => 'UpdateUser', 'action' => 'update']);
+});
+
+//Travel website Endpoints
+Router::scope('/', function ($routes) {
+    $routes->connect('/', ['controller' => 'Form', 'action' => 'login', 'login']);
+    $routes->connect('destination', ['controller' => 'Form', 'action' => 'destination', 'login']);
+    $routes->connect('questions', ['controller' => 'Form', 'action' => 'questions', 'login']);
+    $routes->connect('configuration', ['controller' => 'Form', 'action' => 'configuration', 'login']);
+});
 
 
 

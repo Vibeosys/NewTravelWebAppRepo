@@ -40,11 +40,16 @@ class UserTable extends Table {
         return FAIL;
     }
 
-    public function update($userId) {
-
-        $user = $this->connect()->get($userId);
-        $user->DatabaseCheck = 1;
-        $this->connect()->save($user);
+    public function update($userDto) {
+        //$tableObject = $this->connect();
+        $user = $this->connect()->get($userDto->userId);
+        $user->UserName = $userDto->userName;
+        $user->EmailId = $userDto->emailId;
+        if($this->connect()->save($user)){
+            \Cake\Log\Log::debug('User : ' .$userDto->userName. ' updated in user table');
+            return SUCCESS;
+        }
+        return FAIL;
     }
 
     public function activate($UserId) {
@@ -61,7 +66,7 @@ class UserTable extends Table {
         $allUser = null;
         if ($this->connect()->find()->count()) {
             foreach ($rows as $row) {
-                \Cake\Log\Log::info("Valied User : " . $row->UserId . "Active : " . $row->Active);
+               // \Cake\Log\Log::info("Valied User : " . $row->UserId . "Active : " . $row->Active);
                 $userDto = new \App\DTO\ClsUserDto($row->UserId, $row->UserName, $row->Password, $row->EmailId, $row->PhotoUrl, $row->Active, $row->CreatedDate);
                 $allUser[$i] = $userDto;
                 $i++;
@@ -75,8 +80,8 @@ class UserTable extends Table {
         $rows = $this->connect()->where(['UserId =' => $Id]);
 
         foreach ($rows as $row) {
-            $newUser['UserId'] = $row->UserId;
-            $newUser['UserName'] = $row->UserName;
+            $newUser['UserId'] = $row->userId;
+            $newUser['UserName'] = $row->userName;
         }
 
         return $newUser;
@@ -89,9 +94,10 @@ class UserTable extends Table {
                 \Cake\Log\Log::debug("User Authenticate for Email");
                 return SUCCESS;
             }
-            \Cake\Log\Log::debug("User Authentication failed");
+            \Cake\Log\Log::error("User Authentication failed");
+            return FAIL;
         }
-        return FAIL;
+        
     }
 
     public function validate($userId) {

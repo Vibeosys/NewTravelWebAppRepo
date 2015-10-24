@@ -21,27 +21,26 @@ class DownloadDbController extends ApiController {
         $this->autoRender = false;
         \Cake\Log\Log::info('first step in DownloadDb');
         //$tempUserId = null;
-        $tempUserId = $this->request->query("tempid");
-        if(!$tempUserId){
-            //$this->response->type('json');
+        $tempUserId = $this->request->query("userid");
+        if(empty($tempUserId)){
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
+            \Cake\Log\Log::error("User requested with blank user id :".$tempUserId);
             return ;
         }
         $userDto = new DTO\ClsUserDto($tempUserId);
-        \Cake\Log\Log::debug('TempUserID is send to Validate'.$tempUserId);
-        if($this->isValid($userDto->UserId)) {
+        \Cake\Log\Log::debug('TempUserId is send to Validate'.$tempUserId);
+        if($this->isValid($userDto->userId)) {
             \Cake\Log\Log::debug("User validate");
                 $sqliteController = new SqliteController();
-                $sqliteController->getDB($userDto->UserId);
-                \Cake\Log\Log::debug("sqlite file sended to user");
+                $sqliteController->getDB($userDto->userId);
+                \Cake\Log\Log::debug("Sqlite database sended to user");
         } else {
             $userController = new UserController();
             \Cake\Log\Log::debug('UserId send to save in database');
-            if($userController->userSignUp($userDto->UserId)){
+            if($userController->userSignUp($userDto->userId)){
                 $sqliteController = new SqliteController();
-                $sqliteController->getDB($userDto->UserId);
+                $sqliteController->getDB($userDto->userId);
                 \Cake\Log\Log::debug("sqlite file sended  to user after userid saving");
-    
             }
         }
      }

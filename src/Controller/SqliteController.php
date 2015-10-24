@@ -107,7 +107,7 @@ class SqliteController extends AppController {
         $retult = unlink(SQLITE_DB_DIR.'TravelDb'.$userId.'.sqlite');
         \Cake\Log\Log::info('TravelDb.'.$userId.'.sqlite  File deleted successfully');
         $userTable = new Table\UserTable();
-        $userTable->update($userId);
+        //$userTable->update($userId);
         
         }
     }

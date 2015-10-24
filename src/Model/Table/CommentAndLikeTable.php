@@ -17,7 +17,7 @@ use App\DTO;
  *
  * @author niteen
  */
-define('LIKE', 1);
+
 class CommentAndLikeTable extends Table {
 
     // to get object of table registry for database operation
@@ -33,15 +33,12 @@ class CommentAndLikeTable extends Table {
         $rows = $this->connect()->find();
         $i = 0;
         foreach ($rows as $row) {
-            $commentAndLikeDto = new DTO\ClsCommentAndLikeDto($row->UserId, $row->DestId, $row->LikeCount, $row->CommentText, $row->CommentUpdatedDate);
+            $commentAndLikeDto = new DTO\ClsCommentAndLikeDto($row->UserId, $row->DestId, 
+               $row->LikeCount, $row->CommentText, $row->CommentUpdatedDate);
             $allCommentAndLike[$i] = $commentAndLikeDto;
             $i++;
         }
         return $allCommentAndLike;
-    }
-
-    public function getLike() {
-        
     }
 
     public function getComment() {
@@ -65,7 +62,7 @@ class CommentAndLikeTable extends Table {
             $query->set(['LikeCount' => $count, 'LikeUpdatedDate' => date('Y-m-d H:i:sa')]);
             $query->where(['UserId =' => $userid, 'DestId =' => $destid]);
             if ($query->execute()) {
-                 $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'"}';
+                 $json = json_encode(new DTO\ClsCommentAndLikeDto($userid, $destid));
                 $syncController = new \App\Controller\SyncController();
                 $syncController->likeEntry($userid, $json, UPDATE);
                 return SUCCESS;
@@ -79,7 +76,7 @@ class CommentAndLikeTable extends Table {
             $query->LikeCount = LIKE;
             $query->LikeUpdatedDate = date('Y-m-d H:i:sa');
             if ($this->connect()->save($query)) {
-                 $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'"}';
+                 $json = json_encode(new DTO\ClsCommentAndLikeDto($userid, $destid));
                 $syncController = new \App\Controller\SyncController();
                 $syncController->likeEntry($userid, $json, INSERT);
                 return SUCCESS;
@@ -94,10 +91,10 @@ class CommentAndLikeTable extends Table {
         if ($check) {
             $query = $this->connect()->query();
             $query->update();
-            $query->set(['CommentText' => $comment, 'CommentUpdatedDate' => $current = date('Y-m-d H:i:sa')]);
+            $query->set(['CommentText =' => $comment]);
             $query->where(['UserId ='=> $userid ,'DestId =' => $destid]);
             if ($query->execute()) {
-                $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'","CommentText":"'.$comment.'","CreatedDate":"'.$current.'"}';
+                 $json = json_encode(new DTO\ClsCommentAndLikeDto($userid, $destid, $likeCount = null, $comment));
                 $syncController = new \App\Controller\SyncController();
                 $syncController->commentEntry($userid, $json, UPDATE);
                 return SUCCESS;
@@ -111,9 +108,9 @@ class CommentAndLikeTable extends Table {
             $query->CommentText = $comment;
             $query->CommentUpdatedDate = $current = date('Y-m-d H:i:sa');
             if ($this->connect()->save($query)) {
-                 $json = '{"UserId":"'.$userid.'","DestId":"'.$destid.'","CommentText":"'.$comment.'","CreatedDate":"'.$current.'"}';
+                 $json = new DTO\ClsCommentAndLikeDto($userid, $destid, $likeCount = null, $comment);
                 $syncController = new \App\Controller\SyncController();
-                $syncController->commentEntry($userid, $json, INSERT);
+                $syncController->commentEntry($userid, json_encode($json), INSERT);
                 return SUCCESS;
             } else {
                 return FAIL;

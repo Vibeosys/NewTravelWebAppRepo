@@ -25,10 +25,10 @@ class ImagesTable extends Table {
 
     public function insertImage($userid, $destid, $path) {
         $query = $this->newEntity();
-        $query->ImagePath = $path;
-        $query->CreatedDate = date('Y-M-d H:i:sa');
-        $query->UserId = $userid;
-        $query->DestId = $destid;
+        $query->imagePath = $path;
+        $query->createdDate = date('Y-M-d H:i:sa');
+        $query->userId = $userid;
+        $query->destId = $destid;
         if($this->save($query)){
             return SUCCESS;
         }

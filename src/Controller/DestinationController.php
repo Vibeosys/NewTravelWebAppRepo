@@ -32,8 +32,8 @@ class DestinationController extends AppController{
     }
     public function putNewDest() {
         $querydata = $this->request->input('json_decode');
-        if($this->getTableObj()->InsertDest($querydata->DestName,$querydata->lat, $querydata->long,$querydata->Active)){
-            $this->getTableObj()->SqliteInsert($querydata->DestName,$querydata->lat, $querydata->long,$querydata->Active);
+        if($this->getTableObj()->InsertDest($querydata->destName,$querydata->lat, $querydata->long,$querydata->active)){
+            $this->getTableObj()->SqliteInsert($querydata->destName,$querydata->lat, $querydata->long,$querydata->active);
         }
     }
     public function prepareInsertStatement() {
@@ -46,10 +46,10 @@ class DestinationController extends AppController{
         {
             $preparedStatement.= DEST_INS_QRY;
 
-            $preparedStatement = str_replace('@DestId', $destination->Destid, $preparedStatement);
-            $preparedStatement = str_replace('@DestName', $destination->DestName, $preparedStatement);
-            $preparedStatement = str_replace('@Lat', $destination->Lat, $preparedStatement);
-            $preparedStatement = str_replace('@Long', $destination->Long, $preparedStatement);
+            $preparedStatement = str_replace('@DestId', $destination->destid, $preparedStatement);
+            $preparedStatement = str_replace('@DestName', $destination->destName, $preparedStatement);
+            $preparedStatement = str_replace('@Lat', $destination->lat, $preparedStatement);
+            $preparedStatement = str_replace('@Long', $destination->long, $preparedStatement);
             
         }
         return $preparedStatement;

@@ -67,11 +67,11 @@ CREATE TABLE [TempData]
 
 CREATE TABLE [MyUser]
 ('UserId'    TEXT PRIMARY KEY NOT NULL ,
- 'UserName'     TEXT NOT NULL,
- 'UserEmail'     TEXT NOT NULL,
- 'PhotoURL'      TEXT NOT NULL,
- 'APIKey'        TEXT NOT NULL,
- 'LginSource'    TEXT NOT NULL); 
+ 'UserName'     TEXT  NULL,
+ 'UserEmail'     TEXT  NULL,
+ 'PhotoURL'      TEXT  NULL,
+ 'APIKey'        TEXT  NULL,
+ 'LginSource'    TEXT  NULL); 
 
 
 CREATE TABLE [Sync](

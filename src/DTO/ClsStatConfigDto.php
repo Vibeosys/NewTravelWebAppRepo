@@ -15,12 +15,12 @@ namespace App\DTO;
 class ClsStatConfigDto {
 
     
-  public $Key;
-  public  $Value;
+  public $key;
+  public  $value;
   
   public function __construct($key,$value) {
       
-      $this->Key = $key;
-      $this->Value = $value;
+      $this->key = $key;
+      $this->value = $value;
   }
 }

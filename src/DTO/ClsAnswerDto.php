@@ -13,18 +13,18 @@ namespace App\DTO;
  */
 class ClsAnswerDto extends JsonDeserializer{
 
-    public $AnswerId;
-    public $UserId;
-    public $DestId;
-    public $OptionId;
-    public $CreatedDate;
+    public $answerId;
+    public $userId;
+    public $destId;
+    public $optionId;
+    public $createdDate;
 
-    public function __construct($userId, $destId, $optionId,$answerId = null, $createdDate = null) {
-        $this->AnswerId = $answerId;
-        $this->UserId = $userId;
-        $this->DestId = $destId;
-        $this->OptionId = $optionId;
-        $this->CreatedDate = $createdDate;
+    public function __construct($userId = null, $destId = null, $optionId = null, $answerId = null, $createdDate = null) {
+        $this->answerId = $answerId;
+        $this->userId = $userId;
+        $this->destId = $destId;
+        $this->optionId = $optionId;
+        $this->createdDate = $createdDate;
     }
 
 }

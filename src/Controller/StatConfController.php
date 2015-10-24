@@ -35,8 +35,8 @@ class StatConfController extends AppController {
         $preparedstatements = '';
         foreach ($allConfig as $config) {
             $preparedstatements.=STATCONF_INS_QRY;
-            $preparedstatements = str_replace('@key', $config->Key, $preparedstatements);
-            $preparedstatements = str_replace('@Value', $config->Value, $preparedstatements);
+            $preparedstatements = str_replace('@key', $config->key, $preparedstatements);
+            $preparedstatements = str_replace('@Value', $config->value, $preparedstatements);
         }
         return $preparedstatements;
     }

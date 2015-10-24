@@ -27,13 +27,29 @@ class ClsErrorDto {
         $errorDto->message = $errorDto->errorDictionary[$errorcode];
         return json_encode($errorDto);
     }
+    
+     public static function prepareSuccessMessage($message) {
+        
+        $errorDto = new ClsErrorDto();
+        $errorDto->errorCode = 0;
+        $errorDto->message = $message;
+        return json_encode($errorDto);
+    }
+    
+    
     protected $errorDictionary = array(
         100 => 'User is not authenticated',
         101 => 'UserId is blank',
         102 => 'Unknown error occured',
         103 => 'Update not found',
         104 => 'Invalid request',
-        105 => 'Invalid image'
+        105 => 'Invalid image',
+        106 => 'Image data empty',
+        107 => 'UserId and Email fields empty',
+        108 => 'User info not updated successfully into database',
+        109 => 'Not Saved Try again',
+        110 => 'Database Exception occured',
+        111 => 'problem in image uploading'
     );
     
     

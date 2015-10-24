@@ -22,21 +22,23 @@ class DownloadController extends ApiController {
     public function index() {
         $this->autoRender = false;
 
-        $userId = $this->request->query("tempid");
-        if (!$userId) {
-            $this->response->type('json');
+        $userId = $this->request->query("userid");
+          \Cake\Log\Log::info("userId is : ".$userId);
+        if (empty($userId)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
+            \Cake\Log\Log::error("userId is blank ".$userId);
             return ;
         }
         
         $userDto = new DTO\ClsUserDto($userId);
-        if ($this->isValied($userDto->UserId)) {
+        if ($this->isValied($userDto->userId)) {
             \Cake\Log\Log::debug("User validate");
             $syncController = new SyncController();
-            $syncController->download($userDto->UserId);
-            \Cake\Log\Log::debug("User Having sqlite file so call to download method");
+            $syncController->download($userDto->userId);
+            
         } else {
             $this->response->body(DTO\ClsErrorDto::prepareError(102));
+            \Cake\Log\Log::error("User requested with invalid userid : ".$userId);
         }
     }
 
@@ -57,9 +59,4 @@ class DownloadController extends ApiController {
             return FAIL;
         }
     }
-
-    private function functionName($param) {
-        
-    }
-
 }

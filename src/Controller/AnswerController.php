@@ -26,28 +26,19 @@ class AnswerController extends ApiController{
         return $this->getTablObj()->getAll();
     }
     public function submit(DTO\ClsAnswerDto $answer) {
-        if($answer){
-            $temp = $this->getTablObj()->Insert($answer->UserId,$answer->DestId,$answer->OptionId);
+        
+            $temp = $this->getTablObj()->Insert($answer->userId, $answer->destId, $answer->optionId);
             if($temp){
-                \Cake\Log\Log::info('answer submited');
-                $this->response->body('{"ERROR":"False","Message":"Saved"}');
+                \Cake\Log\Log::debug('answer submited');
+                $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Answer Saved"));
                 return SUCCESS;
-            }else{\Cake\Log\Log::info('answer not submited');$this->response->body('{"ERROR":"true","Message":"Not Saved Try again "}');}
-        }
+            }else{\Cake\Log\Log::error('answer not submited');$this->response->body(DTO\ClsErrorDto::prepareError(109));}
+        
         $this->autoRender = false;
         
     }
-    public function putNewAnswer() {
-        $querydata = $this->request->input('json_decode');
-        echo $querydata->UserId.$querydata->DestId.$querydata->OptionId;
-       $AnswerId = $this->getTablObj()->Insert($querydata->UserId,$querydata->DestId,$querydata->OptionId);
-        $syn = new SyncController();
-        $syn->answerEntry($AnserId,$querydata->UserId);
-    }
-    public function test() {
-         $querydata = $this->request->input('json_decode');
-        $this->getTablObj()->SqliteInsert($querydata->UserId,$querydata->DestId,$querydata->OptionId);
-    }
+    
+    
     public function prepareInsertStatement() {
             $allAnswer = $this->allAnswer();
             if(!$allAnswer){
@@ -57,11 +48,11 @@ class AnswerController extends ApiController{
          
             foreach ($allAnswer as $answer){
                 $preparedStatements .= ANS_INS_QRY;
-                $preparedStatements = str_replace('@AnswerId', $answer->AnswerId, $preparedStatements);
-                $preparedStatements = str_replace('@UserId', $answer->UserId, $preparedStatements);
-                $preparedStatements = str_replace('@DestId', $answer->DestId, $preparedStatements);
-                $preparedStatements = str_replace('@OptionId', $answer->OptionId, $preparedStatements);
-                $preparedStatements = str_replace('@CreatedDate', $answer->CreatedDate, $preparedStatements);
+                $preparedStatements = str_replace('@AnswerId', $answer->answerId, $preparedStatements);
+                $preparedStatements = str_replace('@UserId', $answer->userId, $preparedStatements);
+                $preparedStatements = str_replace('@DestId', $answer->destId, $preparedStatements);
+                $preparedStatements = str_replace('@OptionId', $answer->optionId, $preparedStatements);
+                $preparedStatements = str_replace('@CreatedDate', $answer->createdDate, $preparedStatements);
             }
             return $preparedStatements;
          

@@ -20,7 +20,7 @@ use App\Model\Table;
  */
 define('USER_INS_QRY', "INSERT INTO user (UserId,UserName,PhotoUrl)VALUES (\"@UserId\",\"@UserName\",\"@PhotoUrl\");");
 
-class UserController extends AppController {
+class UserController extends ApiController {
 
     public function getTableObj() {
         return new Table\UserTable();
@@ -58,6 +58,8 @@ class UserController extends AppController {
         return FAIL;
     }
   
+   
+  
     public function makeEntry($Id) {
         $syn = new SyncController;
         $sqliteController = new SqliteController;
@@ -77,14 +79,14 @@ class UserController extends AppController {
         $preparedStatement = '';
         foreach ($allUser as $user){
             $preparedStatement.= USER_INS_QRY;
-            $preparedStatement = str_replace('@UserId', $user->UserId, $preparedStatement);
-            $preparedStatement = str_replace('@UserName', $user->UserName, $preparedStatement);
-            $preparedStatement = str_replace('@PhotoUrl', $user->PhotoUrl, $preparedStatement);
+            $preparedStatement = str_replace('@UserId', $user->userId, $preparedStatement);
+            $preparedStatement = str_replace('@UserName', $user->userName, $preparedStatement);
+            $preparedStatement = str_replace('@PhotoUrl', $user->photoUrl, $preparedStatement);
         }
         return $preparedStatement;
     }
     public function validate($userid,$usermail) {
-          \Cake\Log\Log::debug("in user controller method");
+          \Cake\Log\Log::debug("in user controller validate method with userid :".$userid ."and email : ".$usermail);
         if($this->getTableObj()->userCkeck($userid,$usermail)){
             return SUCCESS;
         }

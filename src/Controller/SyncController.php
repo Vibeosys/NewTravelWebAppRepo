@@ -24,8 +24,8 @@ class SyncController extends ApiController {
     public $destTable = "destination";
     public $queTable = "question";
     public $answerTable = "answer";
-    public $LikeTable = "like";
-    public $CommentTable = "comment";
+    public $likeTable = "like";
+    public $commentTable = "comment";
 
     public function connect() {
         return TableRegistry::get('sync');
@@ -35,12 +35,12 @@ class SyncController extends ApiController {
         return new Table\SyncTable();
     }
 
-    public function userEntry($newUser) {
+    public function userEntry(DTO\ClsUserDto $newUser) {
         $userController = new UserController();
         $allUser = $userController->getAllUser();
         foreach ($allUser as $user) {
-            if ($user->UserId) {
-                $this->getTableObj()->Insert($user['UserId'], json_encode($newUser), $this->userTable);
+            if ($user->userId) {
+                $this->getTableObj()->Insert($user->userId, json_encode($newUser), $this->userTable);
             }
         }
     }
@@ -53,7 +53,7 @@ class SyncController extends ApiController {
        
         foreach ($allUser as $user) {
        
-                $this->getTableObj()->Insert($user->UserId, $json, $this->destTable,$opration);
+                $this->getTableObj()->Insert($user->userId, $json, $this->destTable,$opration);
             
         }
     }
@@ -64,7 +64,7 @@ class SyncController extends ApiController {
         $i = 0;
         foreach ($allUser as $user) {
           
-                $this->getTableObj()->Insert($user->UserId, $json, $this->queTable,$opration);
+                $this->getTableObj()->Insert($user->userId, $json, $this->queTable,$opration);
           
         }
     }
@@ -73,8 +73,8 @@ class SyncController extends ApiController {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
         foreach ($allUser as $user) {
-            if($user->UserId != $userId){
-                $this->getTableObj()->Insert($user->UserId,$json, $this->answerTable,$opration);
+            if($user->userId != $userId){
+                $this->getTableObj()->Insert($user->userId,$json, $this->answerTable,$opration);
             
         }}
     }
@@ -83,8 +83,8 @@ class SyncController extends ApiController {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser($userId);
         foreach ($allUser as $user) {
-            if($user->UserId != $userId){
-                $this->getTableObj()->Insert($user->UserId, $json, $this->LikeTable, $opration);
+            if($user->userId != $userId){
+                $this->getTableObj()->Insert($user->userId, $json, $this->likeTable, $opration);
             }
         }
     }
@@ -93,9 +93,9 @@ class SyncController extends ApiController {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser($userId);
         foreach ($allUser as $user) {
-            if($user->UserId != $userId){
+            if($user->userId != $userId){
             try{
-                $this->getTableObj()->Insert($user->UserId, $json, $this->CommentTable, $opration);
+                $this->getTableObj()->Insert($user->userId, $json, $this->commentTable, $opration);
             }  catch (Excption $ex){
                 throw  new Exception($ex);
             }
@@ -109,7 +109,7 @@ class SyncController extends ApiController {
            
             $this->response->body(json_encode($Update));
             $this->response->send();
-            \Cake\Log\Log::debug("Update send to User");
+            \Cake\Log\Log::debug("Update send to User : ".$userid);
             $this->getTableObj()->deleteUpdate($userid);
         } else {
             $this->response->body(DTO\ClsErrorDto::prepareError(103));
