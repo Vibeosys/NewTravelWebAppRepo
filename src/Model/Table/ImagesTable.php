@@ -11,6 +11,8 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\DTO;
+use Cake\Log\Log;
+
 
 /**
  * Description of ImageTable
@@ -23,16 +25,24 @@ class ImagesTable extends Table {
         return TableRegistry::get('images');
     }
 
-    public function insertImage($userid, $destid, $path) {
-        $query = $this->newEntity();
-        $query->imagePath = $path;
-        $query->createdDate = date('Y-M-d H:i:sa');
-        $query->userId = $userid;
-        $query->destId = $destid;
-        if($this->save($query)){
+    public function insertImage($imageid,$userid, $destid, $path) {
+        try{
+            $image = $this->connect();
+        $query = $image->newEntity();
+        $query->ImageId = $imageid;
+        $query->ImagePath = $path;
+        $query->CreatedDate = date('Y-M-d H:i:sa');
+        $query->UserId = $userid;
+        $query->DestId = $destid;
+        if($image->save($query)){
+            \Cake\Log\Log::debug("image saved in database : ".$path);
             return SUCCESS;
         }
+        Log::error("image not saved in database ".$path);
         return FAIL;
+        }  catch (Exception $e){
+            throw  new \PDOException("database error");
+        }
     }
 
     public function getAllImages() {

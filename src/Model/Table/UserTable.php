@@ -51,6 +51,17 @@ class UserTable extends Table {
         }
         return FAIL;
     }
+    public function updateProfileImage($userid,$emailid,$image) {
+        $result = $this->userCkeck($userid, $emailid);
+        if($result){
+        $user = $this->connect();
+        $query = $user->get($userid);
+        $query->PhotoUrl = $image;
+        if($user->save($query)){return SUCCESS;}
+        }else{
+            return FAIL;
+        }
+    }
 
     public function activate($UserId) {
 
@@ -91,10 +102,10 @@ class UserTable extends Table {
         $rows = $this->connect()->find()->where(['UserId =' => $userid]);
         foreach ($rows as $row) {
             if ($row->EmailId == $usermail) {
-                \Cake\Log\Log::debug("User Authenticate for Email");
+                \Cake\Log\Log::debug("user : ".$userid. " is authorised user");
                 return SUCCESS;
             }
-            \Cake\Log\Log::error("User Authentication failed");
+            \Cake\Log\Log::error("user : ".$userid. " is unauthorised user");
             return FAIL;
         }
         

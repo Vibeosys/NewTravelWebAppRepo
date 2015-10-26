@@ -10,10 +10,7 @@ use Cake\Network\Exception\NotFoundException;
 use App\Controller;
 
 $this->layout = false;
-if(isset($_POST['login'])){
-    
 
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +23,7 @@ if(isset($_POST['login'])){
     <body class="align">
         <div class="site__container">
             <div class="grid__container">
-                <form action="" method="post" class="form form--login">
+                <form action="http://localhost/NewTravelWebAppRepo/destination" method="post" class="form form--login">
                     <div class="form__field">
                         <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
                         <input id="login__username" type="text" class="form__input" placeholder="Username" required>
@@ -35,9 +32,9 @@ if(isset($_POST['login'])){
                         <label class="fontawesome-lock" for="login__password"><span class="hidden">Password</span></label>
                         <input id="login__password" type="password" class="form__input" placeholder="Password" required>
                     </div>
-                    <div class="form__field" style="margin-left:190px">
-                        <input type="submit" name="login" value="Sign In">
-                    </div>
+                    <div class="form__field" style="margin-left:190px">  
+                            <input type="submit" name="login" value="Sign In">
+                       </div>
                 </form>
                 <p class="text--center">Not a member? <a href="#">Sign up now</a> <span class="fontawesome-arrow-right"></span></p>
             </div>

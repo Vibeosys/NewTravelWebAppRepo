@@ -15,7 +15,7 @@ $this->layout = false;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Destination</title>
+    <title>Question</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -40,7 +40,7 @@ $this->layout = false;
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/login" class="logo">
+            <a href="http://localhost/NewTravelWebAppRepo" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
@@ -59,8 +59,8 @@ $this->layout = false;
                     <ul class="nav navbar-nav">
                         <!-- User Account -->
                         <li class="dropdown user user-menu">
-                            <a href="http://localhost/NewTravelWebAppRepo/api/v1/form/login">
-                                <img src="../../../img/user.png" class="user-image" alt="User Image">
+                            <a href="http://localhost/NewTravelWebAppRepo">
+                                <img src="../NewTravelWebAppRepo/webroot/img/user.png" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Sign Off</span>
                             </a>
                         </li>      
@@ -81,19 +81,19 @@ $this->layout = false;
                         </a>
                     </li>
                     <li>
-                        <a href="destination">
+                        <a href="http://localhost/NewTravelWebAppRepo/destination">
                             <i class="icon regions"></i> <span>Destinations</span>
                             <em></em>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="questions">
+                        <a href="http://localhost/NewTravelWebAppRepo/questions">
                             <i class="icon channels"></i>  <span>Questions</span>
                             <em></em>
                         </a>
                     </li>
                     <li>
-                        <a href="configuration">
+                        <a href="http://localhost/NewTravelWebAppRepo/configuration">
                             <i class="icon products"></i>  <span>Configurations</span>
                             <em></em>
                         </a>
@@ -111,7 +111,7 @@ $this->layout = false;
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="login"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="http://localhost/NewTravelWebAppRepo"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Questions</li>
                 </ol>
             </section>

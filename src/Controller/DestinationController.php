@@ -15,7 +15,7 @@ use Cake\ORM\TableRegistry;
  */
 define('DEST_INS_QRY', "INSERT INTO destination (DestId,DestName,Lat,Long)VALUES (@DestId,\"@DestName\",@Lat, @Long);");
 
-class DestinationController extends AppController{
+class DestinationController extends ApiController{
     
        public function connect() {
         return TableRegistry::get('destination');

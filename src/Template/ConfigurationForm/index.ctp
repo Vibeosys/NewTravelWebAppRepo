@@ -1,10 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
@@ -14,7 +8,6 @@ use App\Controller;
 
 $this->layout = false;
 
-
 ?>
 
 <!DOCTYPE html>
@@ -22,24 +15,20 @@ $this->layout = false;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Destination</title>
+    <title>Configuration</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->css('bootstrap.min.css')?>
-    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
-   
-      <?= $this->Html->css('dataTables.bootstrap.css')?>
-    
+    <?= $this->Html->css('dataTables.bootstrap.css')?>
     <!-- Theme style -->
      <?= $this->Html->css('Style.css')?>
      <?= $this->Html->css('All-skins.css')?>
-    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,7 +40,7 @@ $this->layout = false;
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="login" class="logo">
+            <a href="http://localhost/NewTravelWebAppRepo" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
@@ -67,15 +56,14 @@ $this->layout = false;
                     <span class="icon-bar"></span>
                 </a>-->
                 <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">                      
+                    <ul class="nav navbar-nav">
                         <!-- User Account -->
                         <li class="dropdown user user-menu">
-                            <a href="login">                              
-                               
-                                <img src="../../../img/user.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Sign Off</span>                             
-                            </a>                        
-                        </li>                      
+                            <a href="http://localhost/NewTravelWebAppRepo">
+                                <img src="../NewTravelWebAppRepo/webroot/img/user.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs">Sign Off</span>
+                            </a>
+                        </li>      
                     </ul>
                 </div>
             </nav>
@@ -83,36 +71,33 @@ $this->layout = false;
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                 
+            <section class="sidebar">              
                 <!-- sidebar menu:  -->
-                <ul class="sidebar-menu">
-                    <!--<li class="header">MAIN NAVIGATION</li>-->                  
+                <ul class="sidebar-menu">                  
                     <li>
                         <a href="#">
                             <i class="icon dashboard"></i> <span>Dashboard</span>
                             <em></em>
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="destination">
+                    <li>
+                        <a href="http://localhost/NewTravelWebAppRepo/destination">
                             <i class="icon regions"></i> <span>Destinations</span>
                             <em></em>
                         </a>
                     </li>
                     <li>
-                        <a href="questions">
+                        <a href="http://localhost/NewTravelWebAppRepo/question">
                             <i class="icon channels"></i>  <span>Questions</span>
                             <em></em>
                         </a>
                     </li>
-                    <li>
-                        <a href="configuration">
-                            <i class="icon products"></i>  <span>Configurations</span> 
+                    <li class="active">
+                        <a href="http://localhost/NewTravelWebAppRepo/configuration">
+                            <i class="icon products"></i>  <span>Configurations</span>
                             <em></em>
                         </a>
-                    </li>                   
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -122,59 +107,44 @@ $this->layout = false;
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                  Destinations
+                    Configuration
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="login"><i class="fa fa-dashboard"></i> Home</a></li>                  
-                    <li class="active">Destinations</li>
+                    <li><a href="http://localhost/NewTravelWebAppRepo"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Configuration</li>
                 </ol>
             </section>
             <!-- Main content -->
             <section class="content">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="box">                           
+                        <div class="box">
                             <section class="content content-div show-add-section">
                                 <div class="row">
                                     <!--Destination Form -->
                                     <div class="with-border box-header">
-                                        <h3 class="box-title">Add New Destination</h3>
+                                        <h3 class="box-title">Add New Configuration</h3>
                                     </div><!-- /.box-header -->
                                     <!-- form start -->
                                     <form class="form-horizontal">
                                         <div class="box-body">
                                             <div class="form-group">
-                                                <label for="Title" class="col-sm-2 control-label">Title</label>
+                                                <label for="Key" class="col-sm-2 control-label">Key</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="Title" placeholder="Title">
+                                                    <input type="text" class="form-control" id="Key" placeholder="Key">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="latitude" class="col-sm-2 control-label">Latitude</label>
+                                                <label for="Value" class="col-sm-2 control-label">Value</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" placeholder="latitude">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="longitude" class="col-sm-2 control-label">Longitude</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" placeholder="longitude">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"> Active
-                                                        </label>
-                                                    </div>
+                                                    <input type="Value" class="form-control" placeholder="Value">
                                                 </div>
                                             </div>
                                         </div><!-- /.box-body -->
                                         <div class="box-footer" style="margin-left:170px">
                                             <button type="submit" class="light-orange add-save-btn">Cancel</button>
-                                            <button type="submit" class="dark-orange add-save-btn">Save Destination</button>
+                                            <button type="submit" class="dark-orange add-save-btn">Save Configuration</button>
                                         </div><!-- /.box-footer -->
                                     </form>
                                     <!-- /.box -->
@@ -182,17 +152,15 @@ $this->layout = false;
                                 </div>
                             </section>
                             <div class="box-header">
-                                <button class="dark-orange add-edit-btn"><span>Add New Destination</span></button>
+                                <button class="dark-orange add-edit-btn"><span>Add New Configuration</span></button>
                             </div><!-- /.box-header -->
                             <div class="box-body show-grid-section">
                                 <table id="destination" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th class="title-width">Title</th>
-                                            <th class="lat-width">latitude</th>
-                                            <th class="lat-width">longitude</th>
-                                            <th>Status</th>
+                                            <th class="title-width">Key</th>
+                                            <th class="title-width">Value</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -200,237 +168,216 @@ $this->layout = false;
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
                                             <td class="title-width">
-                                                Pune
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td class="lat-width">73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
+                                            </td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                         <tr>
                                             <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="title-width">
+                                                Dynamics AX 4.0
+
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td>
-                                                Pune
+                                            <td class="lat-width">
+                                                Dynamics AX 4.0
                                             </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td>
-                                                Pune
-                                            </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td>
-                                                Pune
-                                            </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td>
-                                                Pune
-                                            </td>
-                                            <td>18.5203° N</td>
-                                            <td>73.8567° E</td>
-                                            <td>Active</td>
                                             <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div><!-- /.box-body -->
-                        </div><!-- /.box -->                       
+                        </div><!-- /.box -->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </section><!-- /.content -->
@@ -459,5 +406,3 @@ $this->layout = false;
     <?= $this->Html->script('Common.js')?>
 </body>
 </html>
-
-

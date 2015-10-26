@@ -5,18 +5,16 @@ namespace App\Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use App\Controller\AppController;
+
 /**
- * Description of FormController
+ * Description of QuestionFormController
  *
  * @author niteen
  */
-class FormController extends AppController{
-     public function initialize() {
-        parent::initialize();
-        $this->response->type('html');
+class QuestionFormController extends FormController{
+  
+    public function index() {
+       
+        
     }
-    
-
-    
 }

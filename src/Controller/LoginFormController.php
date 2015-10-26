@@ -5,18 +5,18 @@ namespace App\Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-use App\Controller\AppController;
+
 /**
- * Description of FormController
+ * Description of LoginFormController
  *
  * @author niteen
  */
-class FormController extends AppController{
-     public function initialize() {
-        parent::initialize();
-        $this->response->type('html');
-    }
-    
+class LoginFormController extends FormController{
 
+    public function index() {
     
+       
+       
+        
+    }
 }

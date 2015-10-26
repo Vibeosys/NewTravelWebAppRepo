@@ -44,12 +44,13 @@ class ClsErrorDto {
         103 => 'Update not found',
         104 => 'Invalid request',
         105 => 'Invalid image',
-        106 => 'Image data empty',
+        106 => 'Please select image',
         107 => 'UserId and Email fields empty',
         108 => 'User info not updated successfully into database',
         109 => 'Not Saved Try again',
         110 => 'Database Exception occured',
-        111 => 'problem in image uploading'
+        111 => 'problem in image uploading',
+        112 => 'update your email and username before uploading profile photo OR check your userId and emailId'
     );
     
     
