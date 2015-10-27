@@ -9,6 +9,7 @@ namespace App\Controller;
  */
 
 use App\DTO;
+use App\Model\Table;
 
 /**
  * Description of ImagesUploadController
@@ -27,9 +28,14 @@ class ImagesUploadController extends ApiController {
         }
         try {
             if (array_key_exists('emailId', $data)) {
+                $userTable = new Table\UserTable();
+                if (!$userTable->userCkeck($data['userId'], $data['emailId'])) {
+                    $this->response->body(DTO\ClsErrorDto::prepareError(112));
+                    $this->response->send();
+                }
                 $imagesController = new ImagesController();
                 $result = $imagesController->uploadProfileImage($data);
-                if($result) {
+                if ($result) {
                     \Cake\Log\Log::debug("profile image uploaded successfully");
                 } else {
                     \Cake\Log\Log::error("Invalid image extension");

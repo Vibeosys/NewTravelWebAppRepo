@@ -51,16 +51,14 @@ class UserTable extends Table {
         }
         return FAIL;
     }
-    public function updateProfileImage($userid,$emailid,$image) {
-        $result = $this->userCkeck($userid, $emailid);
-        if($result){
+    public function updateProfileImage($userid,$imageurl) {
         $user = $this->connect();
         $query = $user->get($userid);
-        $query->PhotoUrl = $image;
+        $query->PhotoUrl = $imageurl;
         if($user->save($query)){return SUCCESS;}
-        }else{
-            return FAIL;
-        }
+        $this->response->body(DTO\ClsErrorDto::prepareError(113));
+        $this->response->send();
+        return  FAIL;
     }
 
     public function activate($UserId) {

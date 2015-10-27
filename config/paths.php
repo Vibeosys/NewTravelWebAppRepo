@@ -92,3 +92,7 @@ define('PROFILE_IMAGE_DIR', TMP.'ProfileImages'.DS);
 define('DESTINATION_IMAGE_DIR', TMP.'DestinationImages'.DS);
 
 define('AMAZON_S3_CONFIG_INI_PATH',  CONFIG.'inifiles');
+
+define('AWS_DESTINATION_IMAGES_DIR', 'ImageData/DestinationImages/');
+
+define('AWS_USER_PROFILE_IMAGES_DIR', 'ImageData/UserProfileImages/');

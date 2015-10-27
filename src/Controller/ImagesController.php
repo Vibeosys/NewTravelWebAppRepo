@@ -53,11 +53,16 @@ class ImagesController extends ApiController {
             return FAIL;
         }
         $dir = new Folder(DESTINATION_IMAGE_DIR, true);
-        $file = fopen(DESTINATION_IMAGE_DIR . $filename, 'wb');
+        $image = DESTINATION_IMAGE_DIR . $filename;
+        $file = fopen($image, 'wb');
         fwrite($file, $binary);
         fclose($file);
-        if (file_exists(DESTINATION_IMAGE_DIR . $filename)) {
-            $imageDto = new DTO\ClsImagesDto($data['imageId'], DESTINATION_IMAGE_DIR . $filename, $data['userId'], $data['destId']);
+        if (file_exists($image)) {
+            $awsDir = AWS_DESTINATION_IMAGES_DIR . $this->getDestinationName($data['destId']);
+            \Cake\Log\Log::debug("image uploading on destination : " . $awsDir);
+            $imageUrl = $this->awsImageUpload($awsDir, $filename, $image);
+            \Cake\Log\Log::debug("imageUrl return from aws server : " . $imageUrl);
+            $imageDto = new DTO\ClsImagesDto($data['imageId'], $imageUrl, $data['userId'], $data['destId']);
             $this->saveImage($imageDto);
             $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage($filename . ' image uploaded '));
             $this->response->send();
@@ -79,11 +84,14 @@ class ImagesController extends ApiController {
             return FAIL;
         }
         $dir = new Folder(PROFILE_IMAGE_DIR, true);
-        $file = fopen(PROFILE_IMAGE_DIR . $filename, 'wb');
+        $imagePath = PROFILE_IMAGE_DIR . $filename;
+        $file = fopen($imagePath, 'wb');
         fwrite($file, $binary);
         fclose($file);
-        if (file_exists(PROFILE_IMAGE_DIR . $filename)) {
-            $userDto = new DTO\ClsUserDto($data['userId'], $userName = null, $password = null, $data['emailId'], PROFILE_IMAGE_DIR . $filename);
+        if (file_exists($imagePath)) {
+            $awsDir = AWS_USER_PROFILE_IMAGES_DIR . $data['userId'];
+            $imageUrl = $this->awsImageUpload($awsDir, $filename, $imagePath);
+            $userDto = new DTO\ClsUserDto($data['userId'], $userName = null, $password = null, $data['emailId'], $imageUrl);
             if ($this->updateProfile($userDto)) {
                 $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("profile image uploaded"));
                 $this->response->send();
@@ -104,10 +112,6 @@ class ImagesController extends ApiController {
         $l = strlen($str) - $i;
         $ext = substr($str, $i + 1, $l);
         return $ext;
-    }
-
-    public function upload() {
-        
     }
 
     private function getAll() {
@@ -132,8 +136,10 @@ class ImagesController extends ApiController {
         return $preparedStatements;
     }
 
-    private function saveImage($imageDto) {
+    private function saveImage(DTO\ClsImagesDto $imageDto) {
         if ($this->getTableObj()->insertImage($imageDto->imageId, $imageDto->userId, $imageDto->destId, $imageDto->imagePath)) {
+            $syncController = new SyncController();
+            $syncController->imagesEntry($imageDto->userId, json_encode($imageDto), 'Insert');
             return SUCCESS;
         }
         return FAIL;
@@ -141,34 +147,40 @@ class ImagesController extends ApiController {
 
     private function updateProfile(DTO\ClsUserDto $userDto) {
         $userTable = new Table\UserTable();
-        $result = $userTable->updateProfileImage($userDto->userId, $userDto->emailId, $userDto->photoUrl);
+        $result = $userTable->updateProfileImage($userDto->userId, $userDto->photoUrl);
         if ($result) {
             return SUCCESS;
         } else {
-            $this->response->body(DTO\ClsErrorDto::prepareError(112));
-            $this->response->send();
+            return FAIL;
         }
     }
 
-    public function amazonUpload() {
-
+    private function awsImageUpload($dir, $fileName, $filePath) {
         $this->autoRender = false;
-        $data = $this->request->data;
-        $bucket = \appconfig::getAwsDefaultBucket(PROD_ENV);
-        $s3FactoryArgs = \appconfig::getAwsDefaults(PROD_ENV);
-
+        $bucket = \appconfig::getAwsDefaultBucket(LOCAL_ENV);
+        $s3Client = $this->createS3Client();
+        $date = date('Y-M-d_H:i:s');
         try {
-
-            $s3Client = S3Client::factory($s3FactoryArgs);
-            $s3Client->upload($bucket, 'TempDir/NewImage111.jpg', fopen('MyImage.jpg', 'rb'), 'public-read-write');
-
-            \Cake\Log\Log::info("S3Client instantiation completed");
-
-            //$this->response->body($result['ObjectURL'].$upload->get('name'));
-            $this->response->send();
+            $upload = $s3Client->upload($bucket, $dir . '/' .$date.'_'.$fileName, fopen($filePath, 'rb'), 'public-read-write');
+            \Cake\Log\Log::debug("Aws url of uploaded image  : " . $upload['ObjectURL']);
+            return $upload['ObjectURL'];
         } catch (S3Exception $e) {
+            \Cake\Log\Log::error($e->getMessage());
             $this->response->body($e->getMessage());
         }
+    }
+
+    private function createS3Client() {
+        $this->autoRender = false;
+        $s3FactoryArgs = \appconfig::getAwsDefaults(LOCAL_ENV);
+        $s3Client = S3Client::factory($s3FactoryArgs);
+        \Cake\Log\Log::info("S3Client instantiation completed");
+        return $s3Client;
+    }
+
+    private function getDestinationName($destId) {
+        $destinationTable = new Table\DestinationTable();
+        return $destinationTable->getName($destId);
     }
 
 }

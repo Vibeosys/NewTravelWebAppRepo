@@ -20,7 +20,7 @@ define('UPDATE', 'update');
 
 define('INSERT', 'insert');
 
-define('PROD_ENV', false);
+define('LOCAL_ENV', true);
 
 
 

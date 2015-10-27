@@ -54,8 +54,9 @@ class appconfig {
     public static function getAwsDefaultBucket($local = false)
     {
         if ($local) {
-            return "tempdir";
+            return "dev.vibeosys.com";
         }
         return "imagedata";
     }
+    
 }

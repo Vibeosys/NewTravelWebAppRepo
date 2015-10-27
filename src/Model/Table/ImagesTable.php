@@ -31,9 +31,10 @@ class ImagesTable extends Table {
         $query = $image->newEntity();
         $query->ImageId = $imageid;
         $query->ImagePath = $path;
-        $query->CreatedDate = date('Y-M-d H:i:sa');
+        $query->CreatedDate = date('Y-m-d H:i:s');
         $query->UserId = $userid;
         $query->DestId = $destid;
+        $query->Visibility  = 1;
         if($image->save($query)){
             \Cake\Log\Log::debug("image saved in database : ".$path);
             return SUCCESS;

@@ -26,6 +26,7 @@ class SyncController extends ApiController {
     public $answerTable = "answer";
     public $likeTable = "like";
     public $commentTable = "comment";
+    public $imageTable = "images";
 
     public function connect() {
         return TableRegistry::get('sync');
@@ -35,7 +36,7 @@ class SyncController extends ApiController {
         return new Table\SyncTable();
     }
 
-    public function userEntry(DTO\ClsUserDto $newUser) {
+    public function userEntry($newUser) {
         $userController = new UserController();
         $allUser = $userController->getAllUser();
         foreach ($allUser as $user) {
@@ -68,6 +69,8 @@ class SyncController extends ApiController {
           
         }
     }
+    
+    
 
     public function answerEntry($userId,$json, $opration) {
         $UserObj = new UserController;
@@ -100,6 +103,17 @@ class SyncController extends ApiController {
                 throw  new Exception($ex);
             }
         }}
+    }
+    
+     public function imagesEntry($userId, $json,$opration) {
+        $UserObj = new UserController;
+        $allUser = $UserObj->getAllUser();
+        foreach ($allUser as $user) {
+            \Cake\Log\Log::debug("New image enrty in sync table json : ".$json);
+          if($user->userId != $userId){
+                $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $opration);
+          }
+        }
     }
 
     public function download($userid) {

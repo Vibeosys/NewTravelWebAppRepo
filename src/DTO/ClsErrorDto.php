@@ -49,8 +49,9 @@ class ClsErrorDto {
         108 => 'User info not updated successfully into database',
         109 => 'Not Saved Try again',
         110 => 'Database Exception occured',
-        111 => 'problem in image uploading',
-        112 => 'update your email and username before uploading profile photo OR check your userId and emailId'
+        111 => 'Problem in image uploading',
+        112 => 'Update your email and username before uploading profile photo OR check your userId and emailId',
+        113 => 'Database Faiure. please try again.'
     );
     
     

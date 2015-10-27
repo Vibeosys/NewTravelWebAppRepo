@@ -73,9 +73,9 @@ Router::scope('/api/v1', function ($routes) {
 //Travel website Endpoints
 Router::scope('/', function ($routes) {
     //$routes->connect('/', ['controller' => 'LoginForm', 'action' => 'index',]);
-    $routes->connect('destination', ['controller' => 'DestinationForm', 'action' => 'index',]);
-    $routes->connect('question', ['controller' => 'QuestionForm', 'action' => 'index']);
-    $routes->connect('configuration', ['controller' => 'ConfigurationForm', 'action' => 'index']);
+    $routes->connect('destination/index', ['controller' => 'DestinationForm', 'action' => 'index',]);
+    $routes->connect('question/list', ['controller' => 'QuestionForm', 'action' => 'index']);
+    $routes->connect('configuration/list', ['controller' => 'ConfigurationForm', 'action' => 'index']);
 });
 
 
