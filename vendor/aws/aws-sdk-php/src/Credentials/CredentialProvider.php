@@ -260,7 +260,8 @@ class CredentialProvider
      */
     public static function ini($profile = null, $filename = null)
     {
-        $filename = $filename ?: (self::getHomeDir() . '/.aws/credentials');
+        $filename = AMAZON_S3_CONFIG_INI_PATH.DS.'credentials.ini';
+        //$filename = $filename ?: (self::getHomeDir() . '/.aws/credentials');
         $profile = $profile ?: (getenv(self::ENV_PROFILE) ?: 'default');
 
         return function () use ($profile, $filename) {

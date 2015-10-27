@@ -151,48 +151,20 @@ class ImagesController extends ApiController {
     }
 
     public function amazonUpload() {
+
         $this->autoRender = false;
         $data = $this->request->data;
-        $bucket = "dev.vibeosys.com";
-       // $key = $data['key'];
-        //$body = $data['body'];
-        $s3Client = new S3Client([
-            'version' => '2006-03-01',
-            'region' => 'ap-southeast-1',
-            'credentials' => [
-                'key' => 'AKIAIKZ5UROAPNSQJZNA',
-                'secret' => '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',
-            ],
-        ]);
-         curl_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        //$s3 = S3Client::factory();
-//            'version' => '2006-03-01',
-//            'region' => 'ap-southeast-1',
-//            'credentials' => [
-//                'key' => 'AKIAIKZ5UROAPNSQJZNA',
-//                'secret' => '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',
-//            ],
-//        ]);
-        \Cake\Log\Log::info("S3Client instantiation completed");
+        $bucket = \appconfig::getAwsDefaultBucket(PROD_ENV);
+        $s3FactoryArgs = \appconfig::getAwsDefaults(PROD_ENV);
+
         try {
-            // Upload data.
-           $upload = $s3Client -> upload($bucket, 'new.txt', 'hello world', 'public-read');
-//        $result = $s3Client -> putObject(array(
-//                'Bucket' => $bucket,
-//                'Key' => 'er.png',
-//                'SourceFile' => 'D:\GitPhpWebsites\NewTravelWebAppRepo\tmp\ProfileImages\er.png',
-//                'ContentType' => 'application/octet-stream',
-//                'ACL' => 'public-read'
-//            ));
-//            \Cake\Log\Log::info("file uploaded");
-            //$uploadResult = $s3Client->upload($bucket, $key, $body,$Acl = 'public');
-            
-            
-//            $info = openssl_get_cert_locations();
-           
-            // Print the URL to the object.
-           
-            $this->response->body($result['ObjectURL'].$upload->get('name'));
+
+            $s3Client = S3Client::factory($s3FactoryArgs);
+            $s3Client->upload($bucket, 'TempDir/NewImage111.jpg', fopen('MyImage.jpg', 'rb'), 'public-read-write');
+
+            \Cake\Log\Log::info("S3Client instantiation completed");
+
+            //$this->response->body($result['ObjectURL'].$upload->get('name'));
             $this->response->send();
         } catch (S3Exception $e) {
             $this->response->body($e->getMessage());

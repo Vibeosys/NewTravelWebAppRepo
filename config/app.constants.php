@@ -20,6 +20,8 @@ define('UPDATE', 'update');
 
 define('INSERT', 'insert');
 
+define('PROD_ENV', false);
+
 
 
 

@@ -72,7 +72,7 @@ Router::scope('/api/v1', function ($routes) {
 
 //Travel website Endpoints
 Router::scope('/', function ($routes) {
-    $routes->connect('/', ['controller' => 'LoginForm', 'action' => 'index',]);
+    //$routes->connect('/', ['controller' => 'LoginForm', 'action' => 'index',]);
     $routes->connect('destination', ['controller' => 'DestinationForm', 'action' => 'index',]);
     $routes->connect('question', ['controller' => 'QuestionForm', 'action' => 'index']);
     $routes->connect('configuration', ['controller' => 'ConfigurationForm', 'action' => 'index']);
@@ -84,13 +84,14 @@ Router::scope('/', function ($routes) {
 
 
 
-//Router::scope('/', function ($routes) {
 /**
  * Here, we are connecting '/' (base path) to a controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, src/Template/Pages/home.ctp)...
  */
-//$routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+
+//Router::connect('/', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/', ['controller' => 'LoginForm', 'action' => 'index']);
 
 /**
  * ...and connect the rest of 'Pages' controller's URLs.

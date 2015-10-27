@@ -90,3 +90,5 @@ define('SQLITE_DB_DIR',TMP.'SqliteDBFiles'.DS);
 define('PROFILE_IMAGE_DIR', TMP.'ProfileImages'.DS);
 
 define('DESTINATION_IMAGE_DIR', TMP.'DestinationImages'.DS);
+
+define('AMAZON_S3_CONFIG_INI_PATH',  CONFIG.'inifiles');

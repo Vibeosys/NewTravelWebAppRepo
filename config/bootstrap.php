@@ -23,6 +23,11 @@ require __DIR__ . '/paths.php';
  */
 require __DIR__ . '/app.constants.php';
 
+/**
+ * Configurations of all the defaults required for other classes
+ * constants
+ */
+require __DIR__ . '/appconfig.php';
 
 // Use composer to load the autoloader.
 require ROOT . DS . 'vendor' . DS . 'autoload.php';
