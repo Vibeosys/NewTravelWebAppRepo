@@ -329,11 +329,19 @@ $(function () {
     });
 });
 $(".show-add-section").hide();
+$(".show-edit-section").hide();
 $('.add-edit-btn').on("click", function () {
     $(".show-grid-section").hide();
     $('.add-edit-btn').hide();
     $('.show-add-section').fadeIn(1000, function () {
         $('.show-add-section').show(1000);
+    });
+});
+$('.edit-btn').on("click", function () {
+    $(".show-grid-section").hide();
+    $('.add-edit-btn').hide();
+    $('.show-edit-section').fadeIn(1000, function () {
+        $('.show-edit-section').show(1000);
     });
 });
 $('.add-save-btn').on("click", function () {

@@ -46,7 +46,7 @@ class SyncTable extends Table {
         if ($updateCount) {
             $i = 0;
             foreach ($rows as $row) {
-                $downloadSerielizer = new DTO\ClsDownloadSerializerDto($row->TableName, $row->JsonSync);
+                $downloadSerielizer = new DTO\ClsDownloadSerializerDto($row->TableName, $row->JsonSync, $row->Opration);
                 $update[$i] = $downloadSerielizer;
                 $i++;
             }

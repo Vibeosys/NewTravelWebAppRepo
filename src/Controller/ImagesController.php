@@ -139,7 +139,7 @@ class ImagesController extends ApiController {
     private function saveImage(DTO\ClsImagesDto $imageDto) {
         if ($this->getTableObj()->insertImage($imageDto->imageId, $imageDto->userId, $imageDto->destId, $imageDto->imagePath)) {
             $syncController = new SyncController();
-            $syncController->imagesEntry($imageDto->userId, json_encode($imageDto), 'Insert');
+            $syncController->imagesEntry($imageDto->userId, json_encode($imageDto));
             return SUCCESS;
         }
         return FAIL;
@@ -161,7 +161,7 @@ class ImagesController extends ApiController {
         $s3Client = $this->createS3Client();
         $date = date('Y-M-d_H:i:s');
         try {
-            $upload = $s3Client->upload($bucket, $dir . '/' .$date.'_'.$fileName, fopen($filePath, 'rb'), 'public-read-write');
+            $upload = $s3Client->upload($bucket, $dir .$date.'_'.$fileName, fopen($filePath, 'rb'), 'public-read-write');
             \Cake\Log\Log::debug("Aws url of uploaded image  : " . $upload['ObjectURL']);
             return $upload['ObjectURL'];
         } catch (S3Exception $e) {

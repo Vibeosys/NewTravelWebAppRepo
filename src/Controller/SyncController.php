@@ -108,10 +108,10 @@ class SyncController extends ApiController {
      public function imagesEntry($userId, $json,$opration) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
+        \Cake\Log\Log::debug("New image enrty in sync table json : ".$json);
         foreach ($allUser as $user) {
-            \Cake\Log\Log::debug("New image enrty in sync table json : ".$json);
           if($user->userId != $userId){
-                $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $opration);
+                $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $opration = 'Insert');
           }
         }
     }

@@ -60,7 +60,7 @@ $this->layout = false;
                         <!-- User Account -->
                         <li class="dropdown user user-menu">
                             <a href="loginform/index">
-                                <img src="../NewTravelWebAppRepo/webroot/img/user.png" class="user-image" alt="User Image">
+                                <img src="../webroot/img/user.png" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Sign Off</span>
                             </a>
                         </li>      

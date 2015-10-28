@@ -12,7 +12,7 @@ namespace App\DTO;
  * @author niteen
  */
 class ClsDestinationDto {
-    public $destid;
+    public $destId;
     public $destName;
     public $lat;
     public $long;
@@ -20,8 +20,8 @@ class ClsDestinationDto {
     public $createdDate;
     public $updatedDate;
 
-    public function __construct($destId,$destName,$lat,$long,$active,$createdDate,$updatedDate) {
-        $this->destid = $destId;
+    public function __construct($destId,$destName,$lat,$long,$active,$createdDate = null,$updatedDate = null) {
+        $this->destId = $destId;
         $this->destName = $destName;
         $this->lat = $lat;
         $this->long = $long;

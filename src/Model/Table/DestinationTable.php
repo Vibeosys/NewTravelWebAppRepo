@@ -38,7 +38,7 @@ class DestinationTable extends Table {
         foreach ($rows as $row) {
             if ($row->Active) {
                 $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, 
-                        $row->Lat, $row->Long, $row->Active, $row->CraetedDate, $row->UpdatedDate);
+                        $row->Latitude, $row->Longitude, $row->Active);
                 $allDest[$i] = $destDto;
                 $i++;
             }
@@ -55,8 +55,8 @@ class DestinationTable extends Table {
             if ($row->Active == 1) {
                 $newDest['DestId'] = $row->DestId;
                 $newDest['DestName'] = $row->DestName;
-                $newDest['Lat'] = $row->Lat;
-                $newDest['Long'] = $row->Long;
+                $newDest['Lat'] = $row->Latitude;
+                $newDest['Long'] = $row->Longitude;
                 $newDest['UpdatedDate'] = $row->UpdatedDate;
             }
         }
@@ -64,21 +64,16 @@ class DestinationTable extends Table {
     }
 
     //Insert New destination (call only from admin)
-    public function InsertDest($name, $lat, $long, $active) {
-        try {
-            $query = $this->connect()->newEntity();
-            $query->DestName = $name;
-            $query->Lat = $lat;
-            $query->Long = $long;
-            $query->Active = $active;
-            $query->CreatedDate = date('Y-m-d H:i:sa');
-            $query->CreatedDate = date('Y-m-d H:i:sa');
-            if ($this->connect()->save($query)) {
-                
-            }
-        } catch (Exception $ex) {
-            echo 'message:' . $ex->getMessage();
-            return FALSE;
+    public function addNewDestiantion($name, $lat, $long, $active) {
+        \Cake\Log\Log::debug("New destination added in list : ". $name . $lat.$long.$active);
+        $dest = $this->connect();
+        $query = $dest->newEntity();
+        $query->DestName = $name;
+        $query->Latitude = $lat;
+        $query->Longitude = $long;
+        $query->Active = $active;
+        if($dest->save($query)){
+            SUCCESS;
         }
     }
     public function getName($destId) {

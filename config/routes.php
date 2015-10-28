@@ -72,17 +72,13 @@ Router::scope('/api/v1', function ($routes) {
 
 //Travel website Endpoints
 Router::scope('/', function ($routes) {
-    //$routes->connect('/', ['controller' => 'LoginForm', 'action' => 'index',]);
+    $routes->connect('login/validate', ['controller' => 'LoginForm', 'action' => 'validate',]);
     $routes->connect('destination/index', ['controller' => 'DestinationForm', 'action' => 'index',]);
+    $routes->connect('destination/add', ['controller' => 'DestinationForm', 'action' => 'add',]);
     $routes->connect('question/list', ['controller' => 'QuestionForm', 'action' => 'index']);
     $routes->connect('configuration/list', ['controller' => 'ConfigurationForm', 'action' => 'index']);
+    
 });
-
-
-
-
-
-
 
 /**
  * Here, we are connecting '/' (base path) to a controller called 'Pages',

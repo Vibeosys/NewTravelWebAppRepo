@@ -23,7 +23,7 @@ $this->layout = false;
     <body class="align">
         <div class="site__container">
             <div class="grid__container">
-                <form action="destination/index" method="POST" class="form form--login">
+                <form action= "login/validate" method="POST" class="form form--login">
                     <div class="form__field">
                         <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
                         <input id="login__username" name="username" type="text" class="form__input" placeholder="Username" required>
