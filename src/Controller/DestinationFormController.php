@@ -9,6 +9,7 @@ namespace App\Controller;
  */
 
 use App\Model\Table;
+use Cake\Network;
 
 /**
  * Description of DestinationFormController
@@ -18,40 +19,60 @@ use App\Model\Table;
 class DestinationFormController extends FormController {
 
     public function index() {
+                
         $destinationTable = new Table\DestinationTable();
         $destinationList = $destinationTable->getDest();
         $this->set(['dest' => $destinationList]);
     }
 
     public function edit() {
+        //$this->autoRender = false;
+        $destinationtable = new Table\DestinationTable();
         if ($this->request->is('post')) {
             $data = $this->request->data;
-
-
-        } else {
-            die('Request error occured');
+            if(key_exists('title', $data)){
+                $status = $this->getActive($data['status']);
+              $result =  $destinationtable->updateDestination($data['destId'], $data['title'], $data['latitude'], $data['longitude'], $status);
+               $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
+            }
+                
+            
+        }
+        if ($this->request->is('get')) {
+            $action = $this->request->query('delete');
+            if($action){
+                $destId = $this->request->query('destId');
+                $destinationtable->deleteDestination($destId);
+                $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
+                return ;
+            }
+            
+            $destId = $this->request->query('destId');
+            
+            \Cake\Log\Log::debug("selected destination id: " . $destId ."and action : ".$action);
+            $destination = $destinationtable->getSingleDestination($destId);
+            $this->set(['destinationEntity' => $destination]);
         }
     }
 
     public function add() {
-         //$this->autoRender = false;
-            \Cake\Log\Log::debug("you are in destination add method");
+
+        \Cake\Log\Log::debug("you are in destination add method");
         if ($this->request->is('post')) {
             $data = $this->request->data;
             $destinationTable = new Table\DestinationTable();
             $status = $this->getActive($data['status']);
-            if($destinationTable->addNewDestiantion($data['tilte'], $data['latitude'], $data['longitude'],$status)){
-             $this->redirect(['controller' => 'DestinationForm','action' => 'index']);   
-            }else{
-                    echo '<script>alert("Unknown Error occured !")</script>';
+            if ($destinationTable->addNewDestiantion($data['tilte'], $data['latitude'], $data['longitude'], $status)) {
+                
+                $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
+            } else {
+                echo '<script>alert("Unknown Error occured !")</script>';
             }
-        } else {
-            die('Request error occured');
         }
     }
-    
+
     private function getActive($status) {
-        if($status == 'on'){
+        if ($status == 'on') {
             return SUCCESS;
         }
         return FAIL;

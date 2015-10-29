@@ -40,7 +40,7 @@ $this->layout = false;
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="loginform/index" class="logo">
+            <a href="../" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
@@ -59,8 +59,8 @@ $this->layout = false;
                     <ul class="nav navbar-nav">
                         <!-- User Account -->
                         <li class="dropdown user user-menu">
-                            <a href="loginform/index">
-                                <img src="../NewTravelWebAppRepo/webroot/img/user.png" class="user-image" alt="User Image">
+                            <a href="../">
+                                <img src="../webroot/img/user.png" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Sign Off</span>
                             </a>
                         </li>      
@@ -81,19 +81,19 @@ $this->layout = false;
                         </a>
                     </li>
                     <li>
-                        <a href="destinationform/index">
+                        <a href="../destination/index">
                             <i class="icon regions"></i> <span>Destinations</span>
                             <em></em>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="questions/index">
+                        <a href="../questions/index">
                             <i class="icon channels"></i>  <span>Questions</span>
                             <em></em>
                         </a>
                     </li>
                     <li>
-                        <a href="configurationform/index">
+                        <a href="../configuration/index">
                             <i class="icon products"></i>  <span>Configurations</span>
                             <em></em>
                         </a>
@@ -111,7 +111,7 @@ $this->layout = false;
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="loginform/index"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Questions</li>
                 </ol>
             </section>

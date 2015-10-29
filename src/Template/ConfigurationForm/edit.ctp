@@ -120,40 +120,41 @@ $this->layout = false;
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <div class="box-header">
-                                <button class="dark-orange add-dest-btn"><span>Add New Configuration</span></button>
-                            </div><!-- /.box-header -->
-                            <div class="box-body show-grid-section">
-                                <table id="destination" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th class="title-width">Key</th>
-                                            <th class="title-width">Value</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if(!empty($configs)){
-                                            $srno = 1;
-                                        foreach ($configs as $config){?>
-                                        <form action="edit"method="get" id ="entity-form">
-                                        <tr>
-                                            <td><?= h($srno) ?></td>
-                                                <td class="title-width">
-                                                <?= h($config->key)?><input name="key" class="hide-text" type="text" value=<?=$config->key?>>
-                                                </td>
-                                                <td class="title-width"><?= h($config->value)?></td><input name="value" class="hide-text" type="text" value=<?=$config->value?>>
-                                        <td> <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> <button name="delete" value="delete" class="light-orange add-delete-btn"><span>Delete</span></button></td>
-                                                 </tr>
-                                        </form>
-                                        <?php $srno++;}}else{echo 'Configuration list is empty';}?>
-                                     
-                                       
-                                    </tbody>
-                                </table>
-                            </div><!-- /.box-body -->
+                            <section class="content content-div show-add-section">
+                                <div class="row">
+                                    <!--Destination Form -->
+                                    <div class="with-border box-header">
+                                        <h3 class="box-title">Edit Configuration</h3>
+                                    </div><!-- /.box-header -->
+                                    <!-- form start -->
+                                    <form class="form-horizontal" action="edit" method="post">
+                                        <?php if(!empty($config)){?>
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="Key" class="col-sm-2 control-label">Key</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="Key" placeholder="Key" value=<?= $config['key']?>>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Value" class="col-sm-2 control-label">Value</label>
+                                                <div class="col-sm-8">
+                                                    <input type="Value" class="form-control" placeholder="Value" value=<?= $config['value']?>>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer" style="margin-left:170px">
+                                            <button type="button" class="light-orange add-cancel-btn">Cancel</button>
+                                            <button type="submit" class="dark-orange add-save-btn">Save Configuration</button>
+                                        </div><!-- /.box-footer -->
+                                        <?php }?>
+                                    </form>
+                                    <!-- /.box -->
+                                    <!-- Destination form elements disabled -->
+                                </div>
+                            </section>
+                            
+                            
                         </div><!-- /.box -->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -166,10 +167,8 @@ $this->layout = false;
             <strong>Copyright &copy; 2015-2016 <a href="#">Application Name</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
-    
     <!-- jQuery 2.1.4 -->
     <?= $this->Html->script('jQuery-2.1.4.min.js')?>
-    <?= $this->Html->script('DestinationScript.js')?>
     <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->script('bootstrap.min.js')?>
     <!-- DataTables -->
@@ -178,10 +177,10 @@ $this->layout = false;
     <!-- SlimScroll -->
     <?= $this->Html->script('jquery.slimscroll.min.js')?>
     <!-- FastClick -->
-    <?= $this->Html->script('fastclick.min.js')?>
+ 
     <?= $this->Html->script('Script.js')?>
     <!--<script src="../../dist/js/app.min.js"></script>-->
     <!-- AdminLTE for demo purposes -->
-    
+    <?= $this->Html->script('DestinationScript.js')?>
 </body>
 </html>

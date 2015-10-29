@@ -46,7 +46,7 @@ class DestinationController extends ApiController{
         {
             $preparedStatement.= DEST_INS_QRY;
 
-            $preparedStatement = str_replace('@DestId', $destination->destid, $preparedStatement);
+            $preparedStatement = str_replace('@DestId', $destination->destId, $preparedStatement);
             $preparedStatement = str_replace('@DestName', $destination->destName, $preparedStatement);
             $preparedStatement = str_replace('@Lat', $destination->lat, $preparedStatement);
             $preparedStatement = str_replace('@Long', $destination->long, $preparedStatement);

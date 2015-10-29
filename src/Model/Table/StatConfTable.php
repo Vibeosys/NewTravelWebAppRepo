@@ -25,31 +25,48 @@ class StatConfTable extends Table {
         $rows = $this->connect()->find();
        $i = 0;
         foreach ($rows as $row){
-            if($row->Key != 'AdminUserName' or $row->Key != 'AdminPassword'){
-            $statconfDto = new DTO\ClsStatConfigDto($row->Key, $row->Value);
+            if($row->Active){
+            $statconfDto = new DTO\ClsStatConfigDto($row->ConfigKey, $row->ConfigValue);
             $config[$i] = $statconfDto;
             $i++;
         }}
         return $config;
     }
     
-    public function getCredential() {
-        try{
-            $rows = $this->connect()->find();
-            foreach ($rows as $row){
-                if($row->Key == 'AdminUserName' ){
-                    $un = $row->Value;
-                }elseif ($row->Key == 'AdminPassword') {
-                    $pwd = $row->Value;
-                }
-            }
-            return new DTO\ClsAdminDto($un, $pwd);
-            
-        } catch (Exception $ex) {
-            echo 'Could not connect to database'.$ex->getMaessage();
-        }
-        
+    public function addConfig($key,$value) {
+       try{
+           $entity = $this->connect()->newEntity();
+           $entity->ConfigKey = $key;
+           $entity->ConfigValue = $value;
+           $entity->Updateddate = date('Y-m-d H:i:s');
+           if($this->connect()->save($entity)){
+               
+               return SUCCESS;
+           }
+           return FAIL;
+       } catch (Exception $ex) {
+           echo 'Database Error Occured'.$ex->getMessage();
+       }
         
     }
+    
+    public function deleteConfig($key) {
+      $zero = 0;
+        try{
+           $query = $this->connect()->query();
+           $update = $query->update();
+           $update->set(['Active' => $zero]);
+           $update->where(['ConfigKey =' => $key]);
+           if($update->execute()){
+                 \Cake\Log\Log::debug("config deleted key : ".$key);
+               return SUCCESS;
+           }
+           return FAIL;
+       } catch (Exception $ex) {
+           echo 'Database Error Occured'.$ex->getMessage();
+       }
+    }
+    
+  
     
 }

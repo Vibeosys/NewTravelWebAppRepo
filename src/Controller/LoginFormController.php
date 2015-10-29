@@ -25,9 +25,9 @@ class LoginFormController extends FormController {
         $this->autoRender = false;
         if ($this->request->is('post')) {
             $data = $this->request->data;
-            $credential = $this->getAdminCredential();
-            \Cake\Log\Log::debug("Admin credential from config table : ".$credential->adminUsername);
-            if($data['username'] == $credential->adminUsername and $data['password'] == $credential->adminPassword){
+            $credential = \appconfig::getAdminCredential();
+            \Cake\Log\Log::debug("Admin credential from config table : ".$credential['username']);
+            if($data['username'] == $credential['username'] and $data['password'] == $credential['password']){
                 
                 \Cake\Log\Log::debug("redirect to destiationform controller");
           $this->redirect(['controller' => 'DestinationForm','action' => 'index']);
@@ -38,10 +38,4 @@ class LoginFormController extends FormController {
             die('Request error occured');
         }
     }
-
-    private function getAdminCredential() {
-        $statconftable = new Table\StatConfTable();
-        return $statconftable->getCredential();
-    }
-
 }

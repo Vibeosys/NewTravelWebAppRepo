@@ -344,8 +344,9 @@ $('.edit-btn').on("click", function () {
         $('.show-edit-section').show(1000);
     });
 });
-$('.add-save-btn').on("click", function () {
+$('.add-cancel-btn').on("click", function () {
     $(".show-add-section").hide();
+    $(".show-edit-section").hide();
     $('.show-grid-section').fadeIn(1000, function () {
         $('.add-edit-btn').show();
         $('.show-grid-section').show(1000);

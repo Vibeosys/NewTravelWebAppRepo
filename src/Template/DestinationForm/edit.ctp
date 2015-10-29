@@ -22,7 +22,6 @@ $this->layout = false;
 <!DOCTYPE html>
 <html>
     <head>
-       
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Destination</title>
@@ -54,7 +53,7 @@ $this->layout = false;
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="../" class="logo">
+                <a href= class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>N</span>
                     <!-- logo for regular state and mobile devices -->
@@ -129,7 +128,7 @@ $this->layout = false;
                         <small></small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="loginform/index"><i class="fa fa-dashboard"></i> Home</a></li>                  
+                        <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>                  
                         <li class="active">Destinations</li>
                     </ol>
                 </section>
@@ -137,48 +136,62 @@ $this->layout = false;
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="box"> 
+                            <div class="box">                           
+                                
 <!--  Edit Destination Section -->
-                                <div class="box-header">
-                                    <button class="dark-orange add-dest-btn" onclick="addDest()"><span>Add New Destination</span></button>
-                                </div><!-- /.box-header -->
-                                <div class="box-body show-grid-section">
-                                    <table id="destination" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th class="title-width">Title</th>
-                                                <th class="lat-width">latitude</th>
-                                                <th class="lat-width">longitude</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                        if(!empty($dest)){
-                                        foreach ($dest as $destination){?>
+                                <section class="content content-div show-edit-section">
+                                    <div class="row">
+                                        <!--Destination Form -->
+                                        <div class="with-border box-header">
+
+                                            <h3 class="box-title">Edit Destination</h3>
+                                        </div><!-- /.box-header -->
+                                        <!-- form start -->
                                         
-                                        <form action="edit"method="get" id ="entity-form">
-                                        <tr>
-                                            <td><?= h($destination->destId)?><input name="destId" class="hide-text" type="number" value=<?=$destination->destId?>></td>
-                                            <td class="title-width"><?= h($destination->destName)?>
-                                            <td class="lat-width"><?= h($destination->lat)?></td>
-                                            <td class="lat-width"><?= h($destination->long)?></td>
-                                            <?php if($destination->active){ ?>
-                                            <td>Active</td>
-                                            <td> <button type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> <button name="delete" value="delete" class="light-orange add-delete-btn"><span>Delete</span></button></td>
-                                            <?php }else{ ?>
-                                            <td>Inactive</td>
-                                            <td> <button type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button></td>
-                                            <?php }?>
-                                         </tr>
+                                        <form class="form-horizontal" action="edit" method="POST">
+                                            <div class="box-body"><input name="destId" type="number" class="hide-text" value=<?= $destinationEntity->destId?>>
+                                                <div class="form-group">
+                                                    <label for="Title" class="col-sm-2 control-label">Title</label>
+                                                    <div class="col-sm-8">
+                                                        <input name="title" type="text" class="form-control" id="Title" placeholder="Title" value=<?= $destinationEntity->destName?>>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="latitude" class="col-sm-2 control-label">Latitude</label>
+                                                    <div class="col-sm-8">
+                                                        <input name="latitude" type="text" class="form-control" placeholder="latitude" value=<?= $destinationEntity->lat?>>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="longitude" class="col-sm-2 control-label">Longitude</label>
+                                                    <div class="col-sm-8">
+                                                        <input name="longitude" type="text" class="form-control" placeholder="longitude" value=<?= $destinationEntity->long?>> 
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <?php if($destinationEntity->active){?>
+                                                                <input name="status" type="checkbox" checked> Active  
+                                                                <?php }else{?>
+                                                                <input name="status" type="checkbox"> Active
+                                                                <?php }?>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.box-body -->
+                                            <div class="box-footer" style="margin-left:170px">
+                                                <button name="cancel" type="button" class="light-orange add-cancel-btn">Cancel</button>
+                                                <button name="save" type="submit" class="dark-orange edit-save-btn">Save Destination</button>
+                                            </div><!-- /.box-footer -->
                                         </form>
-                                        <?php }}else{echo 'Destination list is empty';}?>
-                                           
-                                        </tbody>
-                                    </table>
-                                </div><!-- /.box-body -->
+                                        
+                                        <!-- /.box -->
+                                        <!-- Destination form elements disabled -->
+                                    </div>
+                                </section>
                             </div><!-- /.box -->                       
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -203,10 +216,10 @@ $this->layout = false;
         <!-- FastClick -->
 
     <?= $this->Html->script('Script.js')?>
-         <?= $this->Html->script('DestinationScript.js')?>
+            <?= $this->Html->script('DestinationScript.js')?>
  <!--<script src="../../dist/js/app.min.js"></script>-->
         <!-- AdminLTE for demo purposes -->
-   
+    
     </body>
 </html>
 

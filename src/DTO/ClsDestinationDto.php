@@ -17,17 +17,14 @@ class ClsDestinationDto {
     public $lat;
     public $long;
     public $active;
-    public $createdDate;
-    public $updatedDate;
 
-    public function __construct($destId,$destName,$lat,$long,$active,$createdDate = null,$updatedDate = null) {
+    public function __construct($destId,$destName,$lat,$long,$active= null) {
         $this->destId = $destId;
         $this->destName = $destName;
         $this->lat = $lat;
         $this->long = $long;
         $this->active = $active;
-        $this->createdDate = $createdDate;
-        $this->updatedDate = $updatedDate;
+       
         
     }
     

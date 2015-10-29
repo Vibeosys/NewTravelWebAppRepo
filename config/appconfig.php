@@ -32,6 +32,11 @@ class appconfig {
         'version' => '2006-03-01',
         'scheme' => 'http'
     ];
+    
+    private static $adminCredential = [
+        'username' => 'Admin',
+        'password' => 'Admin123'
+    ];
 
     /**
      * 
@@ -57,6 +62,10 @@ class appconfig {
             return "dev.vibeosys.com";
         }
         return "imagedata";
+    }
+    
+    public static function getAdminCredential() {
+        return static::$adminCredential;
     }
     
 }

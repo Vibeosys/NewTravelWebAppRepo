@@ -75,8 +75,11 @@ Router::scope('/', function ($routes) {
     $routes->connect('login/validate', ['controller' => 'LoginForm', 'action' => 'validate',]);
     $routes->connect('destination/index', ['controller' => 'DestinationForm', 'action' => 'index',]);
     $routes->connect('destination/add', ['controller' => 'DestinationForm', 'action' => 'add',]);
-    $routes->connect('question/list', ['controller' => 'QuestionForm', 'action' => 'index']);
-    $routes->connect('configuration/list', ['controller' => 'ConfigurationForm', 'action' => 'index']);
+    $routes->connect('destination/edit', ['controller' => 'DestinationForm', 'action' => 'edit',]);
+    $routes->connect('question/index', ['controller' => 'QuestionForm', 'action' => 'index']);
+    $routes->connect('configuration/index', ['controller' => 'ConfigurationForm', 'action' => 'index']);
+    $routes->connect('configuration/add', ['controller' => 'ConfigurationForm', 'action' => 'add']);
+    $routes->connect('configuration/edit', ['controller' => 'ConfigurationForm', 'action' => 'edit']);
     
 });
 

@@ -47,11 +47,8 @@ class SyncController extends ApiController {
     }
 
     public function destEntry($json,$opration) {
-       
         $UserObj = new UserController;
-       
         $allUser = $UserObj->getAllUser();
-       
         foreach ($allUser as $user) {
        
                 $this->getTableObj()->Insert($user->userId, $json, $this->destTable,$opration);

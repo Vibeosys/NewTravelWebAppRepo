@@ -11,6 +11,7 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\DTO;
+use App\Controller;
 
 /**
  * Description of DestTable
@@ -36,9 +37,8 @@ class DestinationTable extends Table {
         $allDest[] = null;
         $i = 0;
         foreach ($rows as $row) {
-            if ($row->Active) {
-                $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, 
-                        $row->Latitude, $row->Longitude, $row->Active);
+            if (1) {
+                $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Latitude, $row->Longitude, $row->Active);
                 $allDest[$i] = $destDto;
                 $i++;
             }
@@ -47,43 +47,84 @@ class DestinationTable extends Table {
     }
 
     //to get new destination for sync table entry
-    public function newDest($DestId) {
-        $rows = $this->connect()->find()->where(['DestId = ' => $DestId]);
-        $newDest[] = null;
-
+    public function getSingleDestination($destId) {
+        $rows = $this->connect()->find()->where(['DestId = ' => $destId]);
         foreach ($rows as $row) {
-            if ($row->Active == 1) {
-                $newDest['DestId'] = $row->DestId;
-                $newDest['DestName'] = $row->DestName;
-                $newDest['Lat'] = $row->Latitude;
-                $newDest['Long'] = $row->Longitude;
-                $newDest['UpdatedDate'] = $row->UpdatedDate;
-            }
+            $destinationDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Latitude, $row->Longitude, $row->Active);
         }
-        return $newDest;
+        return $destinationDto;
     }
 
     //Insert New destination (call only from admin)
     public function addNewDestiantion($name, $lat, $long, $active) {
-        \Cake\Log\Log::debug("New destination added in list : ". $name . $lat.$long.$active);
+        \Cake\Log\Log::debug("New destination added in list : " . $name . $lat . $long . $active);
         $dest = $this->connect();
         $query = $dest->newEntity();
         $query->DestName = $name;
         $query->Latitude = $lat;
         $query->Longitude = $long;
         $query->Active = $active;
-        if($dest->save($query)){
-            SUCCESS;
+        $query->CreatedDate = date('Y-m-d H-i-s');
+        $query->UpdatedDate = date('Y-m-d H-i-s');
+        if ($dest->save($query)) {
+            $destinationDto = new \App\DTO\ClsDestinationDto($query->DestId, $name, $lat, $long, $active);
+            $this->makeSyncUpdate($active, json_encode($destinationDto), 'Insert');
+            return SUCCESS;
         }
+        return FAIL;
     }
+
     public function getName($destId) {
-        try{
+        try {
             $rows = $this->connect()->find()->where(['DestId = ' => $destId]);
-            foreach ($rows as $row)return $row->DestName;
+            foreach ($rows as $row)
+                return $row->DestName;
         } catch (Exception $ex) {
             echo 'message:' . $ex->getMessage();
         }
-        
+    }
+
+    public function updateDestination($destId, $destName, $lat, $long, $active) {
+        try {
+            $update = $this->connect()->query();
+            $update->update();
+            $update->set(['DestName' => $destName, 'Latitude' => $lat, 'Longitude' => $long, 'Active' => $active, 'UpdatedDate' => date('Y-m-d H-i-s')]);
+            $update->where(['DestId = ' => $destId]);
+            if ($update->execute()) {
+                \Cake\Log\Log::debug("Destination Updated Title : " . $destName);
+                $destinationDto = new \App\DTO\ClsDestinationDto($destId, $destName, $lat, $long, $active);
+                $this->makeSyncUpdate($active, json_encode($destinationDto), 'Update');
+                return SUCCESS;
+            }
+            return FAIL;
+        } catch (Exception $ex) {
+            echo 'Database error occurd ' . $ex->getMessage();
+        }
+    }
+
+    public function deleteDestination($destId) {
+        try {
+            $update = $this->connect()->query();
+            $update->update();
+            $update->set(['Active' => FAIL, 'UpdatedDate' => date('Y-m-d H-i-s')]);
+            $update->where(['DestId = ' => $destId]);
+            if ($update->execute()) {
+                \Cake\Log\Log::debug("Destination Deleted DestId : " . $destId);
+                $destinationDto = $this->getSingleDestination($destId);
+                $this->makeSyncUpdate($active = null, json_encode($destinationDto), 'Update');
+                return SUCCESS;
+            }
+            return FAIL;
+        } catch (Exception $ex) {
+            echo 'Database error occurd ' . $ex->getMessage();
+        }
+    }
+
+    private function makeSyncUpdate($active, $json, $opration) {
+        if ($active or $opration == 'Update') {
+            $syncController = new Controller\SyncController();
+            $syncController->destEntry($json, $opration);
+        }
     }
 
 }
