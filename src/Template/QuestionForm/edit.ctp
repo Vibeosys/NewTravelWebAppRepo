@@ -15,7 +15,7 @@ $this->layout = false;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Configuration</title>
+    <title>Question</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -27,7 +27,7 @@ $this->layout = false;
     <!-- DataTables -->
     <?= $this->Html->css('dataTables.bootstrap.css')?>
     <!-- Theme style -->
-     <?= $this->Html->css('Style.css')?>
+    <?= $this->Html->css('Style.css')?>
      <?= $this->Html->css('All-skins.css')?>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,9 +71,9 @@ $this->layout = false;
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar -->
-            <section class="sidebar">              
+            <section class="sidebar">             
                 <!-- sidebar menu:  -->
-                <ul class="sidebar-menu">                  
+                <ul class="sidebar-menu">                
                     <li>
                         <a href="home">
                             <i class="icon dashboard"></i> <span>Dashboard</span>
@@ -86,13 +86,13 @@ $this->layout = false;
                             <em></em>
                         </a>
                     </li>
-                    <li>
-                        <a href="../question/index">
+                    <li class="active">
+                        <a href="../questions/index">
                             <i class="icon channels"></i>  <span>Questions</span>
                             <em></em>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="../configuration/index">
                             <i class="icon products"></i>  <span>Configurations</span>
                             <em></em>
@@ -107,12 +107,12 @@ $this->layout = false;
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Configuration
+                    Questions
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Configuration</li>
+                    <li class="active">Questions</li>
                 </ol>
             </section>
             <!-- Main content -->
@@ -120,39 +120,49 @@ $this->layout = false;
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <div class="box-header">
-                                <button class="dark-orange add-dest-btn"><span>Add New Configuration</span></button>
-                            </div><!-- /.box-header -->
-                            <div class="box-body show-grid-section">
-                                <table id="destination" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th class="title-width">Key</th>
-                                            <th class="title-width">Value</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if(!empty($configs)){
-                                            $srno = 1;
-                                        foreach ($configs as $config){?>
-                                        <form action="edit"method="get" id ="entity-form">
-                                        <tr>
-                                            <td><?= h($srno) ?></td>
-                                                <td class="title-width">
-                                                <?= h($config->key)?><input name="key" class="hide-text" type="text" value=<?=$config->key?>>
-                                                </td>
-                                                <td class="title-width"><?= h($config->value)?></td><input name="value" class="hide-text" type="text" value=<?=$config->value?>>
-                                        <td> <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> <button name="delete" value="delete" class="light-orange add-delete-btn"><span>Delete</span></button></td>
-                                                 </tr>
-                                        </form>
-                                        <?php $srno++;}}else{echo 'Configuration list is empty';}?>
-                                     
-                                       
-                                    </tbody>
-                                </table>
+                            <section class="content content-div show-add-section">
+                                <div class="row">
+                                    <!--Destination Form -->
+                                    <div class="with-border box-header">
+                                        <h3 class="box-title">Edit Question</h3>
+                                    </div><!-- /.box-header -->
+                                    <!-- form start -->
+                                    <form class="form-horizontal" method="POST" action="add">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="Title" class="col-sm-2 control-label">Title</label>
+                                                <div class="col-sm-8">
+                                                    <input name="questiontext"type="text" class="form-control" id="Title" placeholder="Title">
+                                                </div>
+                                            </div>
+                                            <div id="options">
+                                            <div class="form-group" id="options1">
+                                                <label for="Options" class="col-sm-2 control-label">Option 1</label>
+                                                <div class="col-sm-8">
+                                                    <input name="option1" type="text" class="form-control" placeholder="Option1">
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input name="status" type="checkbox" value="0"> Active
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer" style="margin-left:170px">
+                                            <button type="button" id="add-option" class="dark-orange" >Add Options</button>
+                                            <button type="submit" class="light-orange add-save-btn">Cancel</button>
+                                            <button type="submit" class="dark-orange add-save-btn">Save Question</button>
+                                        </div><!-- /.box-footer -->
+                                    </form>
+                                    <!-- /.box -->
+                                    <!-- Destination form elements disabled -->
+                                </div>
+                            </section>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->
@@ -166,11 +176,10 @@ $this->layout = false;
             <strong>Copyright &copy; 2015-2016 <a href="#">Application Name</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
-    
     <!-- jQuery 2.1.4 -->
     <?= $this->Html->script('jQuery-2.1.4.min.js')?>
-    <?= $this->Html->script('DestinationScript.js')?>
     <!-- Bootstrap 3.3.5 -->
+    <?= $this->Html->script('DestinationScript.js')?>
     <?= $this->Html->script('bootstrap.min.js')?>
     <!-- DataTables -->
     <?= $this->Html->script('jquery.dataTables.js')?>

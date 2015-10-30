@@ -40,7 +40,7 @@ $this->layout = false;
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="../" class="logo">
+            <a href="home" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
@@ -75,7 +75,7 @@ $this->layout = false;
                 <!-- sidebar menu:  -->
                 <ul class="sidebar-menu">                
                     <li>
-                        <a href="#">
+                        <a href="home">
                             <i class="icon dashboard"></i> <span>Dashboard</span>
                             <em></em>
                         </a>
@@ -111,7 +111,7 @@ $this->layout = false;
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Questions</li>
                 </ol>
             </section>
@@ -120,52 +120,13 @@ $this->layout = false;
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                            <section class="content content-div show-add-section">
-                                <div class="row">
-                                    <!--Destination Form -->
-                                    <div class="with-border box-header">
-                                        <h3 class="box-title">Add New Question</h3>
-                                    </div><!-- /.box-header -->
-                                    <!-- form start -->
-                                    <form class="form-horizontal">
-                                        <div class="box-body">
-                                            <div class="form-group">
-                                                <label for="Title" class="col-sm-2 control-label">Title</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="Title" placeholder="Title">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="Options" class="col-sm-2 control-label">Options</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" placeholder="Options">
-                                                </div>
-                                            </div>                                          
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox"> Active
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /.box-body -->
-                                        <div class="box-footer" style="margin-left:170px">
-                                            <button type="submit" class="light-orange add-save-btn">Cancel</button>
-                                            <button type="submit" class="dark-orange add-save-btn">Save Question</button>
-                                        </div><!-- /.box-footer -->
-                                    </form>
-                                    <!-- /.box -->
-                                    <!-- Destination form elements disabled -->
-                                </div>
-                            </section>
                             <div class="box-header">
-                                <button class="dark-orange add-edit-btn"><span>Add New Question</span></button>
+                                <button class="dark-orange add-dest-btn"><span>Add New Question</span></button>
                             </div><!-- /.box-header -->
                             <div class="box-body show-grid-section">
                                 <table id="destination" class="table table-bordered table-hover">
                                     <thead>
+                                       
                                         <tr>
                                             <th>ID</th>
                                             <th class="title-width">Title</th>
@@ -175,357 +136,26 @@ $this->layout = false;
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if(!empty($questions)){
+                                        foreach ($questions as $question){?>
+                                    <form action="edit" method="get">
                                         <tr>
-                                            <td>344</td>
+                                            <td><?=h($question->questionId)?><input name="questionId" class="hide-text" type="number" value=<?=$question->questionId?>></td>
                                             <td class="title-width">
-                                                Best things to see and do in Pune?
+                                                <?=h($question->questionText)?><textarea name="questionText" class="hide-text"><?=$question->questionText?></textarea>
                                             </td>
-                                            <td class="lat-width">18.5203° N</td>                                           
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
+                                            <td class="lat-width"><?=h($question->options)?></td>
+                                            <?php if($question->active){?>
+                                            <td>Active</td><input class="hide-text" name="status" type="number" value=0>
+                                            <td> <button type="submit" name="edit" value="edit" class="dark-orange add-edit-btn"><span> Edit</span></button> <button type="submit" name="delete" value="delete" class="light-orange"><span>Delete</span></button></td>
+                                            <?php }else{?>
+                                            <td>Inactive</td><input class="hide-text" name="status" type="number" value=1>
+                                            <td> <button type="submit" name="edit" value="edit" class="dark-orange add-edit-btn"><span> Edit</span></button></td>
+                                            <?php }?>
                                         </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>                                          
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>                                           
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>344</td>
-                                            <td class="title-width">
-                                                Best things to see and do in Pune?
-                                            </td>
-                                            <td class="lat-width">18.5203° N</td>
-                                            <td>Active</td>
-                                            <td> <button class="dark-orange add-edit-btn"><span> Edit</span></button> <button class="light-orange"><span>Delete</span></button></td>
-                                        </tr>
+                                    </form>
+                                        <?php }}?>
+                                       
                                     </tbody>
                                 </table>
                             </div><!-- /.box-body -->
@@ -543,6 +173,7 @@ $this->layout = false;
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <?= $this->Html->script('jQuery-2.1.4.min.js')?>
+    <?= $this->Html->script('DestinationScript.js')?>
     <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->script('bootstrap.min.js')?>
     <!-- DataTables -->
@@ -555,6 +186,6 @@ $this->layout = false;
     <?= $this->Html->script('Script.js')?>
     <!--<script src="../../dist/js/app.min.js"></script>-->
     <!-- AdminLTE for demo purposes -->
-    <?= $this->Html->script('Common.js')?>
+    
 </body>
 </html>

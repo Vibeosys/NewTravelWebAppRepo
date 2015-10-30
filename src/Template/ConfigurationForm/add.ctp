@@ -40,7 +40,7 @@ $this->layout = false;
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="../" class="logo">
+            <a href="home" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
@@ -75,7 +75,7 @@ $this->layout = false;
                 <!-- sidebar menu:  -->
                 <ul class="sidebar-menu">                  
                     <li>
-                        <a href="#">
+                        <a href="home">
                             <i class="icon dashboard"></i> <span>Dashboard</span>
                             <em></em>
                         </a>
@@ -111,7 +111,7 @@ $this->layout = false;
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Configuration</li>
                 </ol>
             </section>

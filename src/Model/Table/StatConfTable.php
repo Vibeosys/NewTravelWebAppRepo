@@ -8,6 +8,7 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\DTO;
+use App\Controller;
 /**
  * Description of Stat_ConfTable
  *
@@ -38,9 +39,11 @@ class StatConfTable extends Table {
            $entity = $this->connect()->newEntity();
            $entity->ConfigKey = $key;
            $entity->ConfigValue = $value;
-           $entity->Updateddate = date('Y-m-d H:i:s');
+           $entity->UpdatedDate = date('Y-m-d H:i:s');
            if($this->connect()->save($entity)){
-               
+               $statConfDto = new DTO\ClsStatConfigDto($key, $value);
+               $syncController = new Controller\SyncController();
+               $syncController->statConfEntry(json_encode($statConfDto), 'Insert');
                return SUCCESS;
            }
            return FAIL;
@@ -51,11 +54,10 @@ class StatConfTable extends Table {
     }
     
     public function deleteConfig($key) {
-      $zero = 0;
         try{
            $query = $this->connect()->query();
            $update = $query->update();
-           $update->set(['Active' => $zero]);
+           $update->set(['Active' => 0]);
            $update->where(['ConfigKey =' => $key]);
            if($update->execute()){
                  \Cake\Log\Log::debug("config deleted key : ".$key);
@@ -65,6 +67,24 @@ class StatConfTable extends Table {
        } catch (Exception $ex) {
            echo 'Database Error Occured'.$ex->getMessage();
        }
+    }
+    
+    public function updateConfig($key, $value) {
+         try{
+           $query = $this->connect()->query();
+           $update = $query->update();
+           $update->set(['ConfigValue' => $value]);
+           $update->where(['ConfigKey =' => $key]);
+           if($update->execute()){
+                 \Cake\Log\Log::debug("config updated key : ".$key);
+               return SUCCESS;
+           }
+           return FAIL;
+       } catch (Exception $ex) {
+           echo 'Database Error Occured'.$ex->getMessage();
+       }
+        
+        
     }
     
   

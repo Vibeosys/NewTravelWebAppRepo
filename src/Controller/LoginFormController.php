@@ -30,12 +30,16 @@ class LoginFormController extends FormController {
             if($data['username'] == $credential['username'] and $data['password'] == $credential['password']){
                 
                 \Cake\Log\Log::debug("redirect to destiationform controller");
-          $this->redirect(['controller' => 'DestinationForm','action' => 'index']);
+          $this->redirect(['controller' => 'LoginForm','action' => 'home']);
             }else{
                $this->redirect(['action' => 'index']); 
             }
         } else {
             die('Request error occured');
         }
+    }
+    
+    public function home() {
+        
     }
 }

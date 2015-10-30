@@ -27,11 +27,9 @@ class QuestionTable extends Table{
         $i = 0;
         foreach($rows as $row)
         {
-            if($row->Active == 1){
-            $QuestionDto = new DTO\ClsQuestionDto($row->QuestionId, $row->QuestionText);
-            $allQuestion[$i] = $QuestionDto;
+            $questionDto = new DTO\ClsQuestionDto($row->QuestionId, $row->QuestionText, $row->Active);
+            $allQuestion[$i] = $questionDto;
             $i++;
-            }
         }
         return $allQuestion;
     }
@@ -46,5 +44,43 @@ class QuestionTable extends Table{
             }
         }
         return $newQuestion;
+    }
+    
+    public function add($questionText,$status) {
+        try{
+            \Cake\Log\Log::debug("question added with active : ".$status);
+            $entity = $this->connect()->newEntity();
+            $entity->QuestionText = $questionText;
+            $entity->Active  = $status;
+            $entity->CreatedDate = date('Y-n-d H:i:s');
+            $entity->UpdatedDate = date('Y-n-d H:i:s');
+            if($this->connect()->save($entity)){
+                $questionDto = new DTO\ClsQuestionDto($entity->QuestionId, $questionText);
+                 $syncController = new Controller\SyncController();
+               $syncController->questionEntry(json_encode($questionDto), 'Insert');
+                return $entity->QuestionId;
+            }
+            return FAIL;
+        } catch (Exception $ex) {
+                echo 'Database error occured'.$ex->getMessage();
+                
+        }
+        
+    }
+    
+    public function deleteQuestion($questionId) {
+        
+          try{
+              $update = $this->connect()->query()->update();
+              $update->set(['Active ' => 0]);
+              $update->where(['QuestionId =' => $questionId]);
+            if($update->execute()){
+                return SUCCESS;
+            }
+            return FAIL;
+        } catch (Exception $ex) {
+                echo 'Database error occured'.$ex->getMessage();
+                
+        }
     }
 }

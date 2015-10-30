@@ -61,7 +61,7 @@ class DestinationFormController extends FormController {
         if ($this->request->is('post')) {
             $data = $this->request->data;
             $destinationTable = new Table\DestinationTable();
-            $status = $this->getActive($data['status']);
+            $status = parent::getActive($data['status']);
             if ($destinationTable->addNewDestiantion($data['tilte'], $data['latitude'], $data['longitude'], $status)) {
                 
                 $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
@@ -71,11 +71,6 @@ class DestinationFormController extends FormController {
         }
     }
 
-    private function getActive($status) {
-        if ($status == 'on') {
-            return SUCCESS;
-        }
-        return FAIL;
-    }
+    
 
 }

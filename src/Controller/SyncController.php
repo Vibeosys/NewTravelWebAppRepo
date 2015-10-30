@@ -27,6 +27,8 @@ class SyncController extends ApiController {
     public $likeTable = "like";
     public $commentTable = "comment";
     public $imageTable = "images";
+    public $optionTable = "options";
+    public $statConfTable = "stat_conf";
 
     public function connect() {
         return TableRegistry::get('sync');
@@ -67,6 +69,26 @@ class SyncController extends ApiController {
         }
     }
     
+    public function optionEntry($json,$opration) {
+        $UserObj = new UserController;
+        $allUser = $UserObj->getAllUser();
+        $i = 0;
+        foreach ($allUser as $user) {
+          
+                $this->getTableObj()->Insert($user->userId, $json, $this->optionTable,$opration);
+          
+        }
+    }
+    public function statConfEntry($json,$opration) {
+        $UserObj = new UserController;
+        $allUser = $UserObj->getAllUser();
+        $i = 0;
+        foreach ($allUser as $user) {
+          
+                $this->getTableObj()->Insert($user->userId, $json, $this->statConfTable,$opration);
+          
+        }
+    }
     
 
     public function answerEntry($userId,$json, $opration) {

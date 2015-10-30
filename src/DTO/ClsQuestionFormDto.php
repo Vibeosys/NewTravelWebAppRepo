@@ -11,18 +11,20 @@ namespace App\DTO;
  *
  * @author niteen
  */
-class ClsQuestionDto {
+class ClsQuestionFormDto {
     
     public $questionId;
     public $questionText;
-    public  $active;
+    public $options;
+    public $active;
 
-
-    public function __construct($questionId,$questionText,$active = null) {
+    public function __construct($questionId,$questionText,$options,$active) {
         
         $this->questionId = $questionId;
         $this->questionText = $questionText;
+        $this->options = $options;
         $this->active = $active;
+        
     }
     
 }

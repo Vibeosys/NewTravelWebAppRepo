@@ -17,6 +17,13 @@ class FormController extends AppController{
         $this->response->type('html');
     }
     
+    public static function getActive($status) {
+        if ($status == 'on') {
+            return SUCCESS;
+        }
+        return FAIL;
+    }
+    
 
     
 }

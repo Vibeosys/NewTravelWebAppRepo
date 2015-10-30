@@ -17,7 +17,7 @@ class ClsOptionsDto {
     public  $optionText;
     public  $questionId;
     
-    public function __construct($optionId,$optiontext,$questionId) {
+    public function __construct($optionId,$optiontext,$questionId = null) {
         
         $this->optionId = $optionId;
         $this->optionText = $optiontext;

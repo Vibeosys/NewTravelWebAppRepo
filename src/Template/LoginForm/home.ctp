@@ -25,7 +25,7 @@ $this->layout = false;
        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Destination</title>
+        <title>HOME</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
@@ -54,7 +54,7 @@ $this->layout = false;
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="home" class="logo">
+                <a href="" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>N</span>
                     <!-- logo for regular state and mobile devices -->
@@ -75,7 +75,7 @@ $this->layout = false;
                             <li class="dropdown user user-menu">
                                 <a href="../">                              
 
-                                    <img src="../webroot/img/user.png" class="user-image" alt="User Image">
+                                    <img src="webroot/img/user.png" class="user-image" alt="User Image">
                                     <span class="hidden-xs">Sign Off</span>                             
                                 </a>                        
                             </li>                      
@@ -92,26 +92,26 @@ $this->layout = false;
                     <!-- sidebar menu:  -->
                     <ul class="sidebar-menu">
                         <!--<li class="header">MAIN NAVIGATION</li>-->                  
-                        <li>
+                        <li class="active">
                             <a href="home">
                                 <i class="icon dashboard"></i> <span>Dashboard</span>
                                 <em></em>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="../destination/index">
+                        <li>
+                            <a href="destination/index">
                                 <i class="icon regions"></i> <span>Destinations</span>
                                 <em></em>
                             </a>
                         </li>
                         <li>
-                            <a href="../question/index">
+                            <a href="question/index">
                                 <i class="icon channels"></i>  <span>Questions</span>
                                 <em></em>
                             </a>
                         </li>
                         <li>
-                            <a href="../configuration/index">
+                            <a href="configuration/index">
                                 <i class="icon products"></i>  <span>Configurations</span> 
                                 <em></em>
                             </a>
@@ -125,12 +125,12 @@ $this->layout = false;
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Destinations
+                        HOME
                         <small></small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>                  
-                        <li class="active">Destinations</li>
+                        
                     </ol>
                 </section>
                 <!-- Main content -->
@@ -138,50 +138,11 @@ $this->layout = false;
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box"> 
-<!--  Edit Destination Section -->
-                                <div class="box-header">
-                                    <button class="dark-orange add-dest-btn" onclick="addDest()"><span>Add New Destination</span></button>
-                                </div><!-- /.box-header -->
-                                <div class="box-body show-grid-section">
-                                    <table id="destination" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th class="title-width">Title</th>
-                                                <th class="lat-width">latitude</th>
-                                                <th class="lat-width">longitude</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                        if(!empty($dest)){
-                                        foreach ($dest as $destination){?>
-                                        
-                                        <form action="edit"method="get" id ="entity-form">
-                                        <tr>
-                                            <td><?= h($destination->destId)?><input name="destId" class="hide-text" type="number" value=<?=$destination->destId?>></td>
-                                            <td class="title-width"><?= h($destination->destName)?>
-                                            <td class="lat-width"><?= h($destination->lat)?></td>
-                                            <td class="lat-width"><?= h($destination->long)?></td>
-                                            <?php if($destination->active){ ?>
-                                            <td>Active</td>
-                                            <td> <button type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> <button name="delete" value="delete" class="light-orange add-delete-btn"><span>Delete</span></button></td>
-                                            <?php }else{ ?>
-                                            <td>Inactive</td>
-                                            <td> <button type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button></td>
-                                            <?php }?>
-                                         </tr>
-                                        </form>
-                                        <?php }}else{echo 'Destination list is empty';}?>
-                                           
-                                        </tbody>
-                                    </table>
+                                <!--  Edit Destination Section --><h1 style="color: blue;position: relative;left: 40%">WelCome to Admin Panel</h1>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->                       
                         </div><!-- /.col -->
-                    </div><!-- /.row -->
+                    
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
             <footer class="main-footer">

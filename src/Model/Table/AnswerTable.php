@@ -55,6 +55,7 @@ class AnswerTable extends Table {
             \Cake\Log\Log::debug("Sync Entry for Answer");
             return SUCCESS;
         }
+        return FAIL;
     }
 
 }

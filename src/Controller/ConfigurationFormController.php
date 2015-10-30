@@ -45,12 +45,13 @@ class ConfigurationFormController extends FormController{
                 $this->redirect(['controller' => 'ConfigurationForm', 'action' => 'index']);
             }
             
+        }elseif ($this->request->is('post')) {
+            $data = $this->request->data;
+            $statconfTable->updateConfig($data['key'], $data['value']);
+             $this->redirect(['controller' => 'ConfigurationForm', 'action' => 'index']);
         }  else {
             die('Unknown request');    
         }
-        
-        
-        
     }
     
     public function delete() {
