@@ -53,7 +53,7 @@ $this->layout = false;
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="home" class="logo">
+                <a href="../home" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>N</span>
                     <!-- logo for regular state and mobile devices -->
@@ -92,7 +92,7 @@ $this->layout = false;
                     <ul class="sidebar-menu">
                         <!--<li class="header">MAIN NAVIGATION</li>-->                  
                         <li>
-                            <a href="home">
+                            <a href="../home">
                                 <i class="icon dashboard"></i> <span>Dashboard</span>
                                 <em></em>
                             </a>
@@ -128,7 +128,7 @@ $this->layout = false;
                         <small></small>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>                  
+                        <li><a href="../home"><i class="fa fa-dashboard"></i> Home</a></li>                  
                         <li class="active">Destinations</li>
                     </ol>
                 </section>
@@ -153,19 +153,19 @@ $this->layout = false;
                                                 <div class="form-group">
                                                     <label for="Title" class="col-sm-2 control-label">Title</label>
                                                     <div class="col-sm-8">
-                                                        <input name="tilte" type="text" class="form-control" id="Title" placeholder="Title">
+                                                        <input name="tilte" type="text" class="form-control" id="Title" placeholder="Title" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="latitude" class="col-sm-2 control-label">Latitude</label>
                                                     <div class="col-sm-8">
-                                                        <input name="latitude" type="text" class="form-control" placeholder="latitude">
+                                                        <input name="latitude" type="text" class="form-control" placeholder="latitude" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="longitude" class="col-sm-2 control-label">Longitude</label>
                                                     <div class="col-sm-8">
-                                                        <input name="longitude" type="text" class="form-control" placeholder="longitude">
+                                                        <input name="longitude" type="text" class="form-control" placeholder="longitude" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

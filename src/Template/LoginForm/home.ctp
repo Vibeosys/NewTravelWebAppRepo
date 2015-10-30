@@ -73,8 +73,7 @@ $this->layout = false;
                         <ul class="nav navbar-nav">                      
                             <!-- User Account -->
                             <li class="dropdown user user-menu">
-                                <a href="../">                              
-
+                                <a  id="sign-out-span">                              
                                     <img src="webroot/img/user.png" class="user-image" alt="User Image">
                                     <span class="hidden-xs">Sign Off</span>                             
                                 </a>                        
@@ -138,7 +137,8 @@ $this->layout = false;
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box"> 
-                                <!--  Edit Destination Section --><h1 style="color: blue;position: relative;left: 40%">WelCome to Admin Panel</h1>
+                                <!--  Edit Destination Section --><h1 style="color: blue;position: relative;left: 40%">WelCome to Official Travel Website</h1>
+                                <div> <h2 style="color: black;position: relative;left: 40%;top: 40%">Admin Panel</h2>  </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->                       
                         </div><!-- /.col -->
@@ -164,7 +164,7 @@ $this->layout = false;
         <!-- FastClick -->
 
     <?= $this->Html->script('Script.js')?>
-         <?= $this->Html->script('DestinationScript.js')?>
+    <?= $this->Html->script('HomeScript.js')?>     
  <!--<script src="../../dist/js/app.min.js"></script>-->
         <!-- AdminLTE for demo purposes -->
    

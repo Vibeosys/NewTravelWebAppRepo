@@ -37,7 +37,7 @@ CREATE TABLE [options]
 'QuestionId' INTEGER NOT NULL);
 
 CREATE TABLE [stat_conf] 
-('Key' TEXT NOT NULL PRIMARY KEY,
+('Key' TEXT NOT NULL,
  'Value' TEXT NOT NULL);
 
 CREATE TABLE [user] 

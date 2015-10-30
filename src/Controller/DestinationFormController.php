@@ -63,7 +63,7 @@ class DestinationFormController extends FormController {
             $destinationTable = new Table\DestinationTable();
             $status = parent::getActive($data['status']);
             if ($destinationTable->addNewDestiantion($data['tilte'], $data['latitude'], $data['longitude'], $status)) {
-                
+                echo '<script>alert("Destination added !")</script>';
                 $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
             } else {
                 echo '<script>alert("Unknown Error occured !")</script>';
