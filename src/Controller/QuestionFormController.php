@@ -24,12 +24,15 @@ class QuestionFormController extends FormController {
         foreach ($questions as $question) {
             $optionTable = new Table\OptionsTable();
             $options = $optionTable->getOptions($question->questionId);
+            if(empty($options)){
+                continue;
+            }
             $count = count($options);
             $str = '';
             foreach ($options as $option) {
                 $str .= $option->optionText;
                 if (--$count) {
-                    $str .= ' ,';
+                    $str .= ',';
                 }
             }
             $questionFormDto = new \App\DTO\ClsQuestionFormDto($question->questionId, $question->questionText, $str, $question->active);
@@ -40,39 +43,57 @@ class QuestionFormController extends FormController {
     }
 
     public function add() {
-        $data = $this->request->data;
-        if ($this->request->is('post') and $data['questiontext'] and $data['option1']) {
-            $status = 0;
-            $this->autoRender = false;
-            $count = count($data);
 
+        $data = $this->request->data;
+
+        if ($this->request->is('post') and $data['questiontext'] and $data['options']) {
+            $this->autoRender = false;
+            $status = 0;
+            $option = explode(",", $data['options']);
             if (key_exists('status', $data)) {
                 //\Cake\Log\Log::debug("question added : ".$data)
-                $questionId = $this->addQuestion($data['questiontext'], $status);
                 $status = parent::getActive($data['status']);
-                $optionCount = $count - 2;
-                $this->addOption($optionCount, $data, $questionId);
-                $this->redirect(['controller' => 'QuestionForm', 'action' => 'index']);
-            } else {
                 $questionId = $this->addQuestion($data['questiontext'], $status);
-                $optionCount = $count - 1;
-                $this->addOption($optionCount, $data, $questionId);
+                $this->addOption($this->filterOption($option), $questionId);
                 $this->redirect(['controller' => 'QuestionForm', 'action' => 'index']);
+//            } else {
+//                $questionId = $this->addQuestion($data['questiontext'], $status);
+//                $this->addOption($option, $questionId);
+//                $this->redirect(['controller' => 'QuestionForm', 'action' => 'index']);
             }
         }
     }
 
     public function edit() {
-        //$this->autoRender = false;
-        if ($this->request->is('get')) {
-            $query = $this->request->query;
-            if (key_exists('edit', $query)) {
-                $optionTable = new Table\OptionsTable();
-                $options = $optionTable->getOptions($query['questionId']);
-                $this->set(['questionId' => $query['questionText'],'questionText' => $query['questionText'],'options' => $options, 'status' => $query['status']]);
-            }  else {
-                $questionTable = new Table\QuestionTable();
+        // $this->autoRender = false;
+//        if ($this->request->is('get')) {
+//            $query = $this->request->query;
+//            if (key_exists('edit', $query)) {
+//                $this->set(['questionId' => $query['questionId'],'questionText' => $query['questionText'],'options' => $query['options'], 'status' => $query['status']]);
+//            }  else {
+//                $questionTable = new Table\QuestionTable();
+//                $questionTable->deleteQuestion($query['questionId']);
+//                $this->redirect(['controller' => 'QuestionForm', 'action' => 'index']);
+//            }
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $questionTable = new Table\QuestionTable();
+            $optionsTable = new Table\OptionsTable();
+            if (key_exists('edit', $data)) {
+                $text = base64_encode($data['questionText']);
+                //print_r($data);
+
+                $this->set(['questionId' => $data['questionId'], 'questionText' => $text, 'options' => $data['options'], 'status' => $data['status']]);
+            } elseif (key_exists('delete', $data)) {
+
                 $questionTable->deleteQuestion($query['questionId']);
+                $this->redirect(['controller' => 'QuestionForm', 'action' => 'index']);
+            } elseif (key_exists('save', $data)) {
+                //$this->autoRender = false;
+                $updatedOption = explode(',', $data['options']);
+                $status = parent::getActive($data['status']);
+                $questionTable->update($data['questionId'], $data['questiontext'], $status);
+                $optionsTable->update($data['questionId'], $this->filterOption($updatedOption));
                 $this->redirect(['controller' => 'QuestionForm', 'action' => 'index']);
             }
         }
@@ -87,15 +108,18 @@ class QuestionFormController extends FormController {
         return $questionTable->add($questionText, $status);
     }
 
-    private function addOption($count, $data, $questionId) {
+    private function addOption($option, $questionId) {
         $optionsTable = new Table\OptionsTable();
-        $id = 1;
-        while ($count) {
-            $key = 'option' . $id;
-            $optionsTable->add($data[$key], $questionId);
-            $count--;
-            $id++;
+        foreach ($option as $key => $value) {
+            $optionsTable->add($value, $questionId);
         }
+    }
+    
+    private function filterOption($option) {
+        foreach ($option as $k => $v){
+            $filteredOption[$k] = ucfirst($v);
+        }
+        return $filteredOption;
     }
 
 }

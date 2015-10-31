@@ -44,7 +44,7 @@ $this->layout = false;
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Logo</b></span>
+                <span class="logo-lg"><b></b></span>
             </a>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -138,18 +138,20 @@ $this->layout = false;
                                     <tbody>
                                         <?php if(!empty($questions)){
                                         foreach ($questions as $question){?>
-                                    <form action="edit" method="get">
+                                    <form action="edit" method="post">
                                         <tr>
                                             <td><?=h($question->questionId)?><input name="questionId" class="hide-text" type="number" value=<?=$question->questionId?>></td>
                                             <td class="title-width">
                                                 <?=h($question->questionText)?><textarea name="questionText" class="hide-text"><?=$question->questionText?></textarea>
                                             </td>
-                                            <td class="lat-width"><?=h($question->options)?></td>
+                                            <td class="lat-width">
+                                             <?=h($question->options)?><input type="text" class="hide-text" name="options" data-role="tagsinput" value= <?=h($question->options)?>>
+                                            </td>
                                             <?php if($question->active){?>
-                                            <td>Active</td><input class="hide-text" name="status" type="number" value=0>
+                                            <td>Active</td><input class="hide-text" name="status" type="number" value=1>
                                             <td> <button type="submit" name="edit" value="edit" class="dark-orange add-edit-btn"><span> Edit</span></button> <button type="submit" name="delete" value="delete" class="light-orange"><span>Delete</span></button></td>
                                             <?php }else{?>
-                                            <td>Inactive</td><input class="hide-text" name="status" type="number" value=1>
+                                            <td>Inactive</td><input class="hide-text" name="status" type="number" value=0>
                                             <td> <button type="submit" name="edit" value="edit" class="dark-orange add-edit-btn"><span> Edit</span></button></td>
                                             <?php }?>
                                         </tr>

@@ -145,7 +145,7 @@ $this->layout = false;
                                                 <?= h($config->key)?><input name="key" class="hide-text" type="text" value=<?=$config->key?>>
                                                 </td>
                                                 <td class="title-width"><?= h($config->value)?></td><input name="value" class="hide-text" type="text" value=<?=$config->value?>>
-                                        <td> <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> <button name="delete" value="delete" class="light-orange add-delete-btn"><span>Delete</span></button></td>
+                                        <td> <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> </td>
                                                  </tr>
                                         </form>
                                         <?php $srno++;}}else{echo 'Configuration list is empty';}?>

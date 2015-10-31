@@ -21,11 +21,12 @@ $this->layout = false;
     <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->css('bootstrap.min.css')?>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <?= $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')?>
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <?= $this->Html->css('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')?>
     <!-- DataTables -->
     <?= $this->Html->css('dataTables.bootstrap.css')?>
+    <?= $this->Html->css('bootstrap-tagsinput.css')?>
     <!-- Theme style -->
     <?= $this->Html->css('Style.css')?>
      <?= $this->Html->css('All-skins.css')?>
@@ -44,7 +45,7 @@ $this->layout = false;
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>N</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Logo</b></span>
+                <span class="logo-lg"><b>  </b></span>
             </a>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -127,38 +128,45 @@ $this->layout = false;
                                         <h3 class="box-title">Edit Question</h3>
                                     </div><!-- /.box-header -->
                                     <!-- form start -->
-                                    <form class="form-horizontal" method="POST" action="add">
+                                    <?php if(!empty($questionId)){?>
+                                      
+                                    <form class="form-horizontal" method="post" action="edit">
                                         <div class="box-body">
-                                            <div class="form-group">
+                                            <div class="form-group"><input name="questionId" type="number" class="hide-text" value=<?= $questionId?> >
                                                 <label for="Title" class="col-sm-2 control-label">Title</label>
                                                 <div class="col-sm-8">
-                                                    <input name="questiontext"type="text" class="form-control" id="Title" placeholder="Title">
+                                                    
+                                                    <textarea rows=1 name="questiontext" class="form-control" id="Title" placeholder="Title" required><?= base64_decode($questionText)?></textarea>
+                                                    
                                                 </div>
                                             </div>
-                                            <div id="options">
-                                            <div class="form-group" id="options1">
-                                                <label for="Options" class="col-sm-2 control-label">Option 1</label>
+                                           
+                                            <div class="form-group" id="options">
+                                                <label for="Options" class="col-sm-2 control-label">Option</label>
                                                 <div class="col-sm-8">
-                                                    <input name="option1" type="text" class="form-control" placeholder="Option1">
+                                                   <!-- <input type="text" class="form-control"  value="" data-role="tagsinput" /> -->
+                                                    <input name="options" type="text" class="form-control" data-role="tagsinput" value=<?= h($options)?> />
                                                 </div>
                                             </div>
-                                            </div>
+                                            
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <div class="checkbox">
-                                                        <label>
-                                                            <input name="status" type="checkbox" value="0"> Active
+                                                        <label><?php if($status){echo '<input name="status" type="checkbox" checked> Active';
+                                                        }else{echo '<input name="status" type="checkbox"> Active';}?>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div><!-- /.box-body -->
                                         <div class="box-footer" style="margin-left:170px">
-                                            <button type="button" id="add-option" class="dark-orange" >Add Options</button>
-                                            <button type="submit" class="light-orange add-save-btn">Cancel</button>
-                                            <button type="submit" class="dark-orange add-save-btn">Save Question</button>
+                                          <!--  <button type="button" id="add-option" value =2 class="dark-orange" >Add Options</button>
+                                            <button type="button" id="remove-option"class="light-orange add-save-btn">Remove Options</button>-->
+                                            <button type="button" class="light-orange add-cancel-btn">Cancel</button>
+                                            <button name="save" value="save" type="submit" class="dark-orange add-save-btn">Save Question</button>
                                         </div><!-- /.box-footer -->
                                     </form>
+                                    <?php }?>
                                     <!-- /.box -->
                                     <!-- Destination form elements disabled -->
                                 </div>
@@ -178,8 +186,10 @@ $this->layout = false;
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <?= $this->Html->script('jQuery-2.1.4.min.js')?>
-    <!-- Bootstrap 3.3.5 -->
+    <?= $this->Html->script('bootstrap-tagsinput.js')?>
     <?= $this->Html->script('DestinationScript.js')?>
+    
+    <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->script('bootstrap.min.js')?>
     <!-- DataTables -->
     <?= $this->Html->script('jquery.dataTables.js')?>
@@ -191,6 +201,6 @@ $this->layout = false;
     <?= $this->Html->script('Script.js')?>
     <!--<script src="../../dist/js/app.min.js"></script>-->
     <!-- AdminLTE for demo purposes -->
-    
+   
 </body>
 </html>

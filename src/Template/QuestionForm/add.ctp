@@ -21,11 +21,12 @@ $this->layout = false;
     <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->css('bootstrap.min.css')?>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <?= $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')?>
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <?= $this->Html->css('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')?>
     <!-- DataTables -->
     <?= $this->Html->css('dataTables.bootstrap.css')?>
+    <?= $this->Html->css('bootstrap-tagsinput.css')?>
     <!-- Theme style -->
     <?= $this->Html->css('Style.css')?>
      <?= $this->Html->css('All-skins.css')?>
@@ -132,17 +133,18 @@ $this->layout = false;
                                             <div class="form-group">
                                                 <label for="Title" class="col-sm-2 control-label">Title</label>
                                                 <div class="col-sm-8">
-                                                    <input name="questiontext"type="text" class="form-control" id="Title" placeholder="Title" required>
+                                                    <input name="questiontext" type="text" class="form-control" id="Title" placeholder="Title" required>
                                                 </div>
                                             </div>
-                                            <div id="options">
-                                            <div class="form-group" id="options1">
-                                                <label for="Options" class="col-sm-2 control-label">Option 1</label>
+                                           
+                                            <div class="form-group" id="options">
+                                                <label for="Options" class="col-sm-2 control-label">Option</label>
                                                 <div class="col-sm-8">
-                                                    <input name="option1" type="text" class="form-control" placeholder="Option1" required>
+                                                   <!-- <input type="text" class="form-control"  value="" data-role="tagsinput" /> -->
+                                                    <input name="options" type="text" class="form-control"  value="" data-role="tagsinput" />
                                                 </div>
                                             </div>
-                                            </div>
+                                            
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-10">
                                                     <div class="checkbox">
@@ -154,8 +156,8 @@ $this->layout = false;
                                             </div>
                                         </div><!-- /.box-body -->
                                         <div class="box-footer" style="margin-left:170px">
-                                            <button type="button" id="add-option" value =2 class="dark-orange" >Add Options</button>
-                                            <button type="button" id="remove-option"class="light-orange add-save-btn">Remove Options</button>
+                                          <!--  <button type="button" id="add-option" value =2 class="dark-orange" >Add Options</button>
+                                            <button type="button" id="remove-option"class="light-orange add-save-btn">Remove Options</button>-->
                                             <button type="button" class="light-orange add-cancel-btn">Cancel</button>
                                             <button type="submit" class="dark-orange add-save-btn">Save Question</button>
                                         </div><!-- /.box-footer -->
@@ -179,7 +181,9 @@ $this->layout = false;
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
     <?= $this->Html->script('jQuery-2.1.4.min.js')?>
-     <?= $this->Html->script('DestinationScript.js')?>
+    <?= $this->Html->script('bootstrap-tagsinput.js')?>
+ <?= $this->Html->script('DestinationScript.js')?>
+    
     <!-- Bootstrap 3.3.5 -->
     <?= $this->Html->script('bootstrap.min.js')?>
     <!-- DataTables -->

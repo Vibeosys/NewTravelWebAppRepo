@@ -36,15 +36,8 @@ class ConfigurationFormController extends FormController{
         if($this->request->is('get')){
             $query = $this->request->query;
             //$this->autoRender = false;
-            
-            if(key_exists('edit', $query)){
                 $this->set(['config' => $query]);
-                
-            }  else {
-                $statconfTable->deleteConfig($query['key']);
-                $this->redirect(['controller' => 'ConfigurationForm', 'action' => 'index']);
-            }
-            
+                        
         }elseif ($this->request->is('post')) {
             $data = $this->request->data;
             $statconfTable->updateConfig($data['key'], $data['value']);
@@ -54,7 +47,5 @@ class ConfigurationFormController extends FormController{
         }
     }
     
-    public function delete() {
-        
-    }
+    
 }

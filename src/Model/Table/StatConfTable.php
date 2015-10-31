@@ -53,22 +53,6 @@ class StatConfTable extends Table {
         
     }
     
-    public function deleteConfig($key) {
-        try{
-           $query = $this->connect()->query();
-           $update = $query->update();
-           $update->set(['Active' => 0]);
-           $update->where(['ConfigKey =' => $key]);
-           if($update->execute()){
-                 \Cake\Log\Log::debug("config deleted key : ".$key);
-               return SUCCESS;
-           }
-           return FAIL;
-       } catch (Exception $ex) {
-           echo 'Database Error Occured'.$ex->getMessage();
-       }
-    }
-    
     public function updateConfig($key, $value) {
          try{
            $query = $this->connect()->query();
