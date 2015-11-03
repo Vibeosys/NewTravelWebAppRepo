@@ -17,6 +17,12 @@ use Cake\Network;
  * @author niteen
  */
 class DestinationFormController extends FormController {
+     public function initialize() {
+         session_start();
+        if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
+            $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
+      }
+    }
 
     public function index() {
                 

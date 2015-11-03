@@ -14,6 +14,13 @@ use App\Model\Table;
 class ConfigurationFormController extends FormController{
 
     
+    public function initialize() {
+        session_start();
+        \Cake\Log\Log::info("Cookie varible : ".$_SESSION['login']);
+        if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
+            $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
+      }
+    }
     public function index() {
        $statconfTable = new Table\StatConfTable();
        $config = $statconfTable->getConfig();
@@ -46,6 +53,9 @@ class ConfigurationFormController extends FormController{
             die('Unknown request');    
         }
     }
+    
+    
+    
     
     
 }

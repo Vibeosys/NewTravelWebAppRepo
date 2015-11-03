@@ -15,6 +15,10 @@ $('.edit-save-btn').on("click", function () {
   $('.show-edit-section').hide();
 });
 
+$('.sign-out-link').on("click", function(){
+    
+});
+
 $(document).ready(function(){
 
     var counter = 2;//$("#add-option").val();

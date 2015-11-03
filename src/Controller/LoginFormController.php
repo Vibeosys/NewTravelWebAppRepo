@@ -26,10 +26,16 @@ class LoginFormController extends FormController {
         if ($this->request->is('post')) {
             $data = $this->request->data;
             $credential = \appconfig::getAdminCredential();
-            \Cake\Log\Log::debug("Admin credential from config table : ".$credential['username']);
+            //\Cake\Log\Log::debug("Admin credential from config table : ".$credential['username']);
             if($data['username'] == $credential['username'] and $data['password'] == $credential['password']){
-                
-                \Cake\Log\Log::debug("redirect to destiationform controller");
+                session_start();
+                 $_SESSION['login'] = true;
+                setcookie('Id',$credential['username'], time()+(60*20),"/");
+                $pass = md5($credential['password']);
+                setcookie('pass',$pass, time()+(60*20),"/");
+               
+               // \Cake\Log\Log::info("Cookie varible after created: ".$_SESSION['login']);
+               // \Cake\Log\Log::debug("redirect to destiationform controller");
           $this->redirect(['controller' => 'LoginForm','action' => 'home']);
             }else{
                $this->redirect(['action' => 'index']); 
@@ -38,8 +44,16 @@ class LoginFormController extends FormController {
             die('Request error occured');
         }
     }
+   
     
     public function home() {
-        
+       // $this->autoRender = false;
+        session_start();
+        if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
+            
+            $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
+      }
+      
+      
     }
 }

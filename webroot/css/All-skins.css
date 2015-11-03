@@ -372,9 +372,12 @@
     background-repeat: no-repeat;
     background-size: 30px 30px;
     float: left;
-    height: 44px;
+    height: 30px;
     margin: 0 10px 0 0;
     width: 30px;
+}
+logo{
+    background-image: url("../img/page-logo.png");
 }
 .sidebar-menu .icon.dashboard {
     background-image: url("../img/Sales.png");

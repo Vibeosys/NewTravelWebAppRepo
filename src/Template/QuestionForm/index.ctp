@@ -59,7 +59,7 @@ $this->layout = false;
                     <ul class="nav navbar-nav">
                         <!-- User Account -->
                         <li class="dropdown user user-menu">
-                            <a href="../">
+                            <a href="../logout">
                                 <img src="../webroot/img/user.png" class="user-image" alt="User Image">
                                 <span class="hidden-xs">Sign Off</span>
                             </a>
@@ -170,7 +170,7 @@ $this->layout = false;
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Copyright &copy; 2015-2016 <a href="#">Application Name</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2015-2016 <a href="#"><span class="app-name"><i> Safer<span class="app-name-select"> Ka Sathi </span></i></span></a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->

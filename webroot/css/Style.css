@@ -144,6 +144,43 @@ body.hold-transition .main-header .logo {
   padding-left: 15px;
   padding-right: 15px;
 }
+.admin-flash-h1{
+color: blue;
+position: relative;
+left: 30%;
+
+}
+.admin-flash-h2{
+    color: black;
+    position: relative;
+    left: 40%;
+    top: 60%;
+    font-weight: bold;
+}
+.admin-flash-img{
+    background-image: url("../img/home-logo.png"); 
+    height: 512px;
+    width: 512px;
+    position: relative;
+    left: 30%;
+    top:50%;
+    
+}
+.logo-lg{
+    background-image: url("../img/page-logo.png");
+   
+    height: 100px;
+    width: 80px;
+    display: block;
+    position: relative;
+}
+.app-name{
+    text-decoration: underline;
+    color: black;
+}
+.app-name-select{
+    color: red;
+}
 /* H1 - H6 font */
 h1,
 h2,
@@ -654,13 +691,13 @@ a:focus {
     width: 50px;
   }
   .sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
-    display: block;
+    display: none;
     margin-left: -15px;
     margin-right: -15px;
     font-size: 18px;
   }
   .sidebar-mini.sidebar-collapse .main-header .logo > .logo-lg {
-    display: none;
+    display: block;
   }
   .sidebar-mini.sidebar-collapse .main-header .navbar {
     margin-left: 50px;

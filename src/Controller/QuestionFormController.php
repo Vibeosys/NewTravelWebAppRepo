@@ -17,6 +17,13 @@ use App\Model\Table;
  */
 class QuestionFormController extends FormController {
 
+    public function initialize() {
+        session_start();
+        if (!isset($_SESSION['login']) or !isset($_COOKIE['Id'])) {
+            $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
+        }
+    }
+
     public function index() {
         $questionTable = new Table\QuestionTable();
         $questions = $questionTable->getAll();
@@ -24,7 +31,7 @@ class QuestionFormController extends FormController {
         foreach ($questions as $question) {
             $optionTable = new Table\OptionsTable();
             $options = $optionTable->getOptions($question->questionId);
-            if(empty($options)){
+            if (empty($options)) {
                 continue;
             }
             $count = count($options);
@@ -114,9 +121,9 @@ class QuestionFormController extends FormController {
             $optionsTable->add($value, $questionId);
         }
     }
-    
+
     private function filterOption($option) {
-        foreach ($option as $k => $v){
+        foreach ($option as $k => $v) {
             $filteredOption[$k] = ucfirst($v);
         }
         return $filteredOption;

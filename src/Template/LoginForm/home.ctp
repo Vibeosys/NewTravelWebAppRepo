@@ -54,11 +54,12 @@ $this->layout = false;
         <div class="wrapper">
             <header class="main-header">
                 <!-- Logo -->
-                <a href="" class="logo">
-                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                <a class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels--> 
                     <span class="logo-mini"><b>A</b>N</span>
-                    <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><b>Logo</b></span>
+                    
+                    <!-- logo for regular state and mobile devices-->
+                    <span class="logo-lg"></span> 
                 </a>
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -73,7 +74,7 @@ $this->layout = false;
                         <ul class="nav navbar-nav">                      
                             <!-- User Account -->
                             <li class="dropdown user user-menu">
-                                <a  id="sign-out-span">                              
+                                <a  href="logout">                              
                                     <img src="webroot/img/user.png" class="user-image" alt="User Image">
                                     <span class="hidden-xs">Sign Off</span>                             
                                 </a>                        
@@ -124,7 +125,7 @@ $this->layout = false;
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        HOME
+                        ADMIN PANEL
                         <small></small>
                     </h1>
                     <ol class="breadcrumb">
@@ -137,8 +138,12 @@ $this->layout = false;
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box"> 
-                                <!--  Edit Destination Section --><h1 style="color: blue;position: relative;left: 40%">WelCome to Official Travel Website</h1>
-                                <div> <h2 style="color: black;position: relative;left: 40%;top: 40%">Admin Panel</h2>  </div>
+                                <!--  Edit Destination Section --><h1 class="admin-flash-h1">WelCome to Official  <span class="app-name"><i> Safer<span class="app-name-select"> Ka Sathi </span></i></span>  Website</h1>
+                                <div> <h2  class="admin-flash-h2"></h2>  </div>
+                                <div class="admin-flash-img">
+                                    
+                                    
+                                </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->                       
                         </div><!-- /.col -->
@@ -149,7 +154,7 @@ $this->layout = false;
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 1.0.0
                 </div>
-                <strong>Copyright &copy; 2015-2016 <a href="#">Application Name</a>.</strong> All rights reserved.
+                <strong>Copyright &copy; 2015-2016 <a href="#"><span class="app-name"><i> Safer<span class="app-name-select"> Ka Sathi </span></i></span></a>.</strong> All rights reserved.
             </footer>
         </div><!-- ./wrapper -->
         <!-- jQuery 2.1.4 -->

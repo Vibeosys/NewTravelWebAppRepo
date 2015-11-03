@@ -55,11 +55,7 @@ Router::scope('/api/v1', function ($routes) {
 
 
 
-Router::scope('/', ['Controller' => 'Images'], function ($routes) {
-    $routes->connect('upload1', [
-        'action' => 'upload1'
-    ]);
-});
+
 
 //Travel Web App Endpoints     
 Router::scope('/api/v1', function ($routes) {
@@ -86,6 +82,8 @@ Router::scope('/', function ($routes) {
     
 });
 
+
+Router::connect('logout', ['controller' => 'Form', 'action' => 'logout']);
 /**
  * Here, we are connecting '/' (base path) to a controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
@@ -94,6 +92,7 @@ Router::scope('/', function ($routes) {
 
 //Router::connect('/', array('controller' => 'pages', 'action' => 'display'));
 Router::connect('/', ['controller' => 'LoginForm', 'action' => 'index']);
+
 
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
