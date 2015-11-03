@@ -43,7 +43,7 @@ class SyncController extends ApiController {
         $allUser = $userController->getAllUser();
         foreach ($allUser as $user) {
             if ($user->userId) {
-                $this->getTableObj()->Insert($user->userId, json_encode($newUser), $this->userTable);
+                $this->getTableObj()->Insert($user->userId, json_encode($newUser), $this->userTable,$opration = 'Insert');
             }
         }
     }
