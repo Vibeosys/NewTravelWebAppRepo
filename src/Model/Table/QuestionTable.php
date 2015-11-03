@@ -61,7 +61,7 @@ class QuestionTable extends Table {
             if ($this->connect()->save($entity)) {
                 $questionDto = new DTO\ClsQuestionDto($entity->QuestionId, $questionText);
                 $syncController = new Controller\SyncController();
-                $syncController->questionEntry(json_encode($questionDto), 'Insert');
+                $syncController->questionEntry(json_encode($questionDto), INSERT);
                 return $entity->QuestionId;
             }
             return FAIL;
@@ -76,6 +76,9 @@ class QuestionTable extends Table {
             $update->set(['QuestionText ' => $questionText, 'Active' => $status]);
             $update->where(['QuestionId =' => $questionId]);
             if ($update->execute()) {
+                $questionDto = new DTO\ClsQuestionDto($entity->QuestionId, $questionText);
+                $syncController = new Controller\SyncController();
+                $syncController->questionEntry(json_encode($questionDto), UPDATE);
                 return SUCCESS;
             }
             return FAIL;

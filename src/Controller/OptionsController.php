@@ -27,12 +27,13 @@ class OptionsController extends AppController{
             }
         $preparedStatements = '';
         foreach ($allOptions as $options){
+            if($options->active){
             $preparedStatements .= OPTION_INS_QRY;
             $preparedStatements = str_replace('@OptionId', $options->optionId, $preparedStatements);
             $preparedStatements = str_replace('@OptionText', $options->optionText, $preparedStatements);
             $preparedStatements = str_replace('@QuestionId', $options->questionId, $preparedStatements);
             
-        }
+        }}
         return $preparedStatements;
     }
 }

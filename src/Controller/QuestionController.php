@@ -30,10 +30,11 @@ class QuestionController extends AppController{
             }
         $preparedStatement = '';
         foreach ($allQuestion as $question){
+            if($question->active){
             $preparedStatement.= QUES_INS_QRY;
             $preparedStatement = str_replace('@QuestionId', $question->questionId, $preparedStatement);
             $preparedStatement = str_replace('@QuestionText', $question->questionText, $preparedStatement);
-        }
+        }}
         return $preparedStatement;
     }
 }

@@ -44,7 +44,7 @@ $req = new Network\Request();
 
 Router::defaultRouteClass('DashedRoute');
 Router::scope('/api/v1', function ($routes) {
-    $routes->connect('user', ['controller' => 'User', 'action' => 'show', 'show']);
+    $routes->connect('user/sendmail', ['controller' => 'User', 'action' => 'sendmail']);
     $routes->connect('sync/download', ['controller' => 'Sync', 'action' => 'download']);
     $routes->connect('sqlite/getdb', ['controller' => 'Sqlite', 'action' => 'getDB']);
     $routes->connect('images/amazonupload', ['controller' => 'Images', 'action' => 'amazonUpload']);
@@ -64,6 +64,7 @@ Router::scope('/api/v1', function ($routes) {
     $routes->connect('/upload', ['controller' => 'Upload', 'action' => 'up']);
     $routes->connect('/imagesupload', ['controller' => 'imagesUpload', 'action' => 'index']);
     $routes->connect('/updateuser', ['controller' => 'UpdateUser', 'action' => 'update']);
+    $routes->connect('/sendmail', ['controller' => 'SendMail', 'action' => 'send']);
 });
 
 //Travel website Endpoints

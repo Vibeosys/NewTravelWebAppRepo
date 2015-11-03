@@ -27,14 +27,14 @@ class ImagesUploadController extends ApiController {
             \Cake\Log\Log::debug("Image data empty");
             return;
         }
-         if (!array_key_exists('userId', $data) or !array_key_exists('emailId', $data)) {
+         if (!array_key_exists('userId', $data) or !array_key_exists('emailId', $data) or !array_key_exists('userName', $data)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(107));
             \Cake\Log\Log::debug("Image data empty");
             return;
         }
 
         $userTable = new Table\UserTable();
-        if (!$userTable->userCkeck($data['userId'], $data['emailId'])) {
+        if (!$userTable->userCkeck($data['userId'], $data['emailId'], $data['userName'])) {
             $this->response->body(DTO\ClsErrorDto::prepareError(112));
             $this->response->send();
             return ;

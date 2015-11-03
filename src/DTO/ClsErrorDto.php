@@ -37,7 +37,7 @@ class ClsErrorDto {
     }
     
     
-    protected $errorDictionary = array(
+    protected $errorDictionary = [
         100 => 'User is not authenticated',
         101 => 'UserId is blank',
         102 => 'Unknown error occured',
@@ -52,8 +52,10 @@ class ClsErrorDto {
         111 => 'Problem in image uploading',
         112 => 'Update your email and username before uploading profile photo OR check your userId and emailId',
         113 => 'Database Faiure. please try again.',
-        114 => 'Invalid user details'
-    );
+        114 => 'Invalid user details',
+        115 => 'Mail was not send. try again',
+        116 => 'Please choose valid input'
+       ];
     
     
 }

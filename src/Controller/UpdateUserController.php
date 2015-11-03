@@ -37,7 +37,7 @@ class UpdateUserController extends ApiController{
         if($this->getTableObj()->update($userDto)){
             $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("User updated successfully for userid ".$userDto->userId));
             $syncController = new SyncController;
-            $syncController->userEntry($userDto);
+            $syncController->userEntry(json_encode($userDto),INSERT);
         }  else {
               $this->response->body(DTO\ClsErrorDto::prepareError(108));
         }

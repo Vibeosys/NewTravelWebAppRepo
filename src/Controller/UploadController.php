@@ -36,7 +36,7 @@ class UploadController extends ApiController {
         $arr = DTO\ClsUploadDeserializerDto::Deserialize($json);
         
         $user = DTO\ClsUserDto::Deserialize($arr->user);
-        if ($this->userValidation($user->userId, $user->emailId)) {
+        if ($this->userValidation($user->userId, $user->emailId, $user->userName)) {
             foreach ($arr->data as $index => $record) {
                 \Cake\Log\Log::info('Index : '.$index.'Record :'.$record->tableName);
                 switch ($record->tableName) {
@@ -101,9 +101,9 @@ class UploadController extends ApiController {
         }
     }
 
-    public function userValidation($userid, $usermail) {
+    public function userValidation($userid, $usermail, $userName) {
         $userTable = new Table\UserTable();
-        if ($userTable->userCkeck($userid, $usermail)) {
+        if ($userTable->userCkeck($userid, $usermail, $userName)) {
             return SUCCESS;
         }
         return FAIL;

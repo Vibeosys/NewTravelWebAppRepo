@@ -42,10 +42,10 @@ class UserTable extends Table {
 
     public function update($userDto) {
         //$tableObject = $this->connect();
-        $user = $this->connect()->get($userDto->userId);
-        $user->UserName = $userDto->userName;
-        $user->EmailId = $userDto->emailId;
-        if($this->connect()->save($user)){
+        $update = $this->connect()->query()->update();
+        $update->set(['UserName' => $userDto->userName,'EmailId' => $userDto->emailId, 'Active' => 1]);
+        $update->where(['UserId =' => $userDto->userId]);
+        if($update->execute()){
             \Cake\Log\Log::debug('User : ' .$userDto->userName. ' updated in user table');
             return SUCCESS;
         }
@@ -70,7 +70,7 @@ class UserTable extends Table {
 
     //to retive all 
     public function getAll() {
-        $rows = $this->connect()->find()->where();
+        $rows = $this->connect()->find();
         $i = 0;
         $allUser = null;
         if ($this->connect()->find()->count()) {
@@ -96,11 +96,11 @@ class UserTable extends Table {
         return $newUser;
     }
 
-    public function userCkeck($userid, $usermail) {
+    public function userCkeck($userid, $usermail, $userName) {
         $rows = $this->connect()->find()->where(['UserId =' => $userid]);
         foreach ($rows as $row) {
-            if ($row->EmailId == $usermail) {
-                \Cake\Log\Log::debug("user : ".$userid. " is authorised user");
+            if ($row->EmailId == $usermail and  $row->UserName == $userName) {
+                \Cake\Log\Log::debug("user : ".$userName. " is authorised user");
                 return SUCCESS;
             }
             \Cake\Log\Log::error("user : ".$userid. " is unauthorised user");

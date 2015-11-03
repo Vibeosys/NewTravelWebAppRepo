@@ -31,7 +31,7 @@ class OptionsTable extends Table {
         $rows = $this->connect()->find();
         $i = 0;
         foreach ($rows as $row) {
-            $optionDto = new DTO\ClsOptionsDto($row->OptionId, $row->OptionText, $row->QuestionId);
+            $optionDto = new DTO\ClsOptionsDto($row->OptionId, $row->OptionText, $row->QuestionId, $row->Active);
             $allOption[$i] = $optionDto;
             $i++;
         }
@@ -70,7 +70,7 @@ class OptionsTable extends Table {
             if ($this->connect()->save($entity)) {
                 $optionDto = new DTO\ClsOptionsDto($entity->optionId, $optionText, $questionId);
                 $syncController = new Controller\SyncController();
-                $syncController->questionEntry(json_encode($optionDto), 'Insert');
+                $syncController->questionEntry(json_encode($optionDto), INSERT);
                 return $entity->optionId;
             }
             return FAIL;

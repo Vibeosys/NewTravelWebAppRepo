@@ -44,6 +44,7 @@ class DestinationController extends ApiController{
         $preparedStatement = '';
         foreach ($allDestinations as $destination)
         {
+            if($destination->active){
             $preparedStatement.= DEST_INS_QRY;
 
             $preparedStatement = str_replace('@DestId', $destination->destId, $preparedStatement);
@@ -51,7 +52,7 @@ class DestinationController extends ApiController{
             $preparedStatement = str_replace('@Lat', $destination->lat, $preparedStatement);
             $preparedStatement = str_replace('@Long', $destination->long, $preparedStatement);
             
-        }
+        }}
         return $preparedStatement;
     }
 }

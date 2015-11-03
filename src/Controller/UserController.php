@@ -9,9 +9,7 @@ namespace App\Controller;
  */
 
 use Cake\Network;
-use Cake\ORM\TableRegistry;
 use App\Model\Table;
-
 
 /**
  * Description of DemoController
@@ -50,16 +48,13 @@ class UserController extends ApiController {
 
     //to activate user
     public function userSignUp($userId) {
-        if($this->getTableObj()->insertUser($userId)){
+        if ($this->getTableObj()->insertUser($userId)) {
             \Cake\Log\Log::debug('temp Userid inserted');
             return SUCCESS;
-            
-        }     
+        }
         return FAIL;
     }
-  
-   
-  
+
     public function makeEntry($Id) {
         $syn = new SyncController;
         $sqliteController = new SqliteController;
@@ -73,24 +68,28 @@ class UserController extends ApiController {
 
     public function prepareInsertStatement() {
         $allUser = $this->getAllUser();
-        if(!$allUser){
-                return NOT_FOUND;
-            }
+        if (!$allUser) {
+            return NOT_FOUND;
+        }
         $preparedStatement = '';
-        foreach ($allUser as $user){
+        foreach ($allUser as $user) {
+            if($user->active){
             $preparedStatement.= USER_INS_QRY;
             $preparedStatement = str_replace('@UserId', $user->userId, $preparedStatement);
             $preparedStatement = str_replace('@UserName', $user->userName, $preparedStatement);
             $preparedStatement = str_replace('@PhotoUrl', $user->photoUrl, $preparedStatement);
-        }
+        }}
         return $preparedStatement;
     }
-    public function validate($userid,$usermail) {
-          \Cake\Log\Log::debug("in user controller validate method with userid :".$userid ."and email : ".$usermail);
-        if($this->getTableObj()->userCkeck($userid,$usermail)){
+
+    public function validate($userid, $usermail) {
+        \Cake\Log\Log::debug("in user controller validate method with userid :" . $userid . "and email : " . $usermail);
+        if ($this->getTableObj()->userCkeck($userid, $usermail)) {
             return SUCCESS;
         }
         return FAIL;
     }
+
+   
 
 }
