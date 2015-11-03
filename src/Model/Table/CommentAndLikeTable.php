@@ -121,9 +121,10 @@ class CommentAndLikeTable extends Table {
     private function ispresent($userid, $destid) {
         $checks = $this->connect()->find()->where(['UserId =' => $userid, 'DestId =' => $destid]);
         $check = null;
-        foreach ($checks as $check) {
+        foreach ($checks as $check){
             return $check;
         }
+        \Cake\Log\Log::info("user count for like insert : ".$check);
         return FAIL;
     }
 

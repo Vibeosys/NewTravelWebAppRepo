@@ -160,12 +160,13 @@ class ImagesController extends ApiController {
         $bucket = \appconfig::getAwsDefaultBucket(LOCAL_ENV);
         $s3Client = $this->createS3Client();
         $date = date('Y-M-d_H:i:s');
+        \Cake\Log\Log::debug("aws image upload with filepath : ".$filePath);
         try {
-            $upload = $s3Client->upload($bucket, $dir .$date.'_'.$fileName, fopen($filePath, 'rb'), 'public-read-write');
+            $upload = $s3Client->upload($bucket, $dir .'/'.$date.'_'.$fileName, fopen($filePath, 'rb'), 'public-read-write');
             \Cake\Log\Log::debug("Aws url of uploaded image  : " . $upload['ObjectURL']);
             return $upload['ObjectURL'];
         } catch (S3Exception $e) {
-            \Cake\Log\Log::error($e->getMessage());
+            \Cake\Log\Log::error("error occured in amazon upload script".$e->getMessage());
             $this->response->body($e->getMessage());
         }
     }

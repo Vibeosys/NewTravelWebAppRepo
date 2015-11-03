@@ -25,10 +25,15 @@ class UpdateUserController extends ApiController{
         if(empty($userInfo)){
             $this->response->body(DTO\ClsErrorDto::prepareError(107));
             \Cake\Log\Log::error("User information is empty");
-            return ;
+            return FAIL;
         }
         \Cake\Log\Log::debug("Update user json : ".$userInfo);
         $userDto = DTO\ClsUserDto::Deserialize($userInfo);
+        if(is_null($userDto->userId) or is_null($userDto->emailId) or is_null($userDto->userName)){
+            $this->response->body(DTO\ClsErrorDto::prepareError(114));
+            \Cake\Log\Log::error("User information is empty");
+            return FAIL;
+        }
         if($this->getTableObj()->update($userDto)){
             $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("User updated successfully for userid ".$userDto->userId));
             $syncController = new SyncController;

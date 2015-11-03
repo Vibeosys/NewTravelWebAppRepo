@@ -22,6 +22,8 @@ define('INSERT', 'insert');
 
 define('LOCAL_ENV', true);
 
+define('LIKE', 1);
+
 
 
 

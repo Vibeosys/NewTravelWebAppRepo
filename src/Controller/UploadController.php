@@ -34,10 +34,11 @@ class UploadController extends ApiController {
         }
 
         $arr = DTO\ClsUploadDeserializerDto::Deserialize($json);
+        
         $user = DTO\ClsUserDto::Deserialize($arr->user);
         if ($this->userValidation($user->userId, $user->emailId)) {
             foreach ($arr->data as $index => $record) {
-                \Cake\Log\Log::info('Index : '.$index.'REcord :'.$record->tableName);
+                \Cake\Log\Log::info('Index : '.$index.'Record :'.$record->tableName);
                 switch ($record->tableName) {
                     case $this->table['TC']:
                         \Cake\Log\Log::info("Comment section");
@@ -92,7 +93,7 @@ class UploadController extends ApiController {
         }
     }
 
-    private function images($image) {
+    private function images($imageDto) {
       
         $imagecontroller = new ImagesController();
         if ($imagecontroller->saveImages($imageDto)) {
