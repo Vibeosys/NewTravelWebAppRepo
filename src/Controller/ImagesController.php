@@ -93,7 +93,7 @@ class ImagesController extends ApiController {
             $imageUrl = $this->awsImageUpload($awsDir, $filename, $imagePath);
             $userDto = new DTO\ClsUserDto($data['userId'], $userName = null, $password = null, $data['emailId'], $imageUrl);
             if ($this->updateProfile($userDto)) {
-                $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("profile image uploaded"));
+                $this->response->body($imageUrl);
                 $this->response->send();
                 \Cake\Log\Log::debug('profile image upload successful imagename : ' . $filename);
                 return SUCCESS;
