@@ -38,12 +38,12 @@ class SyncController extends ApiController {
         return new Table\SyncTable();
     }
 
-    public function userEntry($newUser) {
+    public function userEntry($json,$opration) {
         $userController = new UserController();
         $allUser = $userController->getAllUser();
         foreach ($allUser as $user) {
             if ($user->userId) {
-                $this->getTableObj()->Insert($user->userId, json_encode($newUser), $this->userTable,$opration = 'Insert');
+                $this->getTableObj()->Insert($user->userId, $json, $this->userTable,$opration);
             }
         }
     }
@@ -130,12 +130,13 @@ class SyncController extends ApiController {
         \Cake\Log\Log::debug("New image enrty in sync table json : ".$json);
         foreach ($allUser as $user) {
           if($user->userId != $userId){
-                $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $opration = 'Insert');
+                $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $opration);
           }
         }
     }
 
     public function download($userid) {
+        $this->autoRender = false;
         \Cake\Log\Log::info("in Sync controller download method");
         $Update = $this->getTableObj()->getUpdate($userid);
         if ($Update) {

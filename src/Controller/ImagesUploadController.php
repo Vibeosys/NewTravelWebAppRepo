@@ -36,7 +36,6 @@ class ImagesUploadController extends ApiController {
         $userTable = new Table\UserTable();
         if (!$userTable->userCkeck($data['userId'], $data['emailId'], $data['userName'])) {
             $this->response->body(DTO\ClsErrorDto::prepareError(112));
-            $this->response->send();
             return ;
         }
         try {

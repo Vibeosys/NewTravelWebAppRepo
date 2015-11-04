@@ -54,7 +54,8 @@ class ClsErrorDto {
         113 => 'Database Faiure. please try again.',
         114 => 'Invalid user details',
         115 => 'Mail was not send. try again',
-        116 => 'Please choose valid input'
+        116 => 'Please choose valid input',
+        117 => 'Invalid data'
        ];
     
     

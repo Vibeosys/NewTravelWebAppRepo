@@ -34,7 +34,11 @@ class UploadController extends ApiController {
         }
 
         $arr = DTO\ClsUploadDeserializerDto::Deserialize($json);
-        
+        if(empty($arr->user) or empty($arr->data)){
+            $this->response->body(DTO\ClsErrorDto::prepareError(117));
+             return ;
+        }
+       
         $user = DTO\ClsUserDto::Deserialize($arr->user);
         if ($this->userValidation($user->userId, $user->emailId, $user->userName)) {
             foreach ($arr->data as $index => $record) {

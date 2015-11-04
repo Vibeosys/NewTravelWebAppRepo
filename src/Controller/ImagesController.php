@@ -63,9 +63,9 @@ class ImagesController extends ApiController {
             $imageUrl = $this->awsImageUpload($awsDir, $filename, $image);
             \Cake\Log\Log::debug("imageUrl return from aws server : " . $imageUrl);
             $imageDto = new DTO\ClsImagesDto($data['imageId'], $imageUrl, $data['userId'], $data['destId']);
-            $this->saveImage($imageDto);
-            $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage($filename . ' image uploaded '));
+            $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage($imageUrl));
             $this->response->send();
+            $this->saveImage($imageDto);
             \Cake\Log\Log::debug('image upload successful filename : ' . $filename);
             return SUCCESS;
         }
@@ -93,7 +93,7 @@ class ImagesController extends ApiController {
             $imageUrl = $this->awsImageUpload($awsDir, $filename, $imagePath);
             $userDto = new DTO\ClsUserDto($data['userId'], $userName = null, $password = null, $data['emailId'], $imageUrl);
             if ($this->updateProfile($userDto)) {
-                $this->response->body($imageUrl);
+                $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage($imageUrl));
                 $this->response->send();
                 \Cake\Log\Log::debug('profile image upload successful imagename : ' . $filename);
                 return SUCCESS;
@@ -139,7 +139,7 @@ class ImagesController extends ApiController {
     private function saveImage(DTO\ClsImagesDto $imageDto) {
         if ($this->getTableObj()->insertImage($imageDto->imageId, $imageDto->userId, $imageDto->destId, $imageDto->imagePath)) {
             $syncController = new SyncController();
-            $syncController->imagesEntry($imageDto->userId, json_encode($imageDto));
+            $syncController->imagesEntry($imageDto->userId, json_encode($imageDto),INSERT);
             return SUCCESS;
         }
         return FAIL;
