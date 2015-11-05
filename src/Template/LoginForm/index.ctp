@@ -36,6 +36,10 @@ $this->layout = false;
                             <input type="submit" name="login" value="Sign In">
                        </div>
                 </form>
+                <?php session_start();
+                if(isset($_SESSION['message'])){?>
+                <div class="message-div"><?= h($_SESSION['message'])?></div>
+                <?php unset($_SESSION['message']);}?>
                 <p class="text--center">Not a member? <a href="#">Sign up now</a> <span class="fontawesome-arrow-right"></span></p>
             </div>
         </div>

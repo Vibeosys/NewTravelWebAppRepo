@@ -27,8 +27,9 @@ class LoginFormController extends FormController {
             $data = $this->request->data;
             $credential = \appconfig::getAdminCredential();
             //\Cake\Log\Log::debug("Admin credential from config table : ".$credential['username']);
+            session_start();
             if($data['username'] == $credential['username'] and $data['password'] == $credential['password']){
-                session_start();
+                
                  $_SESSION['login'] = true;
                 setcookie('Id',$credential['username'], time()+(60*20),"/");
                 $pass = md5($credential['password']);
@@ -38,7 +39,8 @@ class LoginFormController extends FormController {
                // \Cake\Log\Log::debug("redirect to destiationform controller");
           $this->redirect(['controller' => 'LoginForm','action' => 'home']);
             }else{
-               $this->redirect(['action' => 'index']); 
+                $_SESSION['message'] = 'Username and Password wrong !!';
+               $this->redirect(['controller' => 'LoginForm','action' => 'index']); 
             }
         } else {
             die('Request error occured');
@@ -48,6 +50,8 @@ class LoginFormController extends FormController {
     
     public function home() {
        // $this->autoRender = false;
+        $value = $this->request->params;
+        \Cake\Log\Log::debug("value : ".$value);
         session_start();
         if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
             

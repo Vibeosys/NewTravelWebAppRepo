@@ -147,3 +147,10 @@ input {
 .text--center a{
     margin:0 10px
 }
+
+.message-div{
+    display: block;
+    color: red;
+    position: relative;
+    left: 120px;
+}
