@@ -53,7 +53,7 @@ class CommentAndLikeTable extends Table {
         return $Comment;
     }
 
-    public function insertLike($userid, $destid) {
+    public function insertLike($senderUserId,$userid, $destid) {
         $check = $this->ispresent($userid, $destid);
         if ($check) {
             $count = ++$check->LikeCount;
@@ -62,9 +62,9 @@ class CommentAndLikeTable extends Table {
             $query->set(['LikeCount' => $count, 'LikeUpdatedDate' => date('Y-m-d H:i:sa')]);
             $query->where(['UserId =' => $userid, 'DestId =' => $destid]);
             if ($query->execute()) {
-                 $json = json_encode(new DTO\ClsCommentAndLikeDto($userid, $destid));
+                 $json = json_encode(new DTO\ClsCommentAndLikeDto($userid, $destid, $count));
                 $syncController = new \App\Controller\SyncController();
-                $syncController->likeEntry($userid, $json, UPDATE);
+                $syncController->likeEntry($senderUserId,$userid, $json, UPDATE);
                 return SUCCESS;
             } else {
                 return FAIL;
@@ -86,7 +86,7 @@ class CommentAndLikeTable extends Table {
         }
     }
 
-    public function insertComment($userid, $destid, $comment) {
+    public function insertComment($senderUserId,$userid, $destid, $comment) {
         $check = $this->ispresent($userid, $destid);
         if ($check) {
             $query = $this->connect()->query();
@@ -96,7 +96,7 @@ class CommentAndLikeTable extends Table {
             if ($query->execute()) {
                  $json = json_encode(new DTO\ClsCommentAndLikeDto($userid, $destid, $likeCount = null, $comment));
                 $syncController = new \App\Controller\SyncController();
-                $syncController->commentEntry($userid, $json, UPDATE);
+                $syncController->commentEntry($senderUserId,$userid, $json, UPDATE);
                 return SUCCESS;
             } else {
                 return FAIL;

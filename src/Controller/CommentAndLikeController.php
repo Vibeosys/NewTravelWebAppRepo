@@ -30,12 +30,12 @@ class CommentAndLikeController extends ApiController {
         return $this->getTableObj()->getCommentAndLike();
     }
 
-    public function submitComment(\App\DTO\ClsCommentAndLikeDto $comment) {
+    public function submitComment($senderUserId,\App\DTO\ClsCommentAndLikeDto $comment) {
 
         $this->autoRender = false;
         if ($comment) {
             
-            if ($this->getTableObj()->insertComment($comment->userId,$comment->destId,$comment->commentText)) {
+            if ($this->getTableObj()->insertComment($senderUserId,$comment->userId,$comment->destId,$comment->commentText)) {
                
                 $this->response->body(\App\DTO\ClsErrorDto::prepareSuccessMessage("Comment Saved"));
                 \Cake\Log\Log::debug("comment insert in db for user : ".$comment->userId);
@@ -50,11 +50,11 @@ class CommentAndLikeController extends ApiController {
         }
     }
 
-    public function submitLike(\App\DTO\ClsCommentAndLikeDto $like) {
+    public function submitLike($senderUserId,\App\DTO\ClsCommentAndLikeDto $like) {
         $this->autoRender = false;
         if ($like) {
             
-            if ($this->getTableObj()->insertLike($like->userId, $like->destId)) {
+            if ($this->getTableObj()->insertLike($senderUserId,$like->userId, $like->destId)) {
                 
                 \Cake\Log\Log::debug('Like succefully stored');
                 $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Like Saved"));

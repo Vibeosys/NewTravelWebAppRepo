@@ -47,20 +47,20 @@ class UploadController extends ApiController {
                     case $this->table['TC']:
                         \Cake\Log\Log::info("Comment section");
                         $commentDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                        $this->comment($commentDto);
+                        $this->comment($user->userId, $commentDto);
                         break;
                     case $this->table['TL']:
                         $likeDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                        $this->like($likeDto);
+                        $this->like($user->userId,$likeDto);
                         break;
                     case $this->table['TA']:
                         $answerDto = DTO\ClsAnswerDto::Deserialize($record->tableData);
                         \Cake\Log\Log::debug("Accepted Answer data");
-                        $this->answer($answerDto);
+                        $this->answer($user->userId,$answerDto);
                         break;
                     case $this->table['TU']:
                         $userDto = DTO\ClsUserDto::Deserialize($record->tableData);
-                        $this->user($userDto);
+                        $this->user($user->userId,$userDto);
                         break;
                     case $this->table['TI']:
                         $imageDto = DTO\ClsImagesDto::Deserialize($record->tableData);
@@ -73,25 +73,25 @@ class UploadController extends ApiController {
         }
     }
 
-    private function comment($commentDto) {
+    private function comment($senderUserId, $commentDto) {
         $commentAndLikeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Comment DTO object send to submit');
-        if ($commentAndLikeController->submitComment($commentDto)) {
+        if ($commentAndLikeController->submitComment($senderUserId,$commentDto)) {
             \Cake\Log\Log::debug("Comment stored in database");
         }
     }
 
-    private function like($likeDto) {
+    private function like($senderUserId,$likeDto) {
         $likeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Like DTO object send to submit');
-        $likeController->submitLike($likeDto);
+        $likeController->submitLike($senderUserId,$likeDto);
     }
 
-    private function answer($answerDto) {
+    private function answer($senderUserId,$answerDto) {
 
         $answercontroller = new AnswerController();
         \Cake\Log\Log::info('Answer DTO object send to submit');
-        if ($answercontroller->submit($answerDto)) {
+        if ($answercontroller->submit($senderUserId,$answerDto)) {
             $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Answer Saved"));
             \Cake\Log\Log::debug("Answer stored in database");
         }

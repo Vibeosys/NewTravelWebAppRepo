@@ -39,7 +39,7 @@ class AnswerTable extends Table {
         return $all;
     }
 
-    public function Insert($userid, $destid, $optionid) {
+    public function Insert($senderUserId,$userid, $destid, $optionid) {
         $answer = $this->connect();
         $query = $answer->newEntity();
 
@@ -51,7 +51,7 @@ class AnswerTable extends Table {
         if ($answer->save($query)) {
             $json = json_encode(new DTO\ClsAnswerDto($userid, $destid, $optionid, $query->AnswerId));
             $syncController = new \App\Controller\SyncController();
-            $syncController->answerEntry($userid, $json, INSERT);
+            $syncController->answerEntry($senderUserId,$userid, $json, INSERT);
             \Cake\Log\Log::debug("Sync Entry for Answer");
             return SUCCESS;
         }

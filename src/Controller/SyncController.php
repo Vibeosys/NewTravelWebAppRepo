@@ -91,31 +91,31 @@ class SyncController extends ApiController {
     }
     
 
-    public function answerEntry($userId,$json, $opration) {
+    public function answerEntry($senderUserId,$userId,$json, $opration) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
         foreach ($allUser as $user) {
-            if($user->userId != $userId){
+            if($user->userId != $userId and $user->userId != $senderUserId){
                 $this->getTableObj()->Insert($user->userId,$json, $this->answerTable,$opration);
             
         }}
     }
 
-    public function likeEntry($userId, $json, $opration) {
+    public function likeEntry($senderUserId,$userId, $json, $opration) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser($userId);
         foreach ($allUser as $user) {
-            if($user->userId != $userId){
+            if($user->userId != $userId and $user->userId != $senderUserId){
                 $this->getTableObj()->Insert($user->userId, $json, $this->likeTable, $opration);
             }
         }
     }
 
-    public function commentEntry($userId, $json, $opration) {
+    public function commentEntry($senderUserId,$userId, $json, $opration) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser($userId);
         foreach ($allUser as $user) {
-            if($user->userId != $userId){
+            if($user->userId != $userId and $user->userId != $senderUserId){
             try{
                 $this->getTableObj()->Insert($user->userId, $json, $this->commentTable, $opration);
             }  catch (Excption $ex){

@@ -25,9 +25,9 @@ class AnswerController extends ApiController{
     private function allAnswer() {
         return $this->getTablObj()->getAll();
     }
-    public function submit(DTO\ClsAnswerDto $answer) {
+    public function submit($senderUserId,DTO\ClsAnswerDto $answer) {
         
-            $temp = $this->getTablObj()->Insert($answer->userId, $answer->destId, $answer->optionId);
+            $temp = $this->getTablObj()->Insert($senderUserId,$answer->userId, $answer->destId, $answer->optionId);
             if($temp){
                 \Cake\Log\Log::debug('answer submited');
                 $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Answer Saved"));
