@@ -8,6 +8,7 @@ namespace App\Controller;
 use App\DTO;
 use App\Controller\ApiController;
 use App\Model\Table;
+use App\DTO\DownloadDto;
 /**
  * Description of UpdateUserController
  *
@@ -37,7 +38,8 @@ class UpdateUserController extends ApiController{
         if($this->getTableObj()->update($userDto)){
             $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("User updated successfully for userid ".$userDto->userId));
             $syncController = new SyncController;
-            $syncController->userEntry(json_encode($userDto),INSERT);
+            $downloadUserDto = new DownloadDto\UserDto($userDto->userId, $userDto->userName, $userDto->photoUrl);
+            $syncController->userEntry(json_encode($downloadUserDto),INSERT);
         }  else {
               $this->response->body(DTO\ClsErrorDto::prepareError(108));
         }

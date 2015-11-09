@@ -18,7 +18,7 @@ use Cake\ORM\TableRegistry;
  */
 class SyncTable extends Table {
 
-    public function initialize() {
+    public function initialize(array $config) {
         
     }
 

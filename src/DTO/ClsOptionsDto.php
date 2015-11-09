@@ -16,15 +16,14 @@ class ClsOptionsDto {
     public  $optionId;
     public  $optionText;
     public  $questionId;
-    public  $active;
+    
 
 
-    public function __construct($optionId,$optiontext,$questionId = null, $active = null) {
+    public function __construct($optionId,$optiontext,$questionId = null) {
         
         $this->optionId = $optionId;
         $this->optionText = $optiontext;
         $this->questionId = $questionId;
-        $this->active = $active;
     }
     
 }

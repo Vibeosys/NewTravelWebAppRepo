@@ -16,14 +16,14 @@ class ClsDestinationDto {
     public $destName;
     public $lat;
     public $long;
-    public $active;
+   
 
-    public function __construct($destId,$destName,$lat,$long,$active= null) {
+    public function __construct($destId,$destName,$lat,$long) {
         $this->destId = $destId;
         $this->destName = $destName;
         $this->lat = $lat;
         $this->long = $long;
-        $this->active = $active;
+        
        
         
     }

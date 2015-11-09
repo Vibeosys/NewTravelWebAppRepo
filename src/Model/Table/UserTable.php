@@ -43,7 +43,7 @@ class UserTable extends Table {
     public function update($userDto) {
         //$tableObject = $this->connect();
         $update = $this->connect()->query()->update();
-        $update->set(['UserName' => $userDto->userName,'EmailId' => $userDto->emailId, 'Active' => 1]);
+        $update->set(['UserName' => $userDto->userName,'EmailId' => $userDto->emailId,'PhotoUrl' => $userDto->photoUrl,'Active' => 1]);
         $update->where(['UserId =' => $userDto->userId]);
         if($update->execute()){
             \Cake\Log\Log::debug('User : ' .$userDto->userName. ' updated in user table');
