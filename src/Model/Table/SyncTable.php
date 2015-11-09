@@ -18,7 +18,7 @@ use Cake\ORM\TableRegistry;
  */
 class SyncTable extends Table {
 
-    public function initialize(array $config) {
+    public function initialize() {
         
     }
 
@@ -33,7 +33,7 @@ class SyncTable extends Table {
         $query->JsonSync = $update;
         $query->TableName = $table;
         $query->Opration = $opration;
-        $query->UpdatedDate = date("Y-m-d H:i:sa");
+        $query->UpdatedDate = date("Y-m-d H:i:s");
         $this->connect()->save($query);
        }  catch (Excetion $e){
            \Cake\Log\Log::error("Database exception : ".$ex);

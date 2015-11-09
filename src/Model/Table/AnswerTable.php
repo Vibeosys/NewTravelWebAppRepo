@@ -46,8 +46,8 @@ class AnswerTable extends Table {
         $query->UserId = $userid;
         $query->DestId = $destid;
         $query->OptionId = $optionid;
-        $query->CreatedDate = date('Y-m-d H-i-sa');
-        $query->UpdatedDate = date('Y-m-d H-i-sa');
+        $query->CreatedDate = date('Y-m-d H:i:s');
+        $query->UpdatedDate = date('Y-m-d H:i:s');
         if ($answer->save($query)) {
             $json = json_encode(new DTO\ClsAnswerDto($userid, $destid, $optionid, $query->AnswerId));
             $syncController = new \App\Controller\SyncController();

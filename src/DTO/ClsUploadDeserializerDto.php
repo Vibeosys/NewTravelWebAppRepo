@@ -16,6 +16,8 @@ class ClsUploadDeserializerDto extends JsonDeserializer {
    
         public  $user;
         public  $data;
-        public  $tableName;
-        public  $tableData;
+        public function __construct($user = null,$data = null) {
+            $this->user = $user;
+            $this->data = $data;
+        }
 }

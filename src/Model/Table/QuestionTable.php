@@ -56,8 +56,8 @@ class QuestionTable extends Table {
             $entity = $this->connect()->newEntity();
             $entity->QuestionText = $questionText;
             $entity->Active = $status;
-            $entity->CreatedDate = date('Y-n-d H:i:s');
-            $entity->UpdatedDate = date('Y-n-d H:i:s');
+            $entity->CreatedDate = date('Y-m-d H:i:s');
+            $entity->UpdatedDate = date('Y-m-d H:i:s');
             if ($this->connect()->save($entity)) {
                 $questionDto = new DTO\ClsQuestionDto($entity->QuestionId, $questionText);
                 $syncController = new Controller\SyncController();

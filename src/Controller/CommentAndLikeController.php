@@ -63,6 +63,7 @@ class CommentAndLikeController extends ApiController {
                 \Cake\Log\Log::error('Like not saved');
                 $this->response->body(\App\DTO\ClsErrorDto::prepareError(109));
                    $this->response->send();
+                  
             }
         }
     }

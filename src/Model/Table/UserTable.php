@@ -85,17 +85,7 @@ class UserTable extends Table {
         }
     }
 
-    public function getNew($Id) {
-        $rows = $this->connect()->where(['UserId =' => $Id]);
-
-        foreach ($rows as $row) {
-            $newUser['UserId'] = $row->userId;
-            $newUser['UserName'] = $row->userName;
-        }
-
-        return $newUser;
-    }
-
+   
     public function userCkeck($userid, $usermail, $userName) {
         $rows = $this->connect()->find()->where(['UserId =' => $userid]);
         foreach ($rows as $row) {

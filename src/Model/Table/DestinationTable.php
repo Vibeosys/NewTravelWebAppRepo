@@ -64,8 +64,8 @@ class DestinationTable extends Table {
         $query->Latitude = $lat;
         $query->Longitude = $long;
         $query->Active = $active;
-        $query->CreatedDate = date('Y-m-d H-i-s');
-        $query->UpdatedDate = date('Y-m-d H-i-s');
+        $query->CreatedDate = date('Y-m-d H:i:s');
+        $query->UpdatedDate = date('Y-m-d H:i:s');
         if ($dest->save($query)) {
             $destinationDto = new \App\DTO\ClsDestinationDto($query->DestId, $name, $lat, $long, $active);
             $this->makeSyncUpdate($active, json_encode($destinationDto), 'Insert');
@@ -88,7 +88,7 @@ class DestinationTable extends Table {
         try {
             $update = $this->connect()->query();
             $update->update();
-            $update->set(['DestName' => $destName, 'Latitude' => $lat, 'Longitude' => $long, 'Active' => $active, 'UpdatedDate' => date('Y-m-d H-i-s')]);
+            $update->set(['DestName' => $destName, 'Latitude' => $lat, 'Longitude' => $long, 'Active' => $active, 'UpdatedDate' => date('Y-m-d H:i:s')]);
             $update->where(['DestId = ' => $destId]);
             if ($update->execute()) {
                 \Cake\Log\Log::debug("Destination Updated Title : " . $destName);
@@ -106,7 +106,7 @@ class DestinationTable extends Table {
         try {
             $update = $this->connect()->query();
             $update->update();
-            $update->set(['Active' => FAIL, 'UpdatedDate' => date('Y-m-d H-i-s')]);
+            $update->set(['Active' => FAIL, 'UpdatedDate' => date('Y-m-d H:i:s')]);
             $update->where(['DestId = ' => $destId]);
             if ($update->execute()) {
                 \Cake\Log\Log::debug("Destination Deleted DestId : " . $destId);

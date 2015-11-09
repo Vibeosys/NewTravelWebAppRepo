@@ -43,7 +43,7 @@ CREATE TABLE [stat_conf]
 CREATE TABLE [user] 
 ('UserId' TEXT NOT NULL PRIMARY KEY, 
 'UserName' TEXT NOT NULL,
-'PhotoURL'  TEXT NOT NULL);
+'PhotoURL'  TEXT NULL);
 
 
 
