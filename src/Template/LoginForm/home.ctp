@@ -59,7 +59,8 @@ $this->layout = false;
                     <span class="logo-mini"><b>A</b>N</span>
                     
                     <!-- logo for regular state and mobile devices-->
-                    <span class="logo-lg"></span> 
+                    <div class="cover-div">
+                        <span class="logo-lg"></span></div> 
                 </a>
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -134,21 +135,19 @@ $this->layout = false;
                     </ol>
                 </section>
                 <!-- Main content -->
-                <section class="content">
+                
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box"> 
-                                <!--  Edit Destination Section --><h1 class="admin-flash-h1">WelCome to Official  <span class="app-name"><i> Safer<span class="app-name-select"> Ka Sathi </span></i></span>  Website</h1>
-                                <div> <h2  class="admin-flash-h2"></h2>  </div>
-                                <div class="admin-flash-img">
-                                    
-                                    
+                                <div class="home-header"><h1 class="admin-flash-h1">WelCome to <span class="app-name"><i> Safer<span class="app-name-select"> Ka Sathi </span></i></span></h1>
+                                </div>
+                                <div id="admin-flash-img" class="admin-flash-img">
                                 </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->                       
                         </div><!-- /.col -->
                     
-                </section><!-- /.content -->
+                <!-- /.content -->
             </div><!-- /.content-wrapper -->
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">

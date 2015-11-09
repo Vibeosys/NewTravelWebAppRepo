@@ -41,13 +41,14 @@ class UploadController extends ApiController {
        
         $user = DTO\ClsUserDto::Deserialize($arr->user);
         if ($this->userValidation($user->userId, $user->emailId, $user->userName)) {
+            $senderUserId = $user->userId;
             foreach ($arr->data as $index => $record) {
                 \Cake\Log\Log::info('Index : '.$index.'Record :'.$record->tableName);
                 switch ($record->tableName) {
                     case $this->table['TC']:
                         \Cake\Log\Log::info("Comment section");
                         $commentDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                        $this->comment($user->userId, $commentDto);
+                        $this->comment($senderUserId, $commentDto);
                         break;
                     case $this->table['TL']:
                         $likeDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);

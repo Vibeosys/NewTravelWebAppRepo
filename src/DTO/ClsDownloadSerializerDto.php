@@ -16,11 +16,11 @@ class ClsDownloadSerializerDto{
   
     public  $tableName;
     public  $tableData;
-    public  $opration;
+    public  $operation;
     public function __construct($tableName, $tableData ,$operation) {
        $this->tableName = $tableName;
        $this->tableData = $tableData;
-       $this->opration = $operation;
+       $this->operation = $operation;
         
     }
     

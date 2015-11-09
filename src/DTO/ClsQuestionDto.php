@@ -15,12 +15,14 @@ class ClsQuestionDto {
     
     public $questionId;
     public $questionText;
+    public $active;
 
 
-    public function __construct($questionId,$questionText) {
+    public function __construct($questionId,$questionText, $active) {
         
         $this->questionId = $questionId;
         $this->questionText = $questionText;
+        $this->active = $active;
     }
     
 }

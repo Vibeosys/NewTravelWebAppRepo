@@ -7,7 +7,7 @@ namespace App\Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use Cake\Log;
 /**
  * Description of ApiController
  *
@@ -15,9 +15,12 @@ namespace App\Controller;
  */
 class ApiController extends AppController {
 
+    
+
     public function initialize() {
         parent::initialize();
         $this->response->type('json');
+       
     }
 
 }

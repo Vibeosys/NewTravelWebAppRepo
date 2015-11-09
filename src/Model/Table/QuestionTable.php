@@ -12,6 +12,7 @@ use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\Controller;
 use App\DTO;
+use App\DTO\DownloadDto;
 
 /**
  * Description of QuestionTable
@@ -59,7 +60,7 @@ class QuestionTable extends Table {
             $entity->CreatedDate = date('Y-m-d H:i:s');
             $entity->UpdatedDate = date('Y-m-d H:i:s');
             if ($this->connect()->save($entity)) {
-                $questionDto = new DTO\ClsQuestionDto($entity->QuestionId, $questionText);
+                $questionDto = new DownloadDto\QuestionDto($entity->QuestionId, $questionText);
                 $syncController = new Controller\SyncController();
                 $syncController->questionEntry(json_encode($questionDto), INSERT);
                 return $entity->QuestionId;
@@ -76,7 +77,7 @@ class QuestionTable extends Table {
             $update->set(['QuestionText ' => $questionText, 'Active' => $status]);
             $update->where(['QuestionId =' => $questionId]);
             if ($update->execute()) {
-                $questionDto = new DTO\ClsQuestionDto($entity->QuestionId, $questionText);
+                $questionDto = new DownloadDto\QuestionDto($questionId, $questionText);
                 $syncController = new Controller\SyncController();
                 $syncController->questionEntry(json_encode($questionDto), UPDATE);
                 return SUCCESS;

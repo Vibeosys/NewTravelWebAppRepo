@@ -12,6 +12,7 @@ use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\DTO;
 use App\Controller;
+use App\DTO\DownloadDto;
 
 /**
  * Description of OptionTable
@@ -47,7 +48,7 @@ class OptionsTable extends Table {
         $i = 0;
         foreach ($rows as $row) {
             if($row->Active){
-            $optionDto = new DTO\ClsOptionsDto($row->OptionId, $row->OptionText);
+            $optionDto = new DownloadDto\OptionsDto($row->OptionId, $row->OptionText, $questionId);
             $allOption[$i] = $optionDto;
             $i++;
             }
@@ -68,7 +69,7 @@ class OptionsTable extends Table {
             $entity->OptionText = $optionText;
             $entity->QuestionId = $questionId;
             if ($this->connect()->save($entity)) {
-                $optionDto = new DTO\ClsOptionsDto($entity->optionId, $optionText, $questionId);
+                $optionDto = new DownloadDto\OptionsDto($entity->OptionId, $optionText, $questionId);
                 $syncController = new Controller\SyncController();
                 $syncController->questionEntry(json_encode($optionDto), INSERT);
                 return $entity->optionId;

@@ -12,6 +12,7 @@ use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use App\DTO;
 use App\Controller;
+use App\DTO\DownloadDto;
 
 /**
  * Description of DestTable
@@ -67,8 +68,8 @@ class DestinationTable extends Table {
         $query->CreatedDate = date('Y-m-d H:i:s');
         $query->UpdatedDate = date('Y-m-d H:i:s');
         if ($dest->save($query)) {
-            $destinationDto = new \App\DTO\ClsDestinationDto($query->DestId, $name, $lat, $long, $active);
-            $this->makeSyncUpdate($active, json_encode($destinationDto), 'Insert');
+            $destinationDto = new DownloadDto\DestinationDto($query->DestId, $name, $lat, $long);
+            $this->makeSyncUpdate($active, json_encode($destinationDto), INSERT);
             return SUCCESS;
         }
         return FAIL;
@@ -92,8 +93,8 @@ class DestinationTable extends Table {
             $update->where(['DestId = ' => $destId]);
             if ($update->execute()) {
                 \Cake\Log\Log::debug("Destination Updated Title : " . $destName);
-                $destinationDto = new \App\DTO\ClsDestinationDto($destId, $destName, $lat, $long, $active);
-                $this->makeSyncUpdate($active, json_encode($destinationDto), 'Update');
+                $destinationDto = new DownloadDto\DestinationDto($destId, $destName, $lat, $long);
+                $this->makeSyncUpdate($active, json_encode($destinationDto),UPDATE);
                 return SUCCESS;
             }
             return FAIL;
@@ -110,8 +111,8 @@ class DestinationTable extends Table {
             $update->where(['DestId = ' => $destId]);
             if ($update->execute()) {
                 \Cake\Log\Log::debug("Destination Deleted DestId : " . $destId);
-                $destinationDto = $this->getSingleDestination($destId);
-                $this->makeSyncUpdate($active = null, json_encode($destinationDto), 'Update');
+                //$destinationDto = $this->getSingleDestination($destId);
+                //$this->makeSyncUpdate($active = null, json_encode($destinationDto), UPDATE);
                 return SUCCESS;
             }
             return FAIL;
@@ -120,10 +121,10 @@ class DestinationTable extends Table {
         }
     }
 
-    private function makeSyncUpdate($active, $json, $opration) {
-        if ($active or $opration == 'Update') {
+    private function makeSyncUpdate($active, $json, $operation) {
+        if ($active or $operation == 'Update') {
             $syncController = new Controller\SyncController();
-            $syncController->destEntry($json, $opration);
+            $syncController->destEntry($json, $operation);
         }
     }
 

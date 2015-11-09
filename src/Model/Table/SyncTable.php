@@ -26,13 +26,13 @@ class SyncTable extends Table {
         return TableRegistry::get('sync');
     }
 
-    public function Insert($userId, $update, $table, $opration) {
+    public function Insert($userId, $update, $table, $operation) {
        try{
         $query = $this->connect()->newEntity();
         $query->UserId = $userId;
         $query->JsonSync = $update;
         $query->TableName = $table;
-        $query->Opration = $opration;
+        $query->Operation = $operation;
         $query->UpdatedDate = date("Y-m-d H:i:s");
         $this->connect()->save($query);
        }  catch (Excetion $e){
@@ -41,12 +41,13 @@ class SyncTable extends Table {
     }
 
     public function getUpdate($userId) {
-        $rows = $this->connect()->find()->where(['UserId = ' => $userId]);
+        $rows = $this->connect()->find('all', ['order' => ['UpdatedDate' => 'ASC']
+              ])->where(['UserId = ' => $userId]);
         $updateCount = $rows->count();
         if ($updateCount) {
             $i = 0;
             foreach ($rows as $row) {
-                $downloadSerielizer = new DTO\ClsDownloadSerializerDto($row->TableName, $row->JsonSync, $row->Opration);
+                $downloadSerielizer = new DTO\ClsDownloadSerializerDto($row->TableName, $row->JsonSync, $row->Operation);
                 $update[$i] = $downloadSerielizer;
                 $i++;
             }

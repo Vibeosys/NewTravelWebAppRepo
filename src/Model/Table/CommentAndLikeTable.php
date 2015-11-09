@@ -78,7 +78,7 @@ class CommentAndLikeTable extends Table {
             if ($this->connect()->save($query)) {
                  $json = json_encode(new DTO\ClsLikeDto($userid, $destid, LIKE));
                 $syncController = new \App\Controller\SyncController();
-                $syncController->likeEntry($userid, $json, INSERT);
+                $syncController->likeEntry($senderUserId,$userid, $json, INSERT);
                 return SUCCESS;
             } else {
                 return FAIL;
@@ -109,7 +109,7 @@ class CommentAndLikeTable extends Table {
             if ($this->connect()->save($query)) {
                   $json = json_encode(new DTO\ClsCommentDto($userid, $destid, $comment, $current));
                 $syncController = new \App\Controller\SyncController();
-                $syncController->commentEntry($userid, json_encode($json), INSERT);
+                $syncController->commentEntry($senderUserId, $userid, $json, INSERT);
                 return SUCCESS;
             } else {
                 return FAIL;

@@ -46,10 +46,10 @@ class AnswerTable extends Table {
         $query->UserId = $userid;
         $query->DestId = $destid;
         $query->OptionId = $optionid;
-        $query->CreatedDate = date('Y-m-d H:i:s');
+        $query->CreatedDate = $current = date('Y-m-d H:i:s');
         $query->UpdatedDate = date('Y-m-d H:i:s');
         if ($answer->save($query)) {
-            $json = json_encode(new DTO\ClsAnswerDto($userid, $destid, $optionid, $query->AnswerId));
+            $json = json_encode(new DTO\ClsAnswerDto($userid, $destid, $optionid, $query->AnswerId, $current));
             $syncController = new \App\Controller\SyncController();
             $syncController->answerEntry($senderUserId,$userid, $json, INSERT);
             \Cake\Log\Log::debug("Sync Entry for Answer");

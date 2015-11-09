@@ -34,8 +34,8 @@ class CommentAndLikeController extends ApiController {
 
         $this->autoRender = false;
         if ($comment) {
-            
-            if ($this->getTableObj()->insertComment($senderUserId,$comment->userId,$comment->destId,$comment->commentText)) {
+             $result = $this->getTableObj()->insertComment($senderUserId,$comment->userId,$comment->destId,$comment->commentText);
+            if ($result) {
                
                 $this->response->body(\App\DTO\ClsErrorDto::prepareSuccessMessage("Comment Saved"));
                 \Cake\Log\Log::debug("comment insert in db for user : ".$comment->userId);

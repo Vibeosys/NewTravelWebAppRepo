@@ -50,8 +50,7 @@ class LoginFormController extends FormController {
     
     public function home() {
        // $this->autoRender = false;
-        $value = $this->request->params;
-        \Cake\Log\Log::debug("value : ".$value);
+       
         session_start();
         if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
             

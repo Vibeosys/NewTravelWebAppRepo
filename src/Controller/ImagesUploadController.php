@@ -48,7 +48,6 @@ class ImagesUploadController extends ApiController {
                     \Cake\Log\Log::error("Invalid image extension");
                 }
             } else {
-
                 $imagesController = new ImagesController();
                 $result = $imagesController->uploadProfileImage($data);
                 if ($result) {

@@ -39,7 +39,7 @@ class UpdateUserController extends ApiController{
             $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("User updated successfully for userid ".$userDto->userId));
             $syncController = new SyncController;
             $downloadUserDto = new DownloadDto\UserDto($userDto->userId, $userDto->userName, $userDto->photoUrl);
-            $syncController->userEntry(json_encode($downloadUserDto),INSERT);
+            $syncController->userEntry($userDto->userId, json_encode($downloadUserDto),INSERT);
         }  else {
               $this->response->body(DTO\ClsErrorDto::prepareError(108));
         }
