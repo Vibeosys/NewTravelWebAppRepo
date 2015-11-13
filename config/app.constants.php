@@ -8,11 +8,7 @@
 
 define('NOT_FOUND', 0);
 
-
-
 define('SUCCESS', 1);
-
-
 
 define('FAIL', 0);
 
@@ -24,6 +20,6 @@ define('LOCAL_ENV', true);
 
 define('LIKE', 1);
 
+define('OTP_EMAIL_SUBJECT', 'OTP for Safar ka sathi');
 
-
-
+define('OTP_EMAIL_BODY', 'Welcome to Safar ka sathi, a travellers world. </br></br> Your One Time Password is %1$d, please use this password for activation of your account. </br></br> Regards</br>Team Safar Ka Sathi');

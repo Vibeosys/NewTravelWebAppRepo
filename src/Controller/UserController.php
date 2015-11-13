@@ -9,6 +9,7 @@ namespace App\Controller;
  */
 
 use App\Model\Table;
+use App\DTO;
 
 /**
  * Description of DemoController
@@ -32,7 +33,6 @@ class UserController extends ApiController {
         return FAIL;
     }
 
-   
     public function getAllUser() {
         return $this->getTableObj()->getAll();
     }
@@ -44,14 +44,51 @@ class UserController extends ApiController {
         }
         $preparedStatement = '';
         foreach ($allUser as $user) {
-           // \Cake\Log\Log::debug("active field value from user table : ".var_dump($user->active));
-            if($user->active){
-            $preparedStatement.= USER_INS_QRY;
-            $preparedStatement = str_replace('@UserId', $user->userId, $preparedStatement);
-            $preparedStatement = str_replace('@UserName', $user->userName, $preparedStatement);
-            $preparedStatement = str_replace('@PhotoUrl', $user->photoUrl, $preparedStatement);
-        }}
+            // \Cake\Log\Log::debug("active field value from user table : ".var_dump($user->active));
+            if ($user->active) {
+                $preparedStatement.= USER_INS_QRY;
+                $preparedStatement = str_replace('@UserId', $user->userId, $preparedStatement);
+                $preparedStatement = str_replace('@UserName', $user->userName, $preparedStatement);
+                $preparedStatement = str_replace('@PhotoUrl', $user->photoUrl, $preparedStatement);
+            }
+        }
         return $preparedStatement;
+    }
+
+    public function sendOtp() {
+        $this->autoRender = false;
+        $json = $this->request->input();
+
+        $userOtp = DTO\ClsUserDto::Deserialize($json);
+        $userToEmailid = $userOtp->emailId;
+
+        if (empty($userToEmailid)) {
+            $this->response->body(\App\DTO\ClsErrorDto::prepareError(118));
+            //$this->response->send();
+            return;
+        }
+        
+        $otp = rand(1000, 999999);
+        $subject = OTP_EMAIL_SUBJECT;
+        $message = sprintf(OTP_EMAIL_BODY, $otp);
+        //Update the OTP in database
+        $result = $this->getTableObj()->updateOtp($userOtp -> userId, $otp);
+        
+        $emailClient = new \Cake\Mailer\Email('default');
+        $emailClient ->addBcc('anand@vibeosys.com','Anand Kulkarni');
+        $emailClient ->subject($subject);
+        $emailClient ->to($userToEmailid);
+        $emailClient ->send($message);
+        
+        if ($result) {
+            $this->response->body(\App\DTO\ClsErrorDto::prepareSuccessMessage("verification email was sent to email : " . $userToEmailid));
+            //$this->response->send();
+            return;
+        } else {
+            $this->response->body(\App\DTO\ClsErrorDto::prepareError(115));
+            //$this->response->send();
+            return;
+        }
     }
 
 }
