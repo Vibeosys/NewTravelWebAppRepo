@@ -35,8 +35,8 @@ class UploadController extends ApiController {
 
         $arr = DTO\ClsUploadDeserializerDto::Deserialize($json);
         if(empty($arr->user) or empty($arr->data)){
-            $this->response->body(DTO\ClsErrorDto::prepareError(117));
-             return ;
+           // $this->response->body(DTO\ClsErrorDto::prepareError(117));
+             return;
         }
        
         $user = DTO\ClsUserDto::Deserialize($arr->user);
@@ -48,25 +48,25 @@ class UploadController extends ApiController {
                     case $this->table['TC']:
                         \Cake\Log\Log::info("Comment section");
                         $commentDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                        $this->comment($senderUserId, $commentDto);
+                        $this->uploadComment($senderUserId, $commentDto);
                         break;
                     case $this->table['TL']:
                         $likeDto = DTO\ClsCommentAndLikeDto::Deserialize($record->tableData);
-                        $this->like($user->userId,$likeDto);
+                        $this->uploadLike($user->userId,$likeDto);
                         break;
                     case $this->table['TA']:
                         $answerDto = DTO\ClsAnswerDto::Deserialize($record->tableData);
                         \Cake\Log\Log::debug("Accepted Answer data");
                         $this->uploadAnswer($user->userId,$answerDto);
                         break;
-                    case $this->table['TU']:
-                        $userDto = DTO\ClsUserDto::Deserialize($record->tableData);
-                        $this->user($user->userId,$userDto);
-                        break;
-                    case $this->table['TI']:
-                        $imageDto = DTO\ClsImagesDto::Deserialize($record->tableData);
-                        $this->image($imageDto);
-                        break;
+//                    case $this->table['TU']:
+//                        $userDto = DTO\ClsUserDto::Deserialize($record->tableData);
+//                        $this->uploadUser($user->userId,$userDto);
+//                        break;
+//                    case $this->table['TI']:
+//                        $imageDto = DTO\ClsImagesDto::Deserialize($record->tableData);
+//                        $this->image($imageDto);
+//                        break;
                 }
             }
         } else {
@@ -74,7 +74,7 @@ class UploadController extends ApiController {
         }
     }
 
-    private function comment($senderUserId, $commentDto) {
+    private function uploadComment($senderUserId, $commentDto) {
         $commentAndLikeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Comment DTO object send to submit');
         if ($commentAndLikeController->submitComment($senderUserId,$commentDto)) {
@@ -82,7 +82,7 @@ class UploadController extends ApiController {
         }
     }
 
-    private function like($senderUserId,$likeDto) {
+    private function uploadLike($senderUserId,$likeDto) {
         $likeController = new CommentAndLikeController();
         \Cake\Log\Log::info('Like DTO object send to submit');
         $likeController->submitLike($senderUserId,$likeDto);
@@ -98,13 +98,13 @@ class UploadController extends ApiController {
         }
     }
 
-    private function images($imageDto) {
-      
-        $imagecontroller = new ImagesController();
-        if ($imagecontroller->saveImages($imageDto)) {
-            \Cake\Log\Log::debug("Images saved in local Database");
-        }
-    }
+//    private function images($imageDto) {
+//      
+//        $imagecontroller = new ImagesController();
+//        if ($imagecontroller->saveImages($imageDto)) {
+//            \Cake\Log\Log::debug("Images saved in local Database");
+//        }
+//    }
 
     public function userValidation($userid, $usermail, $userName) {
         $userTable = new Table\UserTable();

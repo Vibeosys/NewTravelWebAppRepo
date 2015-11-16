@@ -71,7 +71,7 @@ class OptionsTable extends Table {
             if ($this->connect()->save($entity)) {
                 $optionDto = new DownloadDto\OptionsDto($entity->OptionId, $optionText, $questionId);
                 $syncController = new Controller\SyncController();
-                $syncController->questionEntry(json_encode($optionDto), INSERT);
+                $syncController->optionEntry(json_encode($optionDto), INSERT);
                 return $entity->optionId;
             }
             return FAIL;

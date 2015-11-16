@@ -95,10 +95,10 @@ class SyncController extends ApiController {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
         foreach ($allUser as $user) {
-            if($user->userId != $userId and $user->userId != $senderUserId){
+            
                 $this->getTableObj()->Insert($user->userId,$json, $this->answerTable,$operation);
             
-        }}
+        }
     }
 
     public function likeEntry($senderUserId,$userId, $json, $operation) {

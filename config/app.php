@@ -1,5 +1,6 @@
 
 <?php
+
 return [
     /**
      * Debug Level:
@@ -11,7 +12,6 @@ return [
      * true: Errors and warnings shown.
      */
     'debug' => true,
-
     /**
      * Configure basic information about the application.
      *
@@ -54,7 +54,6 @@ return [
             'locales' => [APP . 'Locale' . DS],
         ],
     ],
-
     /**
      * Security and encryption configuration
      *
@@ -65,7 +64,6 @@ return [
     'Security' => [
         'salt' => '1e7d6fe87256620078865fce7dcf684a3c8a93b1e71a46e1d628ca8ce1972970',
     ],
-
     /**
      * Apply timestamps with the last modified time to static assets (js, css, images).
      * Will append a querystring parameter containing the time the file was modified.
@@ -75,9 +73,8 @@ return [
      * enable timestamping regardless of debug value.
      */
     'Asset' => [
-        // 'timestamp' => true,
+    // 'timestamp' => true,
     ],
-
     /**
      * Configure the cache adapters.
      */
@@ -86,7 +83,6 @@ return [
             'className' => 'File',
             'path' => CACHE,
         ],
-
         /**
          * Configure the cache used for general framework caching.
          * Translation cache files are stored with this configuration.
@@ -98,7 +94,6 @@ return [
             'serialize' => true,
             'duration' => '+2 minutes',
         ],
-
         /**
          * Configure the cache for model and datasource caches. This cache
          * configuration is used to store schema descriptions, and table listings
@@ -112,7 +107,6 @@ return [
             'duration' => '+2 minutes',
         ],
     ],
-
     /**
      * Configure the Error and Exception handlers used by your application.
      *
@@ -146,7 +140,6 @@ return [
         'log' => true,
         'trace' => true,
     ],
-
     /**
      * Email configuration.
      *
@@ -168,18 +161,25 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => 'Mail',
+            'className' => 'Smtp',
             // The following keys are used in SMTP transports
-            'host' => 'localhost',
-            'port' => 25,
+            'host' => 'smtp.office365.com',
+            'port' => 587,
             'timeout' => 30,
-            'username' => 'user',
-            'password' => 'secret',
+            'username' => 'anand@vibeosys.com',
+            'password' => 'andy@123',
             'client' => null,
-            'tls' => null,
+            'tls' => true,
         ],
+        'gmail' => [
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'username' => 'andyskulkarni@gmail.com',
+            'password' => 'anand1234',
+            'className' => 'Smtp',
+            'tls' => true
+        ]
     ],
-
     /**
      * Email delivery profiles
      *
@@ -192,12 +192,19 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => 'you@localhost',
-            //'charset' => 'utf-8',
-            //'headerCharset' => 'utf-8',
+            'from' => 'anand@vibeosys.com',
+            'emailFormat' => 'html'
+        //'charset' => 'utf-8',
+        //'headerCharset' => 'utf-8',
+        ],
+        'gmail' => [
+            'transport' => 'gmail',
+            'from' => 'andyskulkarni@gmail.com',
+            'emailFormat' => 'html'
+        //'charset' => 'utf-8',
+        //'headerCharset' => 'utf-8',
         ],
     ],
-
     /**
      * Connection information used by the ORM to connect
      * to your application's datastores.
@@ -210,13 +217,12 @@ return [
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => '192.168.1.6',
-           
             /**
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
-             'username' => 'dev',
+            'username' => 'dev',
             'password' => 'dev',
             //'port' => 'nonstandard_port_number',
 //            'host' => 'localhost',
@@ -227,7 +233,6 @@ return [
             'timezone' => 'UTC',
             'cacheMetadata' => true,
             'log' => false,
-
             /**
              * Set identifier quoting to true if you are using reserved words or
              * special characters in your table or column names. Enabling this
@@ -237,41 +242,38 @@ return [
              * manipulated before being executed.
              */
             'quoteIdentifiers' => false,
-
-            /**
-             * During development, if using MySQL < 5.6, uncommenting the
-             * following line could boost the speed at which schema metadata is
-             * fetched from the database. It can also be set directly with the
-             * mysql configuration directive 'innodb_stats_on_metadata = 0'
-             * which is the recommended value in production environments
-             */
-            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
-        ],
-
         /**
-         * The test connection is used during the test suite.
+         * During development, if using MySQL < 5.6, uncommenting the
+         * following line could boost the speed at which schema metadata is
+         * fetched from the database. It can also be set directly with the
+         * mysql configuration directive 'innodb_stats_on_metadata = 0'
+         * which is the recommended value in production environments
          */
-        /*
-        'test' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\sqlite',
-            'persistent' => false,
-            'host' => 'localhost',
-            //'port' => 'nonstandard_port_number',
-            'username' => 'my',
-            'password' => 'set',
-            'database' => 'Traveldb',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-            'quoteIdentifiers' => false,
-            'log' => false,
-            //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+        //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         ],
-         * 
-         */
+    /**
+     * The test connection is used during the test suite.
+     */
+    /*
+      'test' => [
+      'className' => 'Cake\Database\Connection',
+      'driver' => 'Cake\Database\Driver\sqlite',
+      'persistent' => false,
+      'host' => 'localhost',
+      //'port' => 'nonstandard_port_number',
+      'username' => 'my',
+      'password' => 'set',
+      'database' => 'Traveldb',
+      'encoding' => 'utf8',
+      'timezone' => 'UTC',
+      'cacheMetadata' => true,
+      'quoteIdentifiers' => false,
+      'log' => false,
+      //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+      ],
+     * 
+     */
     ],
-
     /**
      * Configures logging options
      */
@@ -289,7 +291,6 @@ return [
             'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
         ],
     ],
-
     /**
      * Session configuration.
      *
