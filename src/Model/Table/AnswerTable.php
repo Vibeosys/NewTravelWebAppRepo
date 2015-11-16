@@ -39,23 +39,48 @@ class AnswerTable extends Table {
         return $all;
     }
 
-    public function Insert($senderUserId,$userid, $destid, $optionid) {
+    public function Insert($userid, $destid, $optionid) {
         $answer = $this->connect();
         $query = $answer->newEntity();
 
         $query->UserId = $userid;
         $query->DestId = $destid;
         $query->OptionId = $optionid;
-        $query->CreatedDate = $current = date('Y-m-d H:i:s');
+        $query->CreatedDate = date('Y-m-d H:i:s');
         $query->UpdatedDate = date('Y-m-d H:i:s');
         if ($answer->save($query)) {
-            $json = json_encode(new DTO\ClsAnswerDto($userid, $destid, $optionid, $query->AnswerId, $current));
-            $syncController = new \App\Controller\SyncController();
-            $syncController->answerEntry($senderUserId,$userid, $json, INSERT);
-            \Cake\Log\Log::debug("Sync Entry for Answer");
-            return SUCCESS;
+           
+            return $query->AnswerId;
         }
         return FAIL;
+    }
+    
+    public function update($answerDto) {
+        try{
+            $answer = $this->connect()->query()->update();
+            $answer->set(['OptionId' => $answerDto->optionId]);
+            $answer->where(['UserId =' => $answerDto->userId,'DestId =' => $answerDto->destId]);
+            if($answer->execute()){
+                return SUCCESS;
+            }
+            return FAIL;
+        } catch (Exception $ex) {
+            return FAIL;
+        }
+    }
+    
+    public function isAnswerNew($answerDto) {
+        try{
+           $row = $this->connect()->find()->where(['UserId =' => $answerDto->userId,'DestId =' => $answerDto->destId,'OptionId =' => $answerDto->optionId]);
+           $count = $row->count(); 
+            if($count){
+                return SUCCESS;
+            }
+            return FAIL;
+        } catch (Exception $ex) {
+            return FAIL;
+        }
+        
     }
 
 }

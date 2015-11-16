@@ -57,7 +57,8 @@ class ClsErrorDto {
         116 => 'Please choose valid input',
         117 => 'Invalid data',
         118 => 'Invalid to email address',
-        119 => 'OTP verification failed'
+        119 => 'OTP verification failed',
+        120 => 'Answer Not Saved'
        ];
     
     

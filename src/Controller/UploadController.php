@@ -57,7 +57,7 @@ class UploadController extends ApiController {
                     case $this->table['TA']:
                         $answerDto = DTO\ClsAnswerDto::Deserialize($record->tableData);
                         \Cake\Log\Log::debug("Accepted Answer data");
-                        $this->answer($user->userId,$answerDto);
+                        $this->uploadAnswer($user->userId,$answerDto);
                         break;
                     case $this->table['TU']:
                         $userDto = DTO\ClsUserDto::Deserialize($record->tableData);
@@ -88,12 +88,12 @@ class UploadController extends ApiController {
         $likeController->submitLike($senderUserId,$likeDto);
     }
 
-    private function answer($senderUserId,$answerDto) {
+    private function uploadAnswer($senderUserId,$answerDto) {
 
         $answercontroller = new AnswerController();
         \Cake\Log\Log::info('Answer DTO object send to submit');
         if ($answercontroller->submit($senderUserId,$answerDto)) {
-            $this->response->body(DTO\ClsErrorDto::prepareSuccessMessage("Answer Saved"));
+           
             \Cake\Log\Log::debug("Answer stored in database");
         }
     }

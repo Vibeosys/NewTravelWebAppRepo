@@ -45,7 +45,7 @@ class ImagesController extends ApiController {
             return;
         }
         $binary = base64_decode($data['upload']);
-        $filename = $data['imagename'];
+        $filename = $data['imageName'];
         $ext = $this->getExtension($filename);
         if (!in_array($ext, $this->extension)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(105));
@@ -75,7 +75,7 @@ class ImagesController extends ApiController {
 
     public function uploadProfileImage($data) {
         $binary = base64_decode($data['upload']);
-        $filename = $data['imagename'];
+        $filename = $data['imageName'];
         $ext = $this->getExtension($filename);
         \Cake\Log\Log::info("image extension : " . $ext);
         if (!in_array($ext, $this->extension)) {
