@@ -78,8 +78,9 @@ class DestinationTable extends Table {
     public function getName($destId) {
         try {
             $rows = $this->connect()->find()->where(['DestId = ' => $destId]);
-            foreach ($rows as $row)
+            foreach ($rows as $row) {
                 return $row->DestName;
+            }
         } catch (Exception $ex) {
             echo 'message:' . $ex->getMessage();
         }

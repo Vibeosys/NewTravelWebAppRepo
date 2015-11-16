@@ -76,13 +76,12 @@ class OptionsTable extends Table {
             }
             return FAIL;
         } catch (Exception $ex) {
-            echo 'Database error occured' . $ex->getMessage();
+            return FAIL;
         }
     }
 
     public function update($questionId, $updatedOption) {
         try {
-            
             $rows = $this->connect()->find()->where(['QuestionId =' => $questionId]);
             foreach ($rows as $row) {
                 if (in_array($row->OptionText, $updatedOption)) {
@@ -101,7 +100,7 @@ class OptionsTable extends Table {
                 }
             }
         } catch (Exception $ex) {
-            echo 'Database error occured' . $ex->getMessage();
+            return FAIL;
         }
     }
 

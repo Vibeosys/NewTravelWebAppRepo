@@ -17,7 +17,6 @@ use App\DTO;
  *
  * @author niteen
  */
-
 class CommentAndLikeTable extends Table {
 
     // to get object of table registry for database operation
@@ -33,97 +32,69 @@ class CommentAndLikeTable extends Table {
         $rows = $this->connect()->find();
         $i = 0;
         foreach ($rows as $row) {
-            $commentAndLikeDto = new DTO\ClsCommentAndLikeDto($row->UserId, $row->DestId, 
-               $row->LikeCount, $row->CommentText, $row->CommentUpdatedDate);
+            $commentAndLikeDto = new DTO\ClsCommentAndLikeDto($row->UserId, $row->DestId, $row->LikeCount, $row->CommentText, $row->CommentUpdatedDate);
             $allCommentAndLike[$i] = $commentAndLikeDto;
             $i++;
         }
         return $allCommentAndLike;
     }
 
-    public function getComment() {
-        $rows = $this->connect()->find();
-        $i = 0;
-        foreach ($rows as $row) {
-            $Comment[$i]['UserId'] = $row->UserId;
-            $Comment[$i]['DestId'] = $row->DestId;
-            $Comment[$i]['Comment'] = $row->Comment;
-            $i = $i + 1;
-        }
-        return $Comment;
-    }
-
-    public function insertLike($senderUserId,$userid, $destid) {
-        $check = $this->ispresent($userid, $destid);
-        if ($check) {
-            $count = ++$check->LikeCount;
-            $query = $this->connect()->query();
-            $query->update();
-            $query->set(['LikeCount' => $count, 'LikeUpdatedDate' => date('Y-m-d H:i:s')]);
-            $query->where(['UserId =' => $userid, 'DestId =' => $destid]);
-            if ($query->execute()) {
-                 $json = json_encode(new DTO\ClsLikeDto($userid, $destid, $count));
-                $syncController = new \App\Controller\SyncController();
-                $syncController->likeEntry($senderUserId,$userid, $json, UPDATE);
-                return SUCCESS;
-            } else {
-                return FAIL;
-            }
+    public function insertLike($userid, $destid) {
+        $query = $this->connect()->newEntity();
+        $query->UserId = $userid;
+        $query->DestId = $destid;
+        $query->LikeCount = LIKE;
+        $query->LikeUpdatedDate = date('Y-m-d H:i:s');
+        if ($this->connect()->save($query)) {
+            return SUCCESS;
         } else {
-            $query = $this->connect()->newEntity();
-            $query->UserId = $userid;
-            $query->DestId = $destid;
-            $query->LikeCount = LIKE;
-            $query->LikeUpdatedDate = date('Y-m-d H:i:s');
-            if ($this->connect()->save($query)) {
-                 $json = json_encode(new DTO\ClsLikeDto($userid, $destid, LIKE));
-                $syncController = new \App\Controller\SyncController();
-                $syncController->likeEntry($senderUserId,$userid, $json, INSERT);
-                return SUCCESS;
-            } else {
-                return FAIL;
-            }
+            return FAIL;
         }
     }
 
-    public function insertComment($senderUserId,$userid, $destid, $comment) {
-        $check = $this->ispresent($userid, $destid);
-        if ($check) {
-            $query = $this->connect()->query()->update();
-            $query->set(['CommentText' => $comment,'CommentUpdatedDate' => $current = date('Y-m-d H:i:s')]);
-            $query->where(['UserId ='=> $userid ,'DestId =' => $destid]);
-            if ($query->execute()) {
-                 $json = json_encode(new DTO\ClsCommentDto($userid, $destid, $comment, $current));
-                $syncController = new \App\Controller\SyncController();
-                $syncController->commentEntry($senderUserId,$userid, $json, UPDATE);
-                return SUCCESS;
-            } else {
-                return FAIL;
-            }
-        } else {
+    public function updateLike($count, $userid, $destid) {
+        $count++;
+        $query = $this->connect()->query();
+        $query->update();
+        $query->set(['LikeCount' => $count, 'LikeUpdatedDate' => date('Y-m-d H:i:s')]);
+        $query->where(['UserId =' => $userid, 'DestId =' => $destid]);
+        if ($query->execute()) {
+            return $count;
+        }
+        return FAIL;
+    }
+
+    public function insertComment($userid, $destid, $comment) {
             $query = $this->connect()->newEntity();
             $query->UserId = $userid;
             $query->DestId = $destid;
             $query->CommentText = $comment;
             $query->CommentUpdatedDate = $current = date('Y-m-d H:i:s');
             if ($this->connect()->save($query)) {
-                  $json = json_encode(new DTO\ClsCommentDto($userid, $destid, $comment, $current));
-                $syncController = new \App\Controller\SyncController();
-                $syncController->commentEntry($senderUserId, $userid, $json, INSERT);
-                return SUCCESS;
+                return $current;
             } else {
                 return FAIL;
             }
-        }
     }
 
-    private function ispresent($userid, $destid) {
+    public function updateComment($userId, $destId, $comment) {
+
+        $query = $this->connect()->query()->update();
+        $query->set(['CommentText' => $comment, 'CommentUpdatedDate' => $current = date('Y-m-d H:i:s')]);
+        $query->where(['UserId =' => $userId, 'DestId =' => $destId]);
+        if ($query->execute()) {
+            return $current;
+        }
+        return FAIL;
+    }
+
+    public function ispresent($userid, $destid) {
         $checks = $this->connect()->find()->where(['UserId =' => $userid, 'DestId =' => $destid]);
         $check = null;
-        foreach ($checks as $check){
+        foreach ($checks as $check) {
             return $check;
         }
-        \Cake\Log\Log::info("user count for like insert : ".$check);
+        \Cake\Log\Log::info("user count for like insert : " . $check);
         return FAIL;
     }
 
