@@ -37,7 +37,7 @@ class LoginFormController extends FormController {
                
                // \Cake\Log\Log::info("Cookie varible after created: ".$_SESSION['login']);
                // \Cake\Log\Log::debug("redirect to destiationform controller");
-          $this->redirect(['controller' => 'LoginForm','action' => 'home']);
+          $this->redirect(['controller' => 'HomeForm','action' => 'adminPanel']);
             }else{
                 $_SESSION['message'] = 'Username and Password wrong !!';
                $this->redirect(['controller' => 'LoginForm','action' => 'index']); 
