@@ -8,7 +8,6 @@ namespace App\Controller;
  * and open the template in the editor.
  */
 
-
 use Cake\ORM\TableRegistry;
 use App\Model\Table;
 use App\DTO;
@@ -38,100 +37,113 @@ class SyncController extends ApiController {
         return new Table\SyncTable();
     }
 
-    public function userEntry($senderUserId, $json,$operation) {
+    public function userEntry($senderUserId, $json, $operation) {
         $userController = new UserController();
         $allUser = $userController->getAllUser();
-        foreach ($allUser as $user) {
-            if ($user->userId != $senderUserId) {
-                $this->getTableObj()->Insert($user->userId, $json, $this->userTable,$operation);
+        if ($allUser) {
+            foreach ($allUser as $user) {
+                if ($user->userId != $senderUserId) {
+                    $this->getTableObj()->Insert($user->userId, $json, $this->userTable, $operation);
+                }
             }
         }
     }
 
-    public function destEntry($json,$operation) {
+    public function destEntry($json, $operation) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
-        foreach ($allUser as $user) {
-       
-                $this->getTableObj()->Insert($user->userId, $json, $this->destTable,$operation);
-            
+        if ($allUser) {
+            foreach ($allUser as $user) {
+
+                $this->getTableObj()->Insert($user->userId, $json, $this->destTable, $operation);
+            }
         }
     }
 
-    public function questionEntry($json,$operation) {
+    public function questionEntry($json, $operation) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
-       
-        foreach ($allUser as $user) {
-          
-                $this->getTableObj()->Insert($user->userId, $json, $this->queTable,$operation);
-          
+        if ($allUser) {
+            foreach ($allUser as $user) {
+
+                $this->getTableObj()->Insert($user->userId, $json, $this->queTable, $operation);
+            }
         }
     }
-    
-    public function optionEntry($json,$operation) {
+
+    public function optionEntry($json, $operation) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
         $i = 0;
-        foreach ($allUser as $user) {
-          
-                $this->getTableObj()->Insert($user->userId, $json, $this->optionTable,$operation);
-          
+        if ($allUser) {
+            foreach ($allUser as $user) {
+
+                $this->getTableObj()->Insert($user->userId, $json, $this->optionTable, $operation);
+            }
         }
     }
-    public function statConfEntry($json,$operation) {
+
+    public function statConfEntry($json, $operation) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
         $i = 0;
-        foreach ($allUser as $user) {
-          
-                $this->getTableObj()->Insert($user->userId, $json, $this->statConfTable,$operation);
-          
-        }
-    }
-    
+        if ($allUser) {
+            foreach ($allUser as $user) {
 
-    public function answerEntry($senderUserId,$userId,$json, $operation) {
-        $UserObj = new UserController;
-        $allUser = $UserObj->getAllUser();
-        foreach ($allUser as $user) {
-            
-                $this->getTableObj()->Insert($user->userId,$json, $this->answerTable,$operation);
-            
-        }
-    }
-
-    public function likeEntry($senderUserId,$userId, $json, $operation) {
-        $UserObj = new UserController;
-        $allUser = $UserObj->getAllUser($userId);
-        foreach ($allUser as $user) {
-            if($user->userId != $userId and $user->userId != $senderUserId){
-                $this->getTableObj()->Insert($user->userId, $json, $this->likeTable, $operation);
+                $this->getTableObj()->Insert($user->userId, $json, $this->statConfTable, $operation);
             }
         }
     }
 
-    public function commentEntry($senderUserId,$userId, $json, $operation) {
-        $UserObj = new UserController;
-        $allUser = $UserObj->getAllUser($userId);
-        foreach ($allUser as $user) {
-            if($user->userId != $userId and $user->userId != $senderUserId){
-            try{
-                $this->getTableObj()->Insert($user->userId, $json, $this->commentTable, $operation);
-            }  catch (Excption $ex){
-                throw  new Exception($ex);
-            }
-        }}
-    }
-    
-     public function imagesEntry($userId, $json,$operation) {
+    public function answerEntry($senderUserId, $userId, $json, $operation) {
         $UserObj = new UserController;
         $allUser = $UserObj->getAllUser();
-        \Cake\Log\Log::debug("New image enrty in sync table json : ".$json);
-        foreach ($allUser as $user) {
-          if($user->userId != $userId){
-                $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $operation);
-          }
+        if ($allUser) {
+            foreach ($allUser as $user) {
+
+                $this->getTableObj()->Insert($user->userId, $json, $this->answerTable, $operation);
+            }
+        }
+    }
+
+    public function likeEntry($senderUserId, $userId, $json, $operation) {
+        $UserObj = new UserController;
+        $allUser = $UserObj->getAllUser($userId);
+        if ($allUser) {
+            foreach ($allUser as $user) {
+                if ($user->userId != $userId and $user->userId != $senderUserId) {
+                    $this->getTableObj()->Insert($user->userId, $json, $this->likeTable, $operation);
+                }
+            }
+        }
+    }
+
+    public function commentEntry($senderUserId, $userId, $json, $operation) {
+        $UserObj = new UserController;
+        $allUser = $UserObj->getAllUser($userId);
+        if ($allUser) {
+            foreach ($allUser as $user) {
+                if ($user->userId != $userId and $user->userId != $senderUserId) {
+                    try {
+                        $this->getTableObj()->Insert($user->userId, $json, $this->commentTable, $operation);
+                    } catch (Excption $ex) {
+                        throw new Exception($ex);
+                    }
+                }
+            }
+        }
+    }
+
+    public function imagesEntry($userId, $json, $operation) {
+        $UserObj = new UserController;
+        $allUser = $UserObj->getAllUser();
+        \Cake\Log\Log::debug("New image enrty in sync table json : " . $json);
+        if ($allUser) {
+            foreach ($allUser as $user) {
+                if ($user->userId != $userId) {
+                    $this->getTableObj()->Insert($user->userId, $json, $this->imageTable, $operation);
+                }
+            }
         }
     }
 
@@ -140,10 +152,10 @@ class SyncController extends ApiController {
         \Cake\Log\Log::info("in Sync controller download method");
         $Update = $this->getTableObj()->getUpdate($userid);
         if ($Update) {
-           
+
             $this->response->body(json_encode($Update));
             $this->response->send();
-            \Cake\Log\Log::debug("Update send to User : ".$userid);
+            \Cake\Log\Log::debug("Update send to User : " . $userid." Update json for this user".  json_encode($Update));
             $this->getTableObj()->deleteUpdate($userid);
         } else {
             $this->response->body(DTO\ClsErrorDto::prepareError(103));

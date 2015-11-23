@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Model\Table;
 use Cake\Network;
+use App\DTO;
 
 /**
  * Description of DestinationFormController
@@ -17,18 +18,49 @@ use Cake\Network;
  * @author niteen
  */
 class DestinationFormController extends FormController {
-     public function initialize() {
-         session_start();
-        if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
+
+    
+
+    public function initialize() {
+        parent::initialize();
+        
+        session_start();
+        if (!isset($_SESSION['login']) or ! isset($_COOKIE['Id'])) {
             $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
-      }
+        }
     }
 
     public function index() {
-                
+        //$this->autoRender = false; 
+        $page = 1;
+        $parameter = $this->request->param('page');
+        if ($parameter) {
+            $page = $parameter;
+            $destinationList = $this->destinationPagination($page);
+            $this->set(['dest' => $destinationList, 'pageNo' => $parameter]);
+        } else {
+            $destinationList = $this->destinationPagination();
+           
+            $this->set(['dest' => $destinationList,'pageNo' => $page]);
+        }
+    }
+
+    private function destinationPagination($page = 1) {
         $destinationTable = new Table\DestinationTable();
-        $destinationList = $destinationTable->getDest();
-        $this->set(['dest' => $destinationList]);
+        if (!$destinationTable->connect()->find()->count()) {
+            return NOT_FOUND;
+        }
+
+        $allDest = array();
+        $i = 0;
+        $limit = \appconfig::getPageSize();
+        $destination = $this->Paginator->paginate($destinationTable->connect()->find(), ['limit' => $limit, 'page' => $page]);
+        foreach ($destination as $row) {
+            $destDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Latitude, $row->Longitude, $row->Active);
+            $allDest[$i] = $destDto;
+            $i++;
+        }
+        return $allDest;
     }
 
     public function edit() {
@@ -36,26 +68,24 @@ class DestinationFormController extends FormController {
         $destinationtable = new Table\DestinationTable();
         if ($this->request->is('post')) {
             $data = $this->request->data;
-            if(key_exists('title', $data)){
+            if (key_exists('title', $data)) {
                 $status = $this->getActive($data['status']);
-              $result =  $destinationtable->updateDestination($data['destId'], $data['title'], $data['latitude'], $data['longitude'], $status);
-               $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
+                $result = $destinationtable->updateDestination($data['destId'], $data['title'], $data['latitude'], $data['longitude'], $status);
+                $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
             }
-                
-            
         }
         if ($this->request->is('get')) {
             $action = $this->request->query('delete');
-            if($action){
+            if ($action) {
                 $destId = $this->request->query('destId');
                 $destinationtable->deleteDestination($destId);
                 $this->redirect(['controller' => 'DestinationForm', 'action' => 'index']);
-                return ;
+                return;
             }
-            
+
             $destId = $this->request->query('destId');
-            
-            \Cake\Log\Log::debug("selected destination id: " . $destId ."and action : ".$action);
+
+            \Cake\Log\Log::debug("selected destination id: " . $destId . "and action : " . $action);
             $destination = $destinationtable->getSingleDestination($destId);
             $this->set(['destinationEntity' => $destination]);
         }
@@ -76,7 +106,5 @@ class DestinationFormController extends FormController {
             }
         }
     }
-
-    
 
 }

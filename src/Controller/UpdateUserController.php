@@ -27,6 +27,7 @@ class UpdateUserController extends ApiController {
     public function update() {
         $this->autoRender = false;
         $userInfo = $this->request->input();
+        \Cake\Log\Log::debug("User information request input json for update : ".$userInfo);
         if (empty($userInfo)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(107));
             \Cake\Log\Log::error("User information is empty");

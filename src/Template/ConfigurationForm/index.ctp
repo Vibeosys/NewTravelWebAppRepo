@@ -24,7 +24,18 @@ $this->layout = false;
                             <div class="box-header">
                                 <button class="dark-orange add-dest-btn"><span>Add New Configuration</span></button>
                             </div><!-- /.box-header -->
+                            <?php if(!empty($config)){?>
+                             <div class="paginate">
+                        <span style="width:100px"> Page  <?= $this->Paginator->counter() ?></span>
+                        <span ><button class="prev-span" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
+                        <span ><button class="next-span" ><?= $this->Paginator->next('next »') ?></button></span>
+                    </div>     
+                    <textarea id="next-page" class="hide-text"><?= $this->Paginator->hasNext()?></textarea>
+                    <textarea id="prev-page" class="hide-text"><?= $this->Paginator->hasPrev()?></textarea>
+                            <?php }?>
                             <div class="box-body show-grid-section">
+                                <?php
+                                if(!empty($configs)){?>
                                 <table id="destination" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -36,7 +47,7 @@ $this->layout = false;
                                     </thead>
                                     <tbody>
                                         <?php
-                                        if(!empty($configs)){
+                                        
                                             $srno = 1;
                                         foreach ($configs as $config){?>
                                         <form action="edit"method="get" id ="entity-form">
@@ -49,9 +60,12 @@ $this->layout = false;
                                         <td> <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> </td>
                                                  </tr>
                                         </form>
-                                        <?php $srno++;}}else{echo 'Configuration list is empty';}?>
+                                        <?php $srno++;}?>
                                     </tbody>
                                 </table>
+                                  <?php }else{?>
+                            <div class="error-div"><div class="error-span"></div><h4>Sorry ! Configurations are empty. please add configurations</h4></div>
+                        <?php }?>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->

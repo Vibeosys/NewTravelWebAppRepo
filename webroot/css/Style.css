@@ -147,7 +147,8 @@ body.hold-transition .main-header .logo {
 .admin-flash-h1{
 color: blue;
 position: relative;
-left: 30%;
+left: 10%;
+padding: 10px;
 
 }
 .admin-flash-h2{
@@ -158,21 +159,37 @@ left: 30%;
     font-weight: bold;
 }
 .admin-flash-img{
-    background-image: url("../img/home-logo.png"); 
-    height: 512px;
+    background-image: url("../img/home-logo.png");
+    
+    background-repeat: no-repeat;
+    height: 450px;
     width: 512px;
     position: relative;
-    left: 30%;
-    top:50%;
+    left: 350px;
+    top: 50px;
+    border-radius: 10px 10px 0px 0px;
     
+    
+   // border: 1px #aaa solid;
+}
+.admin-flash-img:hover{
+    box-shadow: -10px 10px 15px #bbb;
+    cursor: pointer;
+    background-color: #ddd;
 }
 .logo-lg{
     background-image: url("../img/page-logo.png");
-   
+    position: relative;
+    left: 40px;
     height: 100px;
     width: 80px;
     display: block;
     position: relative;
+}
+.cover-div{
+    height: 100px;
+    width: 200px;
+    
 }
 .app-name{
     text-decoration: underline;
@@ -181,6 +198,55 @@ left: 30%;
 .app-name-select{
     color: red;
 }
+.home-header{
+    
+    width: 600px;
+    height: 50px;
+    position: relative;
+    left: 300px;
+    border-radius: 0 0 5px 5px;
+    
+}
+.home-header:hover{
+    box-shadow: -10px 10px 15px black;
+    cursor: pointer;
+   background-color: #ddd;
+}
+.paginate{
+   
+   margin: 10px;
+   
+}
+.prev-span,.next-span{
+    background-color: gray;
+    color: white;
+    border-bottom: 3px solid black;
+    position: relative;
+    left:75%;
+}
+
+.prev,.next{
+    list-style-type: none;
+}
+.dis-button{
+    cursor: not-allowed;
+}
+.error-div{
+    color: red;
+    position: relative;
+    left:30%;
+}
+.error-span{
+    background-image :url("../img/error-logo.png");
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left:10%;
+    //background-color: blue;
+}
+
+
 /* H1 - H6 font */
 h1,
 h2,
@@ -198,7 +264,7 @@ h6,
 }
 /* General Links */
 a {
-  color: #3c8dbc;
+  color: white;
 }
 a:hover,
 a:active,
@@ -1619,6 +1685,7 @@ label{
   border-top: 3px solid #d2d6de;
   margin-bottom: 20px;
   width: 100%;
+  height: 600px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .box.box-primary {

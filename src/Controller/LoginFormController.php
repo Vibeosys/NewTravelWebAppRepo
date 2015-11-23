@@ -31,9 +31,9 @@ class LoginFormController extends FormController {
             if($data['username'] == $credential['username'] and $data['password'] == $credential['password']){
                 
                  $_SESSION['login'] = true;
-                setcookie('Id',$credential['username'], time()+(60*20),"/");
+                setcookie('Id',$credential['username'], time()+(60*60),"/");
                 $pass = md5($credential['password']);
-                setcookie('pass',$pass, time()+(60*20),"/");
+                setcookie('pass',$pass, time()+(60*60),"/");
                
                // \Cake\Log\Log::info("Cookie varible after created: ".$_SESSION['login']);
                // \Cake\Log\Log::debug("redirect to destiationform controller");
@@ -48,15 +48,4 @@ class LoginFormController extends FormController {
     }
    
     
-    public function home() {
-       // $this->autoRender = false;
-       
-        session_start();
-        if(!isset($_SESSION['login']) or !isset($_COOKIE['Id'])){
-            
-            $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
-      }
-      
-      
-    }
 }

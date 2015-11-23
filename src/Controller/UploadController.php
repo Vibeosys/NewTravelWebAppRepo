@@ -25,7 +25,7 @@ class UploadController extends ApiController {
 
        // $json = null;
         $json = $this->request->input();
-      
+        \Cake\Log\Log::debug("Upload request input json : ".$json);
         \Cake\Log\Log::debug("Checking is request empty or not");
         if (empty($json)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(104));

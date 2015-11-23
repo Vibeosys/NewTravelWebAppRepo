@@ -27,11 +27,13 @@ $this->layout = false;
                                         <h3 class="box-title">Edit Question</h3>
                                     </div><!-- /.box-header -->
                                     <!-- form start -->
-                                    <?php if(!empty($questionId)){?>
+                                    <?php if(!empty($questionId)){
+                                        ?>
                                       
                                     <form class="form-horizontal" method="post" action="edit">
                                         <div class="box-body">
-                                            <div class="form-group"><input name="questionId" type="number" class="hide-text" value=<?= $questionId?> >
+                                            <div class="form-group">
+                                                <input name="questionId" type="number" class="hide-text" value=<?= $questionId?> >
                                                 <label for="Title" class="col-sm-2 control-label">Title</label>
                                                 <div class="col-sm-8">
                                                     
@@ -43,8 +45,8 @@ $this->layout = false;
                                             <div class="form-group" id="options">
                                                 <label for="Options" class="col-sm-2 control-label">Option</label>
                                                 <div class="col-sm-8">
-                                                   <!-- <input type="text" class="form-control"  value="" data-role="tagsinput" /> -->
-                                                    <input name="options" type="text" class="form-control" data-role="tagsinput" value=<?= h($options)?> />
+                                                  
+                                                    <input name="options" type="text" class="form-control" data-role="tagsinput" value="<?= h($options)?>" />
                                                 </div>
                                             </div>
                                             

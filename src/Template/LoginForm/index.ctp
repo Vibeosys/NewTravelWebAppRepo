@@ -22,6 +22,10 @@ $this->layout = false;
 </head>
     <body class="align">
         <div class="site__container">
+             <?php session_start();
+                if(isset($_SESSION['message'])){?>
+            <div class="message-div"><div class="img-span" ></div><?= h($_SESSION['message'])?></div>
+                <?php unset($_SESSION['message']);}?>
             <div class="grid__container">
                 <form action= "login/validate" method="POST" class="form form--login">
                     <div class="form__field">
@@ -36,10 +40,7 @@ $this->layout = false;
                             <input type="submit" name="login" value="Sign In">
                        </div>
                 </form>
-                <?php session_start();
-                if(isset($_SESSION['message'])){?>
-                <div class="message-div"><?= h($_SESSION['message'])?></div>
-                <?php unset($_SESSION['message']);}?>
+               
                 <p class="text--center">Not a member? <a href="#">Sign up now</a> <span class="fontawesome-arrow-right"></span></p>
             </div>
         </div>

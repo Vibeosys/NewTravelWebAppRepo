@@ -59,8 +59,6 @@ class UserTable extends Table {
         if ($user->save($query)) {
             return SUCCESS;
         }
-        $this->response->body(DTO\ClsErrorDto::prepareError(113));
-        $this->response->send();
         return FAIL;
     }
 

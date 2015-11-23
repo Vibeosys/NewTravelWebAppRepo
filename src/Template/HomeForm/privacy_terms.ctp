@@ -17,15 +17,20 @@ use Cake\Network;
 $this->layout = false;
 
 
-?>
+?><!DOCTYPE html>
 <html>
-<head>
-<title>PrivacyTerms</title>
-<?= $this->Html->css('new.css')?>
-</head>
-<body>
-<div class = "page-head"><h2>PrivacyTerms</h2></div>
-<div class = "content-wraper">
+	<head>
+		<meta charset="utf-8" />
+		<title>PrivacyTerms</title>
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+                <?= $this->Html->css('vibeosys.css')?>
+        
+	</head>
+	<body >
+		<div class="wrap">
+		<div class = "page-head"><h2>PrivacyTerms</h2></div>
+<div class = "wrapeer">
 <div class = "content">
 <div class = "heading">
 <h4>What kinds of information do we collect?</h4>
@@ -137,5 +142,17 @@ When you use third-party apps, websites or other services that use, or are integ
 </div>
 </div>
 </div>
-</body>
+		</div>
+		<hr class="separator"/>
+		 <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 1.0.0
+                </div>
+                <strong>Copyright &copy; 2015-2016 <a href="#"><span class="app-name"><i> Safar<span class="app-name-select"> Ka Sathi </span></i></span></a></strong> All rights reserved.
+            </footer>
+		
+		
+		
+
+	</body>
 </html>

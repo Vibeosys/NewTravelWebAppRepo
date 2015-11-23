@@ -1,3 +1,23 @@
+$('.next-span').hover(
+          
+        function(){
+            var value = 0;
+         var value = $('#next-page').val();
+         if(!value){
+             $('.next-span').addClass('dis-button');
+             $('.nextDisabled').addClass('dis-button');
+           }
+        });
+$('.prev-span').hover(
+          
+        function(){
+            var value = 0;
+             var value = $('#prev-page').val();
+           if(!value){
+             $('.prev-span').addClass('dis-button'); 
+              $('.prevDisabled').addClass('dis-button');
+           }
+        });
 //redirect to Add New Destination page
 $('.hide-text').hide();
 $('.add-dest-btn').on("click", function () {
@@ -19,9 +39,17 @@ $('.sign-out-link').on("click", function(){
     
 });
 
+
+
+
+
+
 $(document).ready(function(){
 
     var counter = 2;//$("#add-option").val();
+  
+   
+
 		
 $("#add-option").click(function () {
 				

@@ -40,20 +40,20 @@ class OptionsTable extends Table {
     }
 
     public function getOptions($questionId) {
-         
+
         if (!$this->connect()->find()->where(['QuestionId =' => $questionId])->count()) {
             return NOT_FOUND;
         }
         $rows = $this->connect()->find()->where(['QuestionId =' => $questionId]);
         $i = 0;
         foreach ($rows as $row) {
-            if($row->Active){
-            $optionDto = new DownloadDto\OptionsDto($row->OptionId, $row->OptionText, $questionId);
-            $allOption[$i] = $optionDto;
-            $i++;
+            if ($row->Active) {
+                $optionDto = new DownloadDto\OptionsDto($row->OptionId, $row->OptionText, $questionId);
+                $allOption[$i] = $optionDto;
+                $i++;
             }
         }
-        if(!empty($allOption)){
+        if (!empty($allOption)) {
             return $allOption;
         }
         return 0;
@@ -85,6 +85,12 @@ class OptionsTable extends Table {
             $rows = $this->connect()->find()->where(['QuestionId =' => $questionId]);
             foreach ($rows as $row) {
                 if (in_array($row->OptionText, $updatedOption)) {
+                    if (!$row->Active) {
+                        $update = $this->connect()->query()->update();
+                        $update->set(['Active' => 1]);
+                        $update->where(['OptionId = ' => $row->OptionId]);
+                        $update->execute();
+                    }
                     $k = array_search($row->OptionText, $updatedOption);
                     unset($updatedOption[$k]);
                 } else {
@@ -103,5 +109,7 @@ class OptionsTable extends Table {
             return FAIL;
         }
     }
+
+    
 
 }

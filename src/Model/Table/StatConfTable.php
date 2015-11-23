@@ -41,9 +41,6 @@ class StatConfTable extends Table {
            $entity->ConfigValue = $value;
            $entity->UpdatedDate = date('Y-m-d H:i:s');
            if($this->connect()->save($entity)){
-               $statConfDto = new DTO\ClsStatConfigDto($key, $value);
-               $syncController = new Controller\SyncController();
-               $syncController->statConfEntry(json_encode($statConfDto), 'Insert');
                return SUCCESS;
            }
            return FAIL;

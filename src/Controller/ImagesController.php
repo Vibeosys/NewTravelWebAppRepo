@@ -97,6 +97,10 @@ class ImagesController extends ApiController {
                 $this->response->send();
                 \Cake\Log\Log::debug('profile image upload successful imagename : ' . $filename);
                 return SUCCESS;
+            }  else {
+                 $this->response->body(DTO\ClsErrorDto::prepareError(113));
+                 $this->response->send();
+                 
             }
         }
         $this->response->body(DTO\ClsErrorDto::prepareError(111));

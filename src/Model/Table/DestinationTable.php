@@ -22,7 +22,7 @@ use App\DTO\DownloadDto;
 class DestinationTable extends Table {
 
     public function initialize(array $config) {
-        
+       
     }
 
     public function connect() {
@@ -46,6 +46,7 @@ class DestinationTable extends Table {
         }
         return $allDest;
     }
+    
 
     //to get new destination for sync table entry
     public function getSingleDestination($destId) {

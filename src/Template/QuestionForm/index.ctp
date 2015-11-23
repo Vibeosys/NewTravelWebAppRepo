@@ -22,7 +22,17 @@ $this->layout = false;
                             <div class="box-header">
                                 <button class="dark-orange add-dest-btn"><span>Add New Question</span></button>
                             </div><!-- /.box-header -->
+                            <?php if(!empty($questions)){?>
+                    <div class="paginate">
+                        <span style="width:100px"> Page  <?= $this->Paginator->counter() ?></span>
+                        <span ><button class="prev-span" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
+                        <span ><button class="next-span" ><?= $this->Paginator->next('next »') ?></button></span>
+                    </div>     
+                    <textarea id="next-page" class="hide-text"><?= $this->Paginator->hasNext()?></textarea>
+                    <textarea id="prev-page" class="hide-text"><?= $this->Paginator->hasPrev()?></textarea>
+                            <?php }?>
                             <div class="box-body show-grid-section">
+                                <?php if(!empty($questions)){?>
                                 <table id="destination" class="table table-bordered table-hover">
                                     <thead>
                                        
@@ -35,8 +45,8 @@ $this->layout = false;
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if(!empty($questions)){
-                                        foreach ($questions as $question){?>
+                                        
+                                       <?php foreach ($questions as $question){?>
                                     <form action="edit" method="post">
                                         <tr>
                                             <td><?=h($question->questionId)?><input name="questionId" class="hide-text" type="number" value=<?=$question->questionId?>></td>
@@ -44,7 +54,7 @@ $this->layout = false;
                                                 <?=h($question->questionText)?><textarea name="questionText" class="hide-text"><?=$question->questionText?></textarea>
                                             </td>
                                             <td class="lat-width">
-                                             <?=h($question->options)?><input type="text" class="hide-text" name="options" data-role="tagsinput" value= <?=h($question->options)?>>
+                                             <?=h($question->options)?><textarea class="hide-text" name="options"> <?=h($question->options)?></textarea>
                                             </td>
                                             <?php if($question->active){?>
                                             <td>Active</td><input class="hide-text" name="status" type="number" value=1>
@@ -55,10 +65,13 @@ $this->layout = false;
                                             <?php }?>
                                         </tr>
                                     </form>
-                                        <?php }}?>
+                                        
                                        
                                     </tbody>
                                 </table>
+                                <?php }}else{?>
+                                <div class="error-div"><div class="error-span"></div><h4>Sorry ! Questions are empty. please add Questions</h4></div>
+                                   <?php }?>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->

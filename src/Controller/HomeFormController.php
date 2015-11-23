@@ -13,6 +13,9 @@ namespace App\Controller;
  */
 class HomeFormController extends FormController{
     
+    public function initialize() {
+        parent::initialize();
+    }
     public function adminPanel() {
         
     }

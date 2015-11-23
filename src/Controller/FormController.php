@@ -14,6 +14,7 @@ use App\Controller\AppController;
 class FormController extends AppController{
      public function initialize() {
         parent::initialize();
+        $this->loadComponent('Paginator');
         $this->response->type('html');
         
        

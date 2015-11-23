@@ -60,14 +60,11 @@ class QuestionTable extends Table {
             $entity->CreatedDate = date('Y-m-d H:i:s');
             $entity->UpdatedDate = date('Y-m-d H:i:s');
             if ($this->connect()->save($entity)) {
-                $questionDto = new DownloadDto\QuestionDto($entity->QuestionId, $questionText);
-                $syncController = new Controller\SyncController();
-                $syncController->questionEntry(json_encode($questionDto), INSERT);
                 return $entity->QuestionId;
             }
             return FAIL;
         } catch (Exception $ex) {
-            echo 'Database error occured' . $ex->getMessage();
+            return FAIL;
         }
     }
 
@@ -77,14 +74,11 @@ class QuestionTable extends Table {
             $update->set(['QuestionText ' => $questionText, 'Active' => $status]);
             $update->where(['QuestionId =' => $questionId]);
             if ($update->execute()) {
-                $questionDto = new DownloadDto\QuestionDto($questionId, $questionText);
-                $syncController = new Controller\SyncController();
-                $syncController->questionEntry(json_encode($questionDto), UPDATE);
                 return SUCCESS;
             }
             return FAIL;
         } catch (Exception $ex) {
-            echo 'Database error occured' . $ex->getMessage();
+            return FAIL;
         }
     }
 
@@ -99,7 +93,7 @@ class QuestionTable extends Table {
             }
             return FAIL;
         } catch (Exception $ex) {
-            echo 'Database error occured' . $ex->getMessage();
+            return FAIL;
         }
     }
 

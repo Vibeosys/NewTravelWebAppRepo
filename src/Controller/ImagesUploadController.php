@@ -38,7 +38,7 @@ class ImagesUploadController extends ApiController {
             $this->response->body(DTO\ClsErrorDto::prepareError(112));
             return ;
         }
-        try {
+       
             if (array_key_exists('destId', $data)) {
                 $imagesController = new ImagesController();
                 $result = $imagesController->uploadDestinationImage($data);
@@ -56,10 +56,7 @@ class ImagesUploadController extends ApiController {
                     \Cake\Log\Log::error("Invalid image extension");
                 }
             }
-        } catch (Exception $ex) {
-
-            \Cake\Log\Log::error("Exception found in image upload : " . $ex);
-        }
+      
     }
 
 }

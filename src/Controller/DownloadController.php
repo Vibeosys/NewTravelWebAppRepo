@@ -23,7 +23,7 @@ class DownloadController extends ApiController {
         $this->autoRender = false;
 
         $userId = $this->request->query("userid");
-          \Cake\Log\Log::info("userId is : ".$userId);
+          \Cake\Log\Log::debug("Download request input querystring userId is : ".$userId);
         if (empty($userId)) {
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
             \Cake\Log\Log::error("userId is blank ".$userId);
@@ -51,12 +51,4 @@ class DownloadController extends ApiController {
         }
     }
 
-    private function databaseCheck($userid) {
-        $userController = new UserController();
-        if ($userController->isDatabaseTake($userid)) {
-            return SUCCESS;
-        } else {
-            return FAIL;
-        }
-    }
 }

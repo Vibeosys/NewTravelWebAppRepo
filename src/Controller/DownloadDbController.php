@@ -7,7 +7,8 @@ namespace App\Controller;
  */
 use App\DTO;
 use App\Model\Table;
-use Cake\Network;
+
+use App\Controller\Component;
 
 /**
  * Description of DownloadDbController
@@ -19,16 +20,24 @@ class DownloadDbController extends ApiController {
     
      public function index() {
         $this->autoRender = false;
-        \Cake\Log\Log::info('first step in DownloadDb');
+       
         //$tempUserId = null;
         $tempUserId = $this->request->query("userid");
+        $info = base64_decode($this->request->query('info'));
+        $ip = $this->request->clientIp();
+         \Cake\Log\Log::debug('DownloadDb request input querystring info : '.$info);
         if(empty($tempUserId)){
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
             \Cake\Log\Log::error("User requested with blank user id :".$tempUserId);
             return ;
         }
+        $networkDeviceInfoDto = DTO\ClsNetworkDeviceInfoDto::Deserialize($info);
+        $ipInfo = new Component\Ipinfo();
+        $fullDetails = $ipInfo->getFullIpDetails($tempUserId,$networkDeviceInfoDto,$ip);
+        $networkDeviceInfoTable = new Table\NetworkDeviceInfoTable();
+        $networkDeviceInfoTable->saveNetworkDeviceInfo($fullDetails);
         $userDto = new DTO\ClsUserDto($tempUserId);
-        \Cake\Log\Log::debug('TempUserId is send to Validate'.$tempUserId);
+        \Cake\Log\Log::debug('TempUserId is send to Validate'.$tempUserId." userIP : ".$ip);
         if($this->isValid($userDto->userId)) {
             \Cake\Log\Log::debug("User validate");
                 $sqliteController = new SqliteController();
