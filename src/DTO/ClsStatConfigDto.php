@@ -12,13 +12,13 @@ namespace App\DTO;
  * @author niteen
  */
 
-class ClsStatConfigDto {
+class ClsStatConfigDto extends AjaxDeserializer{
 
     
   public $key;
   public  $value;
   
-  public function __construct($key,$value) {
+  public function __construct($key = null,$value = null) {
       
       $this->key = $key;
       $this->value = $value;

@@ -19,11 +19,9 @@ use App\DTO;
  */
 class DestinationFormController extends FormController {
 
-    
-
     public function initialize() {
         parent::initialize();
-        
+
         session_start();
         if (!isset($_SESSION['login']) or ! isset($_COOKIE['Id'])) {
             $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
@@ -33,15 +31,39 @@ class DestinationFormController extends FormController {
     public function index() {
         //$this->autoRender = false; 
         $page = 1;
+        $destinationList = 0;
+        $destinationTable = new Table\DestinationTable();
         $parameter = $this->request->param('page');
         if ($parameter) {
             $page = $parameter;
             $destinationList = $this->destinationPagination($page);
             $this->set(['dest' => $destinationList, 'pageNo' => $parameter]);
-        } else {
+       
+        }else if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            // $searchData = $_GET['v'];
+            //print_r($searchData);
+            \Cake\Log\Log::debug("ajax request catch in destinationform controller index method with search data : ");
+
+            $destinationList = $destinationTable->getDest();
+            foreach ($destinationList as $destination) {
+                $response[$destination->destId] = $destination->destName;
+            }
+            $json = json_encode($response);
+            \Cake\Log\Log::debug("ajax response" . $json);
+            $this->response->body($json);
+        }elseif ($this->request->is('post')) {
+            $data = $this->request->data;
+            $this->destinationPagination();
+            \Cake\Log\Log::debug("search request catch in destinationform controller index method with search data  ");
+            if (array_key_exists('dest', $data)) {
+                $destinationList = $destinationTable->getSearch($data['dest']);
+                $this->set(['dest' => $destinationList]);
+            }
+        }else {
             $destinationList = $this->destinationPagination();
-           
-            $this->set(['dest' => $destinationList,'pageNo' => $page]);
+
+            $this->set(['dest' => $destinationList, 'pageNo' => $page]);
         }
     }
 

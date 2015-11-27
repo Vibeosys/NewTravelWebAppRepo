@@ -54,11 +54,16 @@ $this->layout = false;
                                         <tr>
                                             <td><?= h($srno) ?></td>
                                                 <td class="title-width">
-                                                <?= h($config->key)?><input name="key" class="hide-text" type="text" value=<?=$config->key?>>
+                                                <?= h($config->key)?><textarea name="key" class="hide-text" type="text"><?=$config->key?></textarea>
                                                 </td>
-                                                <td class="title-width"><?= h($config->value)?></td><input name="value" class="hide-text" type="text" value=<?=$config->value?>>
-                                        <td> <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> </td>
-                                                 </tr>
+                                                <td class="title-width">
+                                                <?= h($config->value)?>
+                                                </td>
+                                        <textarea name="value" class="hide-text" type="text" ><?=$config->value?></textarea>
+                                        <td> 
+                                        <button name="edit" value="edit" type="submit" class="dark-orange edit-dest-btn"><span> Edit</span></button> 
+                                        </td>
+                                        </tr>
                                         </form>
                                         <?php $srno++;}?>
                                     </tbody>

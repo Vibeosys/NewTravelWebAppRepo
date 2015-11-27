@@ -32,6 +32,7 @@ class UserTable extends Table {
 
         $user = $this->connect()->newEntity();
         $user->UserId = $userId;
+        $user->CreatedDate = date("Y-m-d H:i:s");
         if ($this->connect()->save($user)) {
 
             \Cake\Log\Log::debug('User saved in database');

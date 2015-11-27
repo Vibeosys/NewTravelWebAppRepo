@@ -68,4 +68,8 @@ class appconfig {
         return static::$adminCredential;
     }
     
+    public static function getPageSize() {
+        return 10;
+    }
+    
 }

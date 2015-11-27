@@ -35,17 +35,18 @@ class StatConfTable extends Table {
     }
     
     public function addConfig($key,$value) {
-       try{
+       if($key and $value){
            $entity = $this->connect()->newEntity();
            $entity->ConfigKey = $key;
            $entity->ConfigValue = $value;
            $entity->UpdatedDate = date('Y-m-d H:i:s');
            if($this->connect()->save($entity)){
+               
                return SUCCESS;
            }
            return FAIL;
-       } catch (Exception $ex) {
-           echo 'Database Error Occured'.$ex->getMessage();
+       }else{
+           return FAIL;
        }
         
     }

@@ -86,6 +86,19 @@ class DestinationTable extends Table {
             echo 'message:' . $ex->getMessage();
         }
     }
+    
+    public function getSearch($key) {
+        $rows = $this->connect()->find()->where(['DestName =' =>  $key]);
+        $i = 0;
+        foreach ($rows as $row) {
+            
+            $destinationDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Latitude, $row->Longitude, $row->Active);
+            $allDest[$i] = $destinationDto;
+            $i++;
+        }
+        \Cake\Log\Log::debug("search object created and send to controller from table ");
+        return $allDest;
+    }
 
     public function updateDestination($destId, $destName, $lat, $long, $active) {
         try {

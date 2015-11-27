@@ -34,12 +34,16 @@ $this->layout = false;
                 </div><!-- /.box-header -->
                 <?php if(!empty($dest)){?>
                   <div class="paginate">
-                        <span style="width:100px"> Page  <?= $this->Paginator->counter() ?></span>
+                      <form action="index" method="post">
+                      <span style="width:100px"> Page  <?= $this->Paginator->counter() ?></span>
+                      <span class="search-box-span"><input id="autocomplete" type="text" name="dest" required></span><span class="search-btn"><button id="searchbtn"class="dark-orange" name="search" type="submit">search</button></span>
                         <span ><button class="prev-span" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
                         <span ><button class="next-span" ><?= $this->Paginator->next('next »') ?></button></span>
-                    </div>     
-                    <textarea id="next-page" class="hide-text"><?= $this->Paginator->hasNext()?></textarea>
-                    <textarea id="prev-page" class="hide-text"><?= $this->Paginator->hasPrev()?></textarea>
+                      </form>
+                    </div> 
+                <div class=""></div>
+                    <textarea id="next-page" style="display: none"><?= $this->Paginator->hasNext()?></textarea>
+                    <textarea id="prev-page" style="display: none"><?= $this->Paginator->hasPrev()?></textarea>
                 <?php }?>
                 <div class="box-body show-grid-section">
                     <?php
@@ -61,7 +65,7 @@ $this->layout = false;
 
                         <form action="edit"method="get" id ="entity-form">
                             <tr>
-                                <td><?= h($destination->destId)?><input name="destId" class="hide-text" type="number" value=<?=$destination->destId?>></td>
+                                <td><?= h($destination->destId)?><input name="destId" style="display: none" type="number" value=<?=$destination->destId?>></td>
                                 <td class="title-width"><?= h($destination->destName)?>
                                 <td class="lat-width"><?= h($destination->lat)?></td>
                                 <td class="lat-width"><?= h($destination->long)?></td>
@@ -79,12 +83,14 @@ $this->layout = false;
                         </tbody>
                     </table>
                     <?php }else{?>
-                    <div class="error-div"><div class="error-span"></div><h4>Sorry ! Questions are empty. please add Questions</h4></div>
+                    <div class="error-div"><div class="error-span"></div><h4>Sorry ! Destinations are empty. please add destinations</h4></div>
                         <?php }?>
+                    <div class="demo"></div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->                       
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->
+
             <?php $this->end();?>
 

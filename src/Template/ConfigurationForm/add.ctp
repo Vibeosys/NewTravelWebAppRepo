@@ -29,27 +29,27 @@ use App\Controller;
                                     <div class="with-border box-header">
                                         <h3 class="box-title">Add New Configuration</h3>
                                     </div><!-- /.box-header -->
-                                    <!-- form start -->
-                                    <form class="form-horizontal" action="add" method="POST">
+                                    <!-- form start  -->
+                                    <form class="form-horizontal" >
                                         <div class="box-body">
                                             <div class="form-group">
                                                 <label for="Key" class="col-sm-2 control-label">Key</label>
                                                 <div class="col-sm-8">
-                                                    <input name="key" type="text" class="form-control" id="Key" placeholder="Key" required>
+                                                    <input name="key" type="text" class="form-control" id="key" placeholder="Key" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Value" class="col-sm-2 control-label">Value</label>
                                                 <div class="col-sm-8">
-                                                    <input name="value" type="text" class="form-control" placeholder="Value" required>
+                                                    <input name="value" type="text" id="value" class="form-control" placeholder="Value" required>
                                                 </div>
                                             </div>
                                         </div><!-- /.box-body -->
                                         <div class="box-footer" style="margin-left:170px">
                                             <button type="button" class="light-orange add-cancel-btn">Cancel</button>
-                                            <button type="submit" class="dark-orange add-save-btn">Save Configuration</button>
+                                            <button  id="add" class="dark-orange add-conf-btn">Save Configuration</button>
                                         </div><!-- /.box-footer -->
-                                    </form>
+                                        </form>
                                     <!-- /.box -->
                                     <!-- Destination form elements disabled -->
                                 </div>

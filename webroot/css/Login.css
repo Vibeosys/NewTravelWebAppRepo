@@ -163,3 +163,6 @@ input {
 //    background-color: red;
     background-image: url("../img/error-small-logo.png");
 }
+.hide-text{
+    display: none;
+}

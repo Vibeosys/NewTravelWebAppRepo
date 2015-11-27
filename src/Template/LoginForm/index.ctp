@@ -40,8 +40,6 @@ $this->layout = false;
                             <input type="submit" name="login" value="Sign In">
                        </div>
                 </form>
-               
-                <p class="text--center">Not a member? <a href="#">Sign up now</a> <span class="fontawesome-arrow-right"></span></p>
             </div>
         </div>
     </body>

@@ -20,11 +20,14 @@ class ConfigurationFormController extends FormController {
 
     public function initialize() {
         parent::initialize();
+       
         session_start();
-        \Cake\Log\Log::info("Cookie varible : " . $_SESSION['login']);
+        \Cake\Log\Log::info("Cookie varible is set in configuration form controller : " . $_SESSION['login']);
         if (!isset($_SESSION['login']) or ! isset($_COOKIE['Id'])) {
+           
             $this->redirect(['controller' => 'LoginForm', 'action' => 'index']);
         }
+        session_write_close();
     }
 
     public function index() {
@@ -72,6 +75,21 @@ class ConfigurationFormController extends FormController {
             }
             $this->redirect(['controller' => 'ConfigurationForm', 'action' => 'index']);
         }
+        if($this->request->is('ajax')){
+            
+            $this->autoRender = false;
+            
+              $data = $this->request->input();
+              \Cake\Log\Log::debug("ajax call come to controller with data :".$data);
+              $statConfDto = DTO\ClsStatConfigDto::ajaxDeserialize($data);
+              $addConfig = $statconfTable->addConfig($statConfDto->key, $statConfDto->value);
+           // \Cake\Log\Log::debug(print_r($data)."data found in request key :  and value : ");
+           //$this->ajaxRequestDecoder($data);
+              \Cake\Log\Log::debug("response send to ajax from statconf table : ".$addConfig);
+            $this->response->body($addConfig);
+            $this->response->send();
+            
+        }
     }
 
     public function edit() {
@@ -95,5 +113,13 @@ class ConfigurationFormController extends FormController {
             die('Request Error Occured !! please try later');
         }
     }
-
+    private function ajaxRequestDecoder($data) {
+        if($data){
+            $rows = explode('&', $data);
+            foreach ($rows as $row)
+                \Cake\Log\Log::debug ("data fetch from request : ".$row);
+        }  else {
+            return NOT_FOUND;
+        }
+    }
 }

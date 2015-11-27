@@ -214,7 +214,7 @@ padding: 10px;
 }
 .paginate{
    
-   margin: 10px;
+   margin: 0px;
    
 }
 .prev-span,.next-span{
@@ -222,7 +222,7 @@ padding: 10px;
     color: white;
     border-bottom: 3px solid black;
     position: relative;
-    left:75%;
+    left:50%;
 }
 
 .prev,.next{
@@ -230,6 +230,7 @@ padding: 10px;
 }
 .dis-button{
     cursor: not-allowed;
+    
 }
 .error-div{
     color: red;
@@ -245,6 +246,40 @@ padding: 10px;
     left:10%;
     //background-color: blue;
 }
+.search-box{
+      position: relative;
+    left: 25%;
+    top:2px;
+    height: 30px;
+    width: 230px;
+    border: 1px solid black;
+    opacity: 0.8;
+    border-radius: 4px 4px;
+    
+}
+.search-btn{
+    position: relative;
+    left: 27%;
+    background-image: url();
+}
+.search-box:hover{
+    background-color: gainsboro;
+    border: none;
+    z-index: 1;
+}
+button:hover{
+    box-shadow: 2px 2px 5px #666666;
+}
+
+#autocomplete{
+   position: relative;
+   left: 26%;
+   top:2px;
+}
+.dis-button{
+    
+}
+
 
 
 /* H1 - H6 font */
