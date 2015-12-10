@@ -17,17 +17,25 @@ $this->layout = false;
      ?>            <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12" >
                         <div class="box">
                             <div class="box-header">
+                                <div class="col-xs-4" style="">
                                 <button class="dark-orange add-dest-btn"><span>Add New Question</span></button>
+                                </div>
+                                <div class="col-xs-5" style=""></div>
+                            <?php if(!empty($questions)){?>
+                                <div class="col-xs-3" style="">
+                                 <span id="prev-btn" ><button class="dark-orange" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
+                                 <span id="next-btn" ><button class="dark-orange" ><?= $this->Paginator->next('next »') ?></button></span>
+                                </div>
+                                     <?php }?>
                             </div><!-- /.box-header -->
                             <?php if(!empty($questions)){?>
-                    <div class="paginate">
-                        <span style="width:100px"> Page  <?= $this->Paginator->counter() ?></span>
-                        <span ><button class="prev-span" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
-                        <span ><button class="next-span" ><?= $this->Paginator->next('next »') ?></button></span>
-                    </div>     
+                    
+                        
+                       
+                      
                     <textarea id="next-page" class="hide-text"><?= $this->Paginator->hasNext()?></textarea>
                     <textarea id="prev-page" class="hide-text"><?= $this->Paginator->hasPrev()?></textarea>
                             <?php }?>
@@ -65,11 +73,15 @@ $this->layout = false;
                                             <?php }?>
                                         </tr>
                                     </form>
-                                        
+                                       <?php }?>
                                        
                                     </tbody>
                                 </table>
-                                <?php }}else{?>
+                                <div class="col-xs-10"></div>
+                                <div class="col-xs-2">
+                                    <span id="page-counter"><b> Page  <?= $this->Paginator->counter() ?></b></span>
+                                </div>
+                                <?php }else{?>
                                 <div class="error-div"><div class="error-span"></div><h4>Sorry ! Questions are empty. please add Questions</h4></div>
                                    <?php }?>
                             </div><!-- /.box-body -->

@@ -22,7 +22,9 @@ $this->layout = false;
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
+                                <div class="col-xs-4">
                                 <button class="dark-orange add-dest-btn"><span>Add New Configuration</span></button>
+                                </div>
                             </div><!-- /.box-header -->
                             <?php if(!empty($config)){?>
                              <div class="paginate">

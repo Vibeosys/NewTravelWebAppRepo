@@ -19,17 +19,20 @@ $this->layout = false;
         <title><?= $this->fetch('title')?></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <?= $this->Html->meta ( 'favicon.ico', '/favicon.ico', array ('type' => 'icon' ) )?>
         <!-- Bootstrap 3.3.5 -->
-    <?= $this->Html->css('bootstrap.min.css')?>
+         <?= $this->Html->css('bootstrap.min.css')?>
+         <?= $this->Html->css('bootstrap-tagsinput.css')?>
+         <?= $this->Html->css('jquery-ui.css')?>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- DataTables -->
-    <?= $this->Html->css('dataTables.bootstrap.css')?>
+         <?= $this->Html->css('dataTables.bootstrap.css')?>
         <!-- Theme style -->
-     <?= $this->Html->css('Style.css')?>
-     <?= $this->Html->css('All-skins.css')?>
+         <?= $this->Html->css('Style.css')?>
+         <?= $this->Html->css('All-skins.css')?>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -39,14 +42,17 @@ $this->layout = false;
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            <header class="main-header">
+            <header class="main-header" style="background-color: #fbffff">
                 <!-- Logo -->
-                <a href="../home" class="logo">
+                <div class="col-xs-2" style="background-color: #fbffff;margin: 2.5px">
+                <a href="../home/adminpanel" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>A</b>N</span>
+                    <span class="logo-mini"><b></b></span>
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg"><b></b></span>
                 </a>
+                </div>
+               
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->
@@ -56,6 +62,7 @@ $this->layout = false;
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>-->
+                    
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <!-- User Account -->
@@ -67,17 +74,36 @@ $this->layout = false;
                             </li>      
                         </ul>
                     </div>
+                    <div class="col-xs-12">
+                    
+                    <div class="col-xs-6">
+                        <h3>
+                    <?= $this->fetch('title')?>
+                    </h3>
+                    
+                    </div>
+                        <div class="col-xs-3"></div>
+                    <div class="col-xs-3" >
+                        <ol class="breadcrumb">
+                        <li><a href="../home/adminpanel"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active"><?= $this->fetch('title')?></li>
+                    </ol>
+                    </div>
+                    
+                </div>
                 </nav>
+                
             </header>
             <!-- Left side column. contains the logo and sidebar -->
 
             <aside class="main-sidebar">
                 <!-- sidebar -->
+                <div style="position:fixed; width:17%">
                 <section class="sidebar">              
                     <!-- sidebar menu:  -->
                     <ul class="sidebar-menu">                  
                         <li>
-                            <a href="../home">
+                            <a href="../home/adminpanel">
                                 <i class="icon dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -98,19 +124,10 @@ $this->layout = false;
                         </li>
                     </ul>
                 </section>
-                <!-- /.sidebar -->
+                    <!-- /.sidebar --></div>
             </aside>
             <div class="content-wrapper">
-                <section class="content-header">
-                    <h1>
-                    <?= $this->fetch('title')?>
-                        
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="../home"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active"><?= $this->fetch('title')?></li>
-                    </ol>
-                </section>
+               
                 <?php if($this->fetch('content')){
                          echo $this->fetch('content');
                       }else{
@@ -122,7 +139,7 @@ $this->layout = false;
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 1.0.0
                 </div>
-                <strong>Copyright &copy; 2015-2016 <a href="#"><span class="app-name"><i> Safer<span class="app-name-select"> Ka Sathi </span></i></span></a>.</strong> All rights reserved.
+                <strong>Copyright &copy; 2015-2016 <a href="#"><span class="app-name"><i> Safar<span class="app-name-select"> Ka Sathi </span></i></span></a>.</strong> All rights reserved.
             </footer>
         </div><!-- ./wrapper -->
         <!-- jQuery 2.1.4 -->
@@ -131,15 +148,20 @@ $this->layout = false;
     <?= $this->Html->script('bootstrap.min.js')?>
         <!-- DataTables -->
     <?= $this->Html->script('jquery.dataTables.js')?>
+        <?= $this->Html->script('jquery.js')?>
+       <?= $this->Html->script('jquery-ui.js')?>
+        
+       
+        <?= $this->Html->script('DestinationScript.js')?>
     <?= $this->Html->script('dataTables.bootstrap.min.js')?>
         <!-- SlimScroll -->
     <?= $this->Html->script('jquery.slimscroll.min.js')?>
         <!-- FastClick -->
-
+        <?= $this->Html->script('bootstrap-tagsinput.js')?>
     <?= $this->Html->script('Script.js')?>
    <!--<script src="../../dist/js/app.min.js"></script>-->
         <!-- AdminLTE for demo purposes -->
-    <?= $this->Html->script('DestinationScript.js')?>
+    
     </body>
 </html>
 

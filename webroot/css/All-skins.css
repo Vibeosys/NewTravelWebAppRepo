@@ -4,7 +4,7 @@
  */
 .skin-blue .main-header .navbar {
   /*background-color: #3086D3;*/
-  background:rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
+ // background:rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
 }
 .skin-blue .main-header .navbar .nav > li > a {
   color:#1d5587;
@@ -47,7 +47,7 @@
 .skin-blue .main-header .logo {
   /*background-color:#3086D3;*/
   color: #ffffff;
-  border-bottom: 1px solid #999;
+  //border-bottom: 1px solid #999;
   background:rgba(255, 255, 255, 0) none repeat scroll 0 0;
 }
 .skin-blue .main-header .logo:hover {
@@ -62,7 +62,7 @@
 .skin-blue .wrapper,
 .skin-blue .main-sidebar,
 .skin-blue .left-side {  
-    background: #3086D3 url(../img/elegant-blue-background_fJXpR_Su.jpg) no-repeat left bottom;
+    background: #3086D3 url(../img/elegant-blue-background_fJXpR_Su.jpg) no-repeat left bottom fixed;
     background-size: cover;
 }
 .skin-blue .user-panel > .info,
@@ -149,7 +149,7 @@
  * ----------
  */
 .skin-blue-light .main-header .navbar {
-  background-color: #3c8dbc;
+ // background-color: #3c8dbc;
 }
 .skin-blue-light .main-header .navbar .nav > li > a {
   color: #ffffff;

@@ -30,25 +30,31 @@ $this->layout = false;
             <div class="box"> 
                 <!--  Edit Destination Section -->
                 <div class="box-header">
-                    <button class="dark-orange add-dest-btn" onclick="addDest()"><span>Add New Destination</span></button>
+                    <div class="col-xs-4" style="">
+                    <button class="dark-orange add-dest-btn" onclick=""><span>Add New Destination</span></button></div>
+                    <form action="index" method="post">
+                        
+                        <div class="col-xs-5 autocomplete">                      
+                            <input id="autocomplete" type="search" name="dest" placeholder="search" required>
+                            <!--<button id="searchbtn" class="btn dark-orange" name="search" type="submit">search</button>-->
+                            </div>
+                    </form>
+                    <div class="col-xs-3" id="pagination">
+                        <span id="prev-btn" ><button class="dark-orange" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
+                        <span id="next-btn" ><button class="dark-orange" ><?= $this->Paginator->next('next »') ?></button></span>
+                    </div>
                 </div><!-- /.box-header -->
-                <?php if(!empty($dest)){?>
-                  <div class="paginate">
-                      <form action="index" method="post">
-                      <span style="width:100px"> Page  <?= $this->Paginator->counter() ?></span>
-                      <span class="search-box-span"><input id="autocomplete" type="text" name="dest" required></span><span class="search-btn"><button id="searchbtn"class="dark-orange" name="search" type="submit">search</button></span>
-                        <span ><button class="prev-span" ><?=  $this->Paginator->prev(' << ' . __('previous')) ?></button></span>
-                        <span ><button class="next-span" ><?= $this->Paginator->next('next »') ?></button></span>
-                      </form>
-                    </div> 
-                <div class=""></div>
+                <?php if(!empty($dest)){
+                    if(!empty($status)){?>
+                         <input style="display: none" id="status" type="text" value="<?= $status?>">
+                    <?php }?>
                     <textarea id="next-page" style="display: none"><?= $this->Paginator->hasNext()?></textarea>
                     <textarea id="prev-page" style="display: none"><?= $this->Paginator->hasPrev()?></textarea>
                 <?php }?>
                 <div class="box-body show-grid-section">
                     <?php
                                         if(!empty($dest)){?>
-                    <table id="destination" class="table table-bordered table-hover">
+                    <table id="destination" class="table table-bordered table-hover dataTable no-footer" role="grid">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -82,8 +88,10 @@ $this->layout = false;
 
                         </tbody>
                     </table>
+                    <div class="col-xs-6 no-of-page" ><b> No of Destinations : <?=$totalNumberOfDest?></b></div>
+                    <div class="col-xs-6 page-counter" ><b> Page  <?= $this->Paginator->counter() ?></b></div>
                     <?php }else{?>
-                    <div class="error-div"><div class="error-span"></div><h4>Sorry ! Destinations are empty. please add destinations</h4></div>
+                    <div class="error-div"><div class="error-span"></div><h4><?= h($message)?></h4></div>
                         <?php }?>
                     <div class="demo"></div>
                 </div><!-- /.box-body -->

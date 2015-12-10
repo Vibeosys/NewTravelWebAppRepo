@@ -90,6 +90,7 @@ class DestinationTable extends Table {
     public function getSearch($key) {
         $rows = $this->connect()->find()->where(['DestName =' =>  $key]);
         $i = 0;
+        $allDest = [];
         foreach ($rows as $row) {
             
             $destinationDto = new DTO\ClsDestinationDto($row->DestId, $row->DestName, $row->Latitude, $row->Longitude, $row->Active);
@@ -134,6 +135,11 @@ class DestinationTable extends Table {
         } catch (Exception $ex) {
             echo 'Database error occurd ' . $ex->getMessage();
         }
+    }
+    public function getTotalNumberOfDest() {
+        $count =  $this->connect()->find()->count();
+        \Cake\Log\Log::debug("total destiantion count : ".$count);
+        return $count;
     }
 
     private function makeSyncUpdate($active, $json, $operation) {

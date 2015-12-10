@@ -33,13 +33,17 @@ class DestinationFormController extends FormController {
         $page = 1;
         $destinationList = 0;
         $destinationTable = new Table\DestinationTable();
+        $totalNumberOfDest = $destinationTable->getTotalNumberOfDest();
         $parameter = $this->request->param('page');
         if ($parameter) {
             $page = $parameter;
             $destinationList = $this->destinationPagination($page);
-            $this->set(['dest' => $destinationList, 'pageNo' => $parameter]);
-       
-        }else if ($this->request->is('ajax')) {
+            if (empty($destinationList)) {
+                $this->set(['message' => DESTINATION_EMPTY_MESSAGE]);
+            } else {
+                $this->set(['dest' => $destinationList, 'totalNumberOfDest' => $totalNumberOfDest]);
+            }
+        } else if ($this->request->is('ajax')) {
             $this->autoRender = false;
             // $searchData = $_GET['v'];
             //print_r($searchData);
@@ -52,18 +56,25 @@ class DestinationFormController extends FormController {
             $json = json_encode($response);
             \Cake\Log\Log::debug("ajax response" . $json);
             $this->response->body($json);
-        }elseif ($this->request->is('post')) {
+        } elseif ($this->request->is('post')) {
             $data = $this->request->data;
             $this->destinationPagination();
             \Cake\Log\Log::debug("search request catch in destinationform controller index method with search data  ");
             if (array_key_exists('dest', $data)) {
                 $destinationList = $destinationTable->getSearch($data['dest']);
-                $this->set(['dest' => $destinationList]);
+                if (empty($destinationList)) {
+                    $this->set(['message' => DESTINATION_NOT_FOUND_MESSAGE]);
+                } else {
+                    $this->set(['dest' => $destinationList,'status' => 1, 'totalNumberOfDest' => $totalNumberOfDest]);
+                }
             }
-        }else {
+        } else {
             $destinationList = $this->destinationPagination();
-
-            $this->set(['dest' => $destinationList, 'pageNo' => $page]);
+            if (empty($destinationList)) {
+                $this->set(['message' => DESTINATION_EMPTY_MESSAGE]);
+            } else {
+                $this->set(['dest' => $destinationList, 'totalNumberOfDest' => $totalNumberOfDest]);
+            }
         }
     }
 

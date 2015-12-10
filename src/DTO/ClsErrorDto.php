@@ -39,7 +39,7 @@ class ClsErrorDto {
     
     protected $errorDictionary = [
         100 => 'User is not authenticated',
-        101 => 'UserId is blank',
+        101 => 'UserId is blank or device information is empty',
         102 => 'Unknown error occured',
         103 => 'Update not found',
         104 => 'Invalid request',

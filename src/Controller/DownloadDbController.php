@@ -24,9 +24,9 @@ class DownloadDbController extends ApiController {
         //$tempUserId = null;
         $tempUserId = $this->request->query("userid");
         $info = base64_decode($this->request->query('info'));
-        $ip = $this->request->clientIp();
+        $ip = "113.193.128.35";//$this->request->clientIp();
          \Cake\Log\Log::debug('DownloadDb request input querystring info : '.$info);
-        if(empty($tempUserId)){
+        if(empty($tempUserId) or empty($info)){
             $this->response->body(DTO\ClsErrorDto::prepareError(101));
             \Cake\Log\Log::error("User requested with blank user id :".$tempUserId);
             return ;

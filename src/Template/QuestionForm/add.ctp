@@ -36,7 +36,7 @@ $this->layout = false;
                                             </div>
                                            
                                             <div class="form-group" id="options">
-                                                <label for="Options" class="col-sm-2 control-label">Option</label>
+                                                <label for="Options" class="col-sm-2 control-label">Options</label>
                                                 <div class="col-sm-8">
                                                    <!-- <input type="text" class="form-control"  value="" data-role="tagsinput" /> -->
                                                     <input name="options" type="text" class="form-control"  value="" data-role="tagsinput" />

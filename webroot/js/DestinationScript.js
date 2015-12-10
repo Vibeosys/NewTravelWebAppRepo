@@ -7,6 +7,18 @@ $(document).ready(function(){
                     prev.push(value);
             });
         });
+        
+        var status = $('.error-div').text();
+        if(status){
+           //$('.autocomplete').hide(); 
+           $('#pagination').hide(); 
+        }
+        var flag = $('#status').val();
+        if(flag){
+           $('.page-counter').hide(); 
+           $('#pagination').hide(); 
+        }
+        
 });
 
  $('#autocomplete').autocomplete({
@@ -41,29 +53,36 @@ $(document).ready(function(){
         }
     });
     
+//hide pagination links in case of search destination
+$('#searchbtn').click(function(){
+   var value = $('#autocomplete').val();
+   if(value){
+       $('#pagination').hide();
+   }
     
+});
     
 
 
 
 //pagination link acivation and deactivation functions
-$('.next-span').hover(
+$('#next-btn').hover(
           
         function(){
             var value = 0;
          var value = $('#next-page').val();
          if(!value){
-             $('.next-span').addClass('dis-button');
+             $('#next-btn').addClass('dis-button');
              $('.nextDisabled').addClass('dis-button');
            }
         });
-$('.prev-span').hover(
+$('#prev-btn').hover(
           
         function(){
             var value = 0;
              var value = $('#prev-page').val();
            if(!value){
-             $('.prev-span').addClass('dis-button'); 
+             $('#prev-btn').addClass('dis-button'); 
               $('.prevDisabled').addClass('dis-button');
            }
         });
